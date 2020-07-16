@@ -47,12 +47,8 @@ div {
   font-weight: bold;
 }
 
-.nav-bar a:hover, .nav-bar a:active {
+.nav-bar a:hover, .nav-bar a:active{
   background-color: rgb(147, 122, 88);
-}
-
-.nav-bar a:active {
-  outline: solid 2px rgb(168, 41, 42);
 }
 
 .content {
@@ -84,18 +80,94 @@ div {
   text-align: center;
 }
 
-.content form {
+.content form, .content ul {
   background-color: rgb(202, 175, 146);
   color: rgb(20, 20, 26);
 }
 
-.content button {
-  background-color: rgb(168, 41, 42);
-  color: rgb(32, 32, 32);
-  font-weight: ;
+.content ul {
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
+.content button {
+  background-color: rgb(168, 41, 42);
+  color: rgb(202, 175, 146);
+  font-weight: bold;
+  padding: 16px 24px;
+  border: none;
+  text-align: center;
+  margin-left: 80px;
+}
 
+.content button:active {
+  outline: rgb(202, 175, 146);
+}
+
+.add-venda {
+  padding: 8px 16px;
+}
+
+.add-venda th, .add-venda td, .add-venda label{
+  padding: 2px;
+  margin: 0;
+  font-weight: normal;
+}
+
+.add-qtde {
+  width:24px;
+  text-align: right;
+}
+
+.add-venda button{
+  padding: 4px;
+  margin: 0;
+}
+
+.lista-venda {
+  padding: 16px 0;
+}
+
+.lista-venda h3 {
+  background-color: rgb(168, 41, 42);
+  color: rgb(32, 32, 32);
+  display: inline-block;
+  padding: 8px 32px 8px 8px;
+  margin: 16px 0 8px 0;
+}
+
+.lista-venda th, .lista-venda td {
+  padding: 4px 80px;
+  margin: 0;
+}
+
+.pagamento {
+  margin: 8px 0;
+}
+
+.pagamento td {
+  text-align: left;
+}
+
+.historico th {
+  padding: 4px 16px;
+  margin: 0;
+}
+
+.historico td {
+  padding: 2px;
+}
+
+.filtrar-venda {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+}
+
+.filtrar-venda button {
+  margin: 0;
+  padding: 4px;
+}
 
 .footer {
   background-color: rgb(202, 175, 146);

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>T Recs: Venda</title>
+</head>
+<body>
+  <div class="header">
+    <p><em><strong>T Recs</strong></em></p>
+  </div>
+    
+  <div class="nav-bar">
+    <a href="index.html">Página Inicial</a>
+    <a href="ctrl-estoque.html">Controle de Estoque</a>
+    <a href="add-produto.html">Adicionar Produto</a>
+    <a href="funcionarios.html">Funcionários</a>
+    <a href="venda.html">Venda</a>
+    <a href="historico-de-vendas.html">Histórico de Vendas</a>
+  </div>
+
+  <div class="content">
+    <h2>Venda</h2>
+
+    <form class="add-venda" action="">
+      <table>
+				<tr>
+					<th><label for="lista-produtos">Produto:</label></th>
+					<th><label for="qtde">Qtde:</label></th>
+				</tr>
+				<tr>
+					<td>
+						<input list="produtos" name="produto">
+							<datalist id="produtos">
+								<option value="Guitarra">
+								<option value="Baixo">
+								<option value="Bateria">
+								<option value="Microfone">
+								<option value="Sintetizador">
+							</datalist>
+					</td>
+					<td>
+						<input class="add-qtde" type="text" id="qtde" name="qtde">
+					</td>
+					<td>
+						<button type="button" value="add">Adicionar</button>
+					</td>
+				</tr>
+      </table>
+		</form>
+		
+		<div class="lista-venda">
+			<h3>Resumo:</h3>
+			<table>
+				<tr>
+					<th>Produto</th>
+					<th>Valor</th>
+					<th>Qtde</th>
+					<th>Total</th>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>				
+			</table>
+			<table class="pagamento">
+				<tr>
+					<th>Forma de pagamento:</th>
+					<td>
+						<form action="">
+							<input type="radio" id="dinheiro" name="forma-pgmto" value="dinheiro">
+							<label for="dinheiro">Dinheiro</label><br>
+							<input type="radio" id="debito" name="forma-pgmto" value="debito">
+							<label for="debito">Débito</label><br>
+							<input type="radio" id="a-vista" name="forma-pgmto" value="a-vista">
+							<label for="a-vista">Crédito à vista</label><br>
+							<input type="radio" id="parcelado" name="forma-pgmto" value="parcelado">
+							<label for="parcelado">Crédito parcelado</label>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</div>
+			
+	</div>
+		
+	<div class="footer">
+    <p>Siga-nos nas redes sociais!</p>
+
+    <div>
+      <img height="50" src="https://image.flaticon.com/icons/png/512/25/25305.png"/>
+      <img height="50" src="https://image.flaticon.com/icons/png/512/25/25425.png"/>
+      <img height="50" src="https://image.flaticon.com/icons/png/512/8/8800.png"/>
+    </div>
+  </div>
+
+</body>
+</html>
