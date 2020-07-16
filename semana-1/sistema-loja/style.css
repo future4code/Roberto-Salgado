@@ -1,0 +1,106 @@
+* {
+  margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+div {
+  padding: 16px;
+}
+
+.header-home {
+  background-color: rgb(32, 32, 32);
+  color: rgb(202, 175, 146);
+  padding: 24px 16px;
+}
+
+.header-home em {
+  color: rgb(168, 41, 42);
+}
+
+.header {
+  background-color: rgb(32, 32, 32);
+  color: rgb(202, 175, 146);
+  padding: 24px 16px;
+}
+
+.header em {
+  color: rgb(168, 41, 42);
+  padding: 32px 16px;
+}
+
+.header strong {
+  color: rgb(168, 41, 42);
+  padding: 32px 16px;
+}
+
+.nav-bar {
+  background-color: rgb(168, 41, 42);
+  padding: 40px 16px;
+}
+
+.nav-bar a {
+  background-color: rgb(202, 175, 146);
+  text-decoration: none;
+  padding: 16px 8px;
+  margin: 0 8px;
+  color: rgb(168, 41, 42);
+  font-weight: bold;
+}
+
+.nav-bar a:hover, .nav-bar a:active {
+  background-color: rgb(147, 122, 88);
+}
+
+.nav-bar a:active {
+  outline: solid 2px rgb(168, 41, 42);
+}
+
+.content {
+  background-color: rgb(108, 108, 108);
+  padding: 40px 160px 40px 80px;
+}
+
+.content h2 {
+  margin-bottom: 24px;
+  background-color: rgb(168, 41, 42);
+  color: rgb(20, 20, 26);
+  padding: 8px;
+}
+
+.content p {
+  color: rgb(32, 32, 32);
+}
+
+.content th {
+  background-color: rgb(147, 122, 88);
+  color: rgb(20, 20, 26);
+  padding: 16px;
+}
+
+.content td {
+  background-color: rgb(202, 175, 146);
+  color: rgb(32, 32, 32);
+  padding: 16px 8px;
+  text-align: center;
+}
+
+.content form {
+  background-color: rgb(202, 175, 146);
+  color: rgb(20, 20, 26);
+}
+
+.content button {
+  background-color: rgb(168, 41, 42);
+  color: rgb(32, 32, 32);
+  font-weight: ;
+}
+
+
+
+.footer {
+  background-color: rgb(202, 175, 146);
+  color: rgb(32, 32, 32);
+}
+
+
+
