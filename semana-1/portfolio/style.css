@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: 'Franklin Gothic Demi', 'Arial Narrow', Arial, sans-serif;
+  letter-spacing: 1.5px;
+}
+
+.header {
+  background-color: rgb(10, 10, 10);
+  color: rgb(212, 186, 140);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.header p {
+  padding: 40px 0 8px 0;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.header h1 {
+  padding: 8px 0 40px 0;
+  font-size: 80px;
+  font-weight: 900;
+}
+
+.nav-bar {
+  padding-bottom: 16px;
+  overflow: hidden;
+}
+
+div.nav-bar a {
+  text-decoration: none;
+  color: rgb(212, 186, 140);
+  margin: 0 40px;
+  padding: 0 0 16px 0 ;
+  display: inline-block;
+  background-color: rgb(164, 42, 42);
+}
+
+.nav-bar a :hover {
+}
+
+.logo img {
+  width: 50px;
+}
