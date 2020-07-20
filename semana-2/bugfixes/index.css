@@ -25,10 +25,6 @@ button:focus {
     color: white;
 }
 
-img {
-    width: 20px;
-}
-
 div>p:first-child {
     display: inline;
 }
@@ -57,6 +53,7 @@ div img {
 
 .icone {
     height: 15px;
+    width: 15px;
 }
 
 
@@ -107,12 +104,20 @@ table {
     text-align: center;
 }
 
+td > img {
+    width: 30px;
+}
+
 td button {
     background-color: #fadf63;
     width: 150px;
     height: 30px;
     border-radius: 5px;
     color: black;
+}
+
+td button:hover {
+    background-color: #b49c30;
 }
 
 .container-do-search {
