@@ -1,0 +1,458 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Franklin Gothic Demi', 'Arial Narrow', Arial, sans-serif;
+  letter-spacing: 1.5px;
+  background-color: rgb(164, 42, 42);
+  color: rgb(212, 186, 140);
+}
+
+.header {
+  background-color: rgb(10, 10, 10);
+  color: rgb(212, 186, 140);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.header p {
+  padding: 24px 0 4px 0;
+  font-size: 24px;
+}
+
+.header h1 {
+  padding: 4px 0 32px 0;
+  font-size: 56px;
+}
+
+.nav-bar {
+  padding-bottom: 16px;
+}
+
+.nav-bar a {
+  display: inline-block;
+  text-decoration: none;
+  color: rgb(212, 186, 140);
+  margin: 0 40px;
+}
+
+.nav-bar a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: rgb(212, 186, 140);
+  transition: width .3s;
+}
+
+.nav-bar a:hover::after {
+  width: 100%;
+}
+
+.about, .experience, .education {
+  width: 60%;
+  margin: auto;
+  overflow: hidden;
+  background-color: rgb(51, 51, 51);
+  clear: both;
+}
+
+.about h2, .experience h2, .education h2 {
+  background-color: rgb(164, 42, 42);
+  padding: 8px 24px;
+  text-transform: uppercase;
+}
+
+.about {
+  padding: 32px 16px 0 16px;
+}
+
+.about img {
+  float: left;
+  width: 160px;
+  border: 8px solid rgb(164, 42, 42);
+  margin: 16px 16px 16px 24px;
+}
+
+.about p {
+  padding: 16px 32px 0 24px;
+}     
+
+
+/* Experience styling */
+div.experience {
+  padding: 32px 16px 0 16px;
+  border-bottom: 8px solid rgb(51, 51, 51);
+}
+
+.item-exp {
+  background-color: rgb(10, 10, 10);
+  overflow: hidden;
+}
+
+.logo {
+  float: left;
+  padding: 32px;
+}
+
+.logo img {
+  width: 50px;
+}
+
+.info-exp {
+  overflow: hidden;
+  padding: 24px 16px 24px 0;
+  border-bottom: 2px solid rgb(51, 51, 51);
+}
+
+.info-exp h3, .info-exp h4 {
+  padding-bottom: 4px;
+}
+
+p.date-location-exp {
+  padding-bottom: 16px;
+  color: rgba(212, 186, 140, 0.6);
+}
+
+div.oldest {
+  border: none;
+}
+
+/* Education styling */
+
+.education {
+  padding: 0 16px 24px 16px;
+}
+
+.item-edu {
+  background-color: rgb(10, 10, 10);
+  overflow: hidden;
+}
+
+.info-edu {
+  overflow: hidden;
+  padding: 24px 16px 24px 0;
+  border-bottom: 2px solid rgb(51, 51, 51);
+}
+
+.info-edu h3, .info-edu h4 {
+  padding-bottom: 4px;
+}
+
+p.date-location-edu {
+  padding-bottom: 16px;
+  color: rgba(212, 186, 140, 0.6);
+}
+
+.footer {
+  background-color: rgb(164, 42, 42);
+}
+
+div.footer {
+  text-align: center;
+  padding: 24px 0;
+}
+
+p.signature {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  background-color: rgb(254, 43, 53);
+  padding: 12px 0;
+}
+
+/* Social Media Icons Styling */
+
+.fa {
+  padding: 16px;
+  font-size: 24px;
+  width: 48px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 50%;
+  background: rgb(212, 186, 140);
+  color: rgb(164, 42, 42);
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+
+/* Galeria de projetos */
+
+.main {
+  max-width: 80%;
+  margin: auto;
+  background-color: rgb(51, 51, 51);
+  padding: 32px 16px 24px 16px;
+}
+
+.main h2 {
+  text-transform: uppercase;
+  background-color: rgb(164, 42, 42);
+  padding: 8px 24px;
+}
+
+h1 {
+  font-size: 50px;
+  word-break: break-all;
+}
+
+.row {
+  margin: 8px -16px;
+}
+
+/* Add padding BETWEEN each column */
+.row,
+.row > .column {
+  padding: 8px;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after rows */ 
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Content */
+.content {
+  background-color: rgb(10, 10, 10);
+  padding: 16px;
+}
+
+div.content img {
+  border: 4px solid rgb(164, 42, 42);
+  opacity:0.4;
+  filter:alpha(opacity=40);
+  width: 100%;
+}
+
+div.content img:hover {
+  opacity:1.0;
+  filter:alpha(opacity=100); 
+}
+
+
+div.content h3 {
+  display: inline-block;
+  margin: 8px 16px;
+  padding: 4px 16px;
+  background-color: rgb(164, 42, 42);
+}
+
+div.content p {
+  margin: 0 16px 0 24px;
+}
+
+
+/* Contact Styling */
+
+.contact {
+  background-color: rgb(51, 51, 51);
+  width: 60%;
+  margin: auto;
+}
+
+div.contact {
+  padding: 16px;
+  padding: 32px 16px 24px 16px;
+}
+
+div.contact div {
+  background-color: rgb(10, 10, 10);
+}
+
+div.contact h2 {
+  background-color: rgb(164, 42, 42);
+  padding: 8px 24px;
+  text-transform: uppercase;
+}
+
+div.contact form {
+  padding: 16px;
+}
+
+/* Style inputs with type="text", type"email" and textareas */
+div.contact input[type=text], div.contact input[type=email], div.contact textarea {
+  padding: 8px; 
+  border: 2px solid rgb(146, 146, 146);
+  box-sizing: border-box;
+  width: 100%;
+  margin: 8px 0 16px 0;
+  border-radius: 4px;
+  resize: vertical
+}
+
+div.contact textarea {
+  height: 200px;
+}
+
+div.contact input, div.contact textarea {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  letter-spacing: 1.5px;
+  background-color: rgb(10, 10, 10);
+  color: rgb(236, 227, 212);
+}
+
+/* Style the submit button with a specific background color etc */
+div.contact button {
+  background-color: rgb(164, 42, 42);
+  color: rgb(212, 186, 140);
+  padding: 16px 24px;
+  border: none;
+  cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+div.contact button:hover {
+  background-color: rgb(212, 186, 140);
+  color: rgb(164, 42, 42);
+}
+
+/* Add a background color and some padding around the form */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+/* Projects Pages Styling */
+
+.proj-description {
+  width: 60%;
+  margin: auto;
+  overflow: hidden;
+  background-color: rgb(51, 51, 51);
+  clear: both;
+  padding: 32px 16px 0 16px;
+}
+
+.proj-description h2, h3 {
+  background-color: rgb(164, 42, 42);
+  text-transform: uppercase;
+  padding: 8px 24px;
+}
+
+.proj-description h3 {
+  margin: 16px 0;
+  overflow: hidden;
+  display: inline-block;
+}
+
+
+.proj-description img {
+  float: left;
+  width: 60%;
+  border: 8px solid rgb(164, 42, 42);
+  margin: 0 16px 24px 8px;
+}
+
+div.proj-details {
+  overflow: hidden;
+}
+
+div.proj-details h4 {
+  background-color: rgb(164, 42, 42);
+  text-transform: uppercase;
+  padding: 2px 8px;
+}
+
+div.proj-details p {
+  padding: 4px 4px 16px 8px;
+}
+
+div.proj-details strong, div.proj-details em,
+div.skills strong, div.skills em {
+  color: rgb(254, 43, 53);
+}
+
+div.proj-details ul {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 0;
+  margin-bottom: 24px;
+}
+
+div.proj-details li {
+  padding-left: 16px;
+  margin-top: 16px;
+}
+
+div.proj-details li:before {
+  content: "￭";
+  padding-right: 8px;
+  color: rgb(254, 43, 53);
+}
+
+
+
+/* Skills Page Styling */
+
+.skills {
+  width: 60%;
+  margin: auto;
+  overflow: hidden;
+  background-color: rgb(51, 51, 51);
+  clear: both;
+  padding: 32px 16px;
+}
+
+.skills h2 {
+  background-color: rgb(164, 42, 42);
+  padding: 8px 24px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.skills table {
+  margin-top: 32px;
+}
+
+.skills td {
+  padding: 8px 4px 8px 16px;
+  background-color: rgb(10, 10, 10);
+}
+
+.skills th {
+  text-align: left;
+  text-transform: uppercase;
+  padding: 8px 32px;
+}
+
+td.skills-item {
+  width: 40%;
+  text-align: center;
+  text-transform: uppercase;
+}
+td.skills-item, .skills th {
+  background-color: rgb(164, 42, 42);
+}
+
+.skills ul {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 0;
+}
+
+.skills li {
+  padding-left: 8px;
+  padding-bottom: 0;
+}
+
+.skills li:before {
+  content: "￭";
+  padding-right: 4px;
+  color: rgb(254, 43, 53);
+}
