@@ -37,6 +37,14 @@ div img {
     background: white;
 }
 
+div img:hover {
+    opacity: 0.5;
+}
+
+div img:active {
+    opacity: 1;
+}
+
 .botao-amarelo {
     background-color: #ffaf43;
     width: 250px;
@@ -51,7 +59,6 @@ div img {
 }
 
 .container {
-    height: 500px;
     text-align: center;
 }
 
@@ -70,25 +77,28 @@ div img {
 #container-de-descricao {
     background-color: #2274a5;
     color: white;
-    padding-top: 50px;
+    padding: 75px 0 150px 0;
 }
 
 #container-de-descricao>ol {
-    padding: 15px 0px;
+    display: inline-block;
+    padding: 15px 20px;
 }
 
 #container-para-comprar {
     background-color: #e7eb90;
+    padding: 80px 0;
 }
 
 #container-para-comprar>p {
     color: #c44f00;
-    padding: 100px 0;
+    padding: 10px 0;
     font-size: 60px;
 }
 
 #container-para-comprar>a {
     display: block;
+    padding-top: 70px;
 }
 
 
@@ -105,7 +115,7 @@ div:last-child {
 
 div > input {
     border: none;
-    border-bottom: 4px solid;
+    border-bottom: 4px solid gray;
 }
 
 table {
@@ -136,7 +146,13 @@ td button:hover {
 }
 
 
-#back-button {
+
+#container-para-voltar {
+    padding: 100px;
+    text-align: center;
+}
+
+#back-button {    
     background-color: white;
     width: 100px;
     height: 20px;
