@@ -25,7 +25,6 @@ div {
 #first-block {
     background-color: red;
     grid-column: 1 / 7;
-    margin: 0;
 }
 
 .blue-block {
@@ -65,7 +64,7 @@ div {
     margin: 0.8rem;
 }
 
-@media screen and (max-device-width : 800px) and ( min-device-width : 400px) {
+@media screen and (max-device-width : 820px) and ( min-device-width : 380px) {
     
     #main-container {
         grid-template: 4rem repeat(4, 6rem) 15rem repeat(2, 6rem) / repeat(2, 1fr);
@@ -92,7 +91,7 @@ div {
     
 }
 
-@media screen and (max-device-width : 400px) {
+@media screen and (max-device-width : 380px) {
 
     #main-container {
         grid-template: 4rem repeat(6, 6rem) repeat(2, 15rem) repeat(3, 6rem) / repeat(1, 1fr);
