@@ -628,3 +628,9 @@ while (chuteD3 != numeroD3) {
 }
 console.log("Acertou!");
 console.log("O número de tentativas foi:", contadorDeChutesD3);
+
+// Foi tranquilo fazer a alteração. Pesquisando sobre geração de números 
+// randômicos eu achei bastante material que pudesse implementar no meu
+// código.
+// Optei pela opção mais simples de compreender para gerar um tipo de valor
+// que eu precisava, que era um número intero de 0 até 100.
