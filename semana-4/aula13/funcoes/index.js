@@ -661,27 +661,157 @@
 // Um novo adequado poderia ser quadrado-dos-pares ou quadradoPares.
 
 // Exercícios de escrita de código
-// // EXERCÍCIO 4.
-// // a.
-// function mensagemSaudacao1a() {
-//   console.log("Eu sou Roberto, tenho 34 anos, moro em São Paulo e sou estudante.")
-// }
-// mensagemSaudacao1a()
-// // b.
-// function mensagemSaudacao1b(a, b, c, d) {
-//   let mensagemSaudacao = ""
-//   if (d === true) {
-//     mensagemSaudacao = "Eu sou " + a + ", tenho " + b + " anos, moro em " + c + " e sou estudante."
-//   } else {
-//     mensagemSaudacao = "Eu sou " + a + ", tenho " + b + " anos, moro em " + c + " e não sou estudante."
-//   }
-//   return mensagemSaudacao
-// }
-// let nomeSaudacao1b = prompt("NOME:")
-// let idadeSaudacao1b = Number(prompt("IDADE:"))
-// let cidadeSaudacao1b = prompt("CIDADE:")
-// let estudanteSaudacao1b = confirm("É ESTUDANTE?")
-// console.log(mensagemSaudacao1b(nomeSaudacao1b, idadeSaudacao1b, cidadeSaudacao1b, estudanteSaudacao1b))
+// EXERCÍCIO 4.
+// a.
+function mensagemSaudacao1a() {
+  console.log("Eu sou Roberto, tenho 34 anos, moro em São Paulo e sou estudante.")
+}
+mensagemSaudacao1a()
+// b.
+function mensagemSaudacao1b(a, b, c, d) {
+  let mensagemSaudacao = ""
+  if (d === true) {
+    mensagemSaudacao = "Eu sou " + a + ", tenho " + b + " anos, moro em " + c + " e sou estudante."
+  } else {
+    mensagemSaudacao = "Eu sou " + a + ", tenho " + b + " anos, moro em " + c + " e não sou estudante."
+  }
+  return mensagemSaudacao
+}
+let nomeSaudacao1b = prompt("NOME:")
+let idadeSaudacao1b = Number(prompt("IDADE:"))
+let cidadeSaudacao1b = prompt("CIDADE:")
+let estudanteSaudacao1b = confirm("É ESTUDANTE?")
+console.log(mensagemSaudacao1b(nomeSaudacao1b, idadeSaudacao1b, cidadeSaudacao1b, estudanteSaudacao1b))
 
 // EXERCÍCIO 5.
-// a. 
+// a.
+function soma5a(numero1, numero2) {
+  const soma = numero1 + numero2
+  return soma
+}
+const numero5a1 = Number(prompt("1º número:"))
+const numero5a2 = Number(prompt("2º número:"))
+console.log(soma5a(numero5a1, numero5a2))
+// b.
+function compararNumeros5b (numero1, numero2) {
+  let resposta = false
+  if (numero1 >= numero2){
+    resposta = true
+  }
+  return resposta
+}
+const numero5b1 = Number(prompt("1º número:"))
+const numero5b2 = Number(prompt("2º número:"))
+let comparacao5b = compararNumeros5b(numero5b1, numero5b2)
+if (comparacao5b) {
+  alert("O 1º número É maior ou igual ao 2º")
+} else {
+  alert("O 1° número NÃO É maior ouo igual ao 2º")
+}
+// c.
+function repetirMensagem5c(mensagem) {
+  for (let i=0; i < 20; i++) {
+    console.log(mensagem)
+  }
+}
+const mensagem5c = prompt("Escreva uma mensagem:")
+repetirMensagem5c(mensagem5c)
+
+// EXERCÍCIO 6
+const array6 = [10, 23, 45, 78, 90, 52, 35, 67, 84, 22]
+// a.
+function quantidadeElementos6a (array) {
+  return array.length
+}
+console.log(quantidadeElementos6a(array6))
+// b.
+function verificarPar6b(numero) {
+  let par = false
+  if (numero % 2 === 0) {
+    par = true
+  }
+  return par
+}
+const numero6b = Number(prompt("Digite um número:"))
+if (verificarPar6b(numero6b)) {
+  alert(numero6b + " é par.")
+} else {
+  alert(numero6b + " não é par.")
+}
+// c.
+function quantidadePares6c (array) {
+  let arrayPares = []
+  for (let numero of array) {
+    if (numero % 2 === 0) {
+      arrayPares.push(numero)
+    }
+  }
+  return arrayPares.length
+}
+alert("Quantidade de pares na array = " + quantidadePares6c(array6))
+// d.
+function quantidadePares6d (array) {
+  let arrayPares = []
+  for (let numero of array) {
+    if (verificarPar6b (numero)) {
+      arrayPares.push(numero)
+    }
+  }
+  return arrayPares.length
+}
+alert("Quantidade de pares na array = " + quantidadePares6d(array6))
+
+// DESAFIOS
+// DESAFIO 1.
+// a.
+let imprimeParametroD1a = (parametro) => {
+  console.log(parametro)
+}
+// b.
+let recebeDoisParametrosD1b = (parametro1, parametro2) => {
+  imprimeParametroD1a(parametro1)
+  imprimeParametroD1a(parametro2)
+}
+
+const arrayD1 = [prompt("Parâmetro 1"), prompt("Parâmetro 2")]
+recebeDoisParametrosD1b (arrayD1[0], arrayD1[1])
+
+// DESAFIO 2.
+const numerosD2 = [0, 8, 23, 16, 10, 15, 41, 12, 13]
+console.log(numerosD2)
+// a.
+function desafio2a(array) {
+  let arrayFinal = [];
+  for (let x of array) {
+		if (x % 2 === 0) {
+	    arrayFinal.push(x * 2)
+		}
+  }
+  return arrayFinal;
+}
+console.log(desafio2a(numerosD2))
+// b.
+function desafio2b(array) {
+  let maiorNumero = 0
+  for (let x of array) {
+    if (x > maiorNumero) {
+      maiorNumero = x
+    }
+  }
+  return maiorNumero
+}
+console.log(desafio2b(numerosD2))
+// c.
+function desafio2c(array) {
+  return array[array.length - 1]
+}
+console.log(desafio2c(numerosD2))
+// d.
+function desafio2d(array) {
+  let arrayInvertido = []
+  for (let i = array.length - 1; i >= 0; i--) {
+    arrayInvertido.push(array[i])
+  }
+  return arrayInvertido
+}
+console.log(desafio2d(numerosD2))
