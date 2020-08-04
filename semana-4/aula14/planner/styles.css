@@ -11,6 +11,10 @@ header {
     align-items: center;
 }
 
+header>button {
+    padding: 0 0.4rem;
+}
+
 section {
     display: flex;
     justify-content: space-evenly;
@@ -30,4 +34,41 @@ section {
 .tarefa-feita {
     text-decoration: line-through;
     color: darkgreen;
+}
+
+@media screen and (max-width: 375px) {
+    header {
+        flex-wrap: wrap;
+        height: auto;
+        padding-bottom: 0.8rem;
+    }
+
+    header>form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 0.8rem 1rem;
+        gap: 0.4rem;
+    }
+
+    header>form>input {
+        flex-grow: 2;
+    }
+
+    header>button {
+        margin: 0 0.8rem;
+    }
+
+    section {
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+    }
+
+    .semana {
+        width: 98%;
+        height: 78vh;
+        margin-bottom: 0.8rem;
+    }
 }
