@@ -4,12 +4,12 @@ function criarTarefa() {
   
   if (novaTarefa !== "") {
     let diaSemana = document.getElementById("dias-semana").value
-    // console.log(novaTarefa, diaSemana)
     const tarefaAFazer = document.getElementById(diaSemana)
-    tarefaAFazer.innerHTML += `<li class='tarefa-a-fazer' onclick='riscarTarefa(this)'>${novaTarefa}</li>`
+    const horaTarefa = document.getElementById("hora-tarefa").value
+    tarefaAFazer.innerHTML += `<li class='tarefa-a-fazer' onclick='riscarTarefa(this)'>${horaTarefa}h: ${novaTarefa}</li>`
     inputTarefa.value = ""
   } else {
-    alert("Campo tarefa não pode ser vazio.\nPor favor, digite uma tarefa!")
+    alert(`Campo tarefa não pode ser vazio.\nPor favor, digite uma tarefa!`)
   }
 }
 
@@ -21,7 +21,7 @@ function riscarTarefa(tarefa) {
   }
 }
 
-function limparTarefas() {
+function limparTarefas() {  
   const listaTarefasAFazer = document.getElementsByClassName("tarefa-a-fazer")
   const listaTarefasFeitas = document.getElementsByClassName("tarefa-feita")
   for (let i = listaTarefasAFazer.length - 1; i >= 0 ; i--) {
