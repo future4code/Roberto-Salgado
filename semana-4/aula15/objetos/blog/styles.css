@@ -44,3 +44,22 @@ button {
     margin: 10px;
     border-top: 3px double rgb(77, 77, 77);
 }
+
+#container-de-posts img {
+    width: 25%;
+}
+
+@media screen and (max-width : 375px) {
+    #formulario {
+        width: 90vw;
+    }
+
+    label {
+        width: 25%;
+    }
+
+    input, textarea {
+        width: 75%;
+        margin-bottom: 10px;
+    }
+}

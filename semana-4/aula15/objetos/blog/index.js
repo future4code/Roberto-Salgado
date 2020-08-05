@@ -17,15 +17,15 @@ function adicionarPost()  {
   
   posts.push(postNovo)
 
-  console.log(postNovo)
-  console.log(posts)
+  // console.log(postNovo)
+  // console.log(posts)
 
   const container = document.getElementById("container-de-posts")
   container.innerHTML += `
     <h1>${posts[posts.length - 1].titulo}</h1>
     <h2>por ${posts[posts.length - 1].autor}</h2>
     <p>${posts[posts.length - 1].conteudo}</p>
-    `
+  `
 
   if (postNovo.imagem.includes('.png') || postNovo.imagem.includes('.jpg')) {
     container.innerHTML += `<img src=${posts[posts.length - 1].imagem}>`
@@ -38,6 +38,8 @@ function adicionarPost()  {
   conteudoPost.value = ""
   imagemPost.value = ""
 }
+
+
 
 function criarPost(evento) {
   adicionarPost()
