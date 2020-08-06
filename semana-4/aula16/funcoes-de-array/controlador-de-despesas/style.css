@@ -1,0 +1,10 @@
+body {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+section {
+  border: 1px solid orange;
+  padding: 0 1rem 1rem 1rem;
+  width: 25vw;  
+}
