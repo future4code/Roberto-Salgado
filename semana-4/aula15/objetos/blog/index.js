@@ -1,10 +1,16 @@
 const posts = []
 
+if (sessionStorage.posts) {
+  const postsAnteriores = JSON.parse(sessionStorage.posts)
+  posts.push(...postsAnteriores)
+}
+
+const tituloPost = document.getElementById("titulo-post")
+const autorPost = document.getElementById("autor-post")
+const conteudoPost = document.getElementById("conteudo-post")
+const imagemPost = document.getElementById("imagem-post")
+
 function adicionarPost()  {
-  const tituloPost = document.getElementById("titulo-post")
-  const autorPost = document.getElementById("autor-post")
-  const conteudoPost = document.getElementById("conteudo-post")
-  const imagemPost = document.getElementById("imagem-post")
   const postNovo = {
     titulo: tituloPost.value,
     autor: autorPost.value,
@@ -12,26 +18,11 @@ function adicionarPost()  {
     imagem: imagemPost.value
   }
   
-
   postNovo.conteudo = postNovo.conteudo.replace(/(\r\n|\n|\r)/gm, "<br>")
   
   posts.push(postNovo)
-
-  // console.log(postNovo)
-  // console.log(posts)
-
-  const container = document.getElementById("container-de-posts")
-  container.innerHTML += `
-    <h1>${posts[posts.length - 1].titulo}</h1>
-    <h2>por ${posts[posts.length - 1].autor}</h2>
-    <p>${posts[posts.length - 1].conteudo}</p>
-  `
-
-  if (postNovo.imagem.includes('.png') || postNovo.imagem.includes('.jpg')) {
-    container.innerHTML += `<img src=${posts[posts.length - 1].imagem}>`
-  } else {
-    alert("Link inválido.\nImagem não será postada.")
-  }
+  
+  sessionStorage.posts = JSON.stringify(posts)
 
   tituloPost.value = ""
   autorPost.value = ""
@@ -39,8 +30,11 @@ function adicionarPost()  {
   imagemPost.value = ""
 }
 
-
-
-function criarPost(evento) {
-  adicionarPost()
+function criarPost() {
+  if (!tituloPost.value || !autorPost.value || !conteudoPost.value || !imagemPost.value) {
+    alert("Tem que preenhcer todos os campos, bicho!")
+  } else {
+    adicionarPost()
+    window.open("posts.html", "_blank")
+  }
 }
