@@ -11,10 +11,10 @@
 <body>
   <section id="controlador-despesas">
     <h1>Controlador de Despesas</h1>
-    <h2>Cadastrar despesa</h2>
+    <h3>Cadastrar despesa</h3>
     
     <label for="valor-despesa">Valor:</label>
-    <input type="text" name="valor-despesa" placeholder="R$" id="valor-despesa">
+    <input type="number" name="valor-despesa" placeholder="R$" id="valor-despesa">
     <br><br>
     <label for="tipo-despesa">Tipo:</label>
     <select name="tipo-despesa" id="tipo-despesa">
@@ -50,21 +50,20 @@
     </select>
     <br><br>
     <label for="detalhe-valor-minimo">Valor Mínimo</label>
-    <input type="text" name="detalhe-valor-minimo" placeholder="R$" id="detalhe-valor-minimo">
+    <input type="number" name="detalhe-valor-minimo" placeholder="R$" id="detalhe-valor-minimo">
     <br><br>
     <label for="detalhe-valor-maximo">Valor Máximo</label>
-    <input type="text" name="detalhe-valor-maximo" placeholder="R$" id="detalhe-valor-maximo">
+    <input type="number" name="detalhe-valor-maximo" placeholder="R$" id="detalhe-valor-maximo">
     <br><br>
     <button onclick="filtrarDespesas()">Filtrar</button>
     <button onclick="limparFiltros()">Limpar Filtros</button>
   </section>
 
-  <section>
+  <section id="extrato-despesas">
     <h1>Extrato</h1>
-    <article id="extrato-despesas">
-
-    </article>
-    <h2>Valor Total:</h2>
+    <div id="despesas-filtradas"></div>
+    <h3>Valor Total:</h3>
+    <span id="valor-total"></span>
   </section>
 </body>
 </html>

@@ -8,3 +8,25 @@ section {
   padding: 0 1rem 1rem 1rem;
   width: 25vw;  
 }
+
+#extrato-despesas>h1 {
+  margin-bottom: 0.4rem;
+  border-bottom: 1px dashed orange;
+}
+
+#extrato-despesas>h3 {
+  border-top: 1px dashed orange;
+  padding-top: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+#despesas-filtradas, #valor-total {
+  padding-left: 0.8rem;
+}
+
+.despesa {
+  margin-bottom: 0.5rem;
+}
+.despesa>h4, .despesa>p {
+  margin: 0;
+}
