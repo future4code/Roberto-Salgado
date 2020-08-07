@@ -72,16 +72,17 @@ function filtrarDespesas() {
     
     const filtroDespesas = despesas.filter(filtrarExtrato)
 
-    let totalDespesas = 0
-    filtroDespesas.forEach((despesa, index, array) => {
-      totalDespesas += parseInt(despesa.valor)
-    })
+    let totalDespesas = despesas.reduce(
+      (acumulador, valorAtual) => acumulador + parseInt(valorAtual.valor), 0
+    )
+
+    // console.log(totalDespesas)
 
     filtroDespesas.sort(function (valorA, valorB){
-      return Number(valorA.valor) - Number(valorB.valor)
+      return (parseInt(valorA.valor) - parseInt(valorB.valor)) * -1
     })
 
-    console.log(filtroDespesas)
+    // console.log(filtroDespesas)
 
     filtroDespesas.forEach(inserirExtrato)
       
@@ -107,8 +108,14 @@ function limparFiltros() {
 
 // console.log(despesas)
 
-// const despesasOrganizadas = despesas.sort(function (valorA, valorB){
-//   return Number(valorA.valor) - Number(valorB.valor)
-// })
+// // const despesasOrganizadas = despesas.sort(function (valorA, valorB){
+// //   return Number(valorA.valor) - Number(valorB.valor)
+// // })
 
-// console.log(despesasOrganizadas)
+// // console.log(despesasOrganizadas)
+
+// let despesasSomadas = despesas.reduce(
+//   (acumulador, valorAtual) => acumulador + Number(valorAtual.valor), 0
+// )
+
+// console.log(despesasSomadas)
