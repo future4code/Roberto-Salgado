@@ -276,25 +276,59 @@
 // ------------------------- Exercícios de Funções de array
 
 // --- 1.
-const pessoas = [
-	{ nome: "Pedro", idade: 20 },
-	{ nome: "João", idade: 10 },
-	{ nome: "Paula", idade: 12 },
-	{ nome: "Artur", idade: 89 } 
-]
+// const pessoas = [
+// 	{ nome: "Pedro", idade: 20 },
+// 	{ nome: "João", idade: 10 },
+// 	{ nome: "Paula", idade: 12 },
+// 	{ nome: "Artur", idade: 89 } 
+// ]
 
-console.log(pessoas)
+// console.log(pessoas)
 
+// // a.
+// const adultos = pessoas.filter((pessoa, indice, array) => {
+//   return pessoa.idade >= 20
+// })
+
+// console.log(adultos)
+
+// // b.
+// const menoresDeIdade = pessoas.filter((pessoa, indice, array) => {
+//   return pessoa.idade < 20
+// })
+
+// console.log(menoresDeIdade)
+
+
+// --- 2.
+const exercicio2FDA = [1, 2, 3, 4, 5, 6]
 // a.
-const adultos = pessoas.filter((pessoa, indice, array) => {
-  return pessoa.idade >= 20
+const dobro = []
+exercicio2FDA.forEach((numero, index, array) => {
+  numero *= 2
+  dobro.push(numero)
 })
 
-console.log(adultos)
+console.log(dobro)
 
 // b.
-const menoresDeIdade = pessoas.filter((pessoa, indice, array) => {
-  return pessoa.idade < 20
+const triploTexto = []
+exercicio2FDA.forEach((numero, index, array) => {
+  numero *= 3
+  triploTexto.push(numero.toString())
 })
 
-console.log(menoresDeIdade)
+console.log(triploTexto)
+
+// c.
+const parImparTexto = []
+exercicio2FDA.forEach((numero, index, array) => {
+  if (numero % 2 === 0) {
+    numero = `${numero} é par`
+  } else {
+    numero = `${numero} é impar`
+  }
+  parImparTexto.push(numero)
+})
+
+console.log(parImparTexto)
