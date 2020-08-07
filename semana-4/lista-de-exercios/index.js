@@ -335,27 +335,91 @@
 
 
 // --- 3.
-const pessoas = [
-	{ nome: "Paula", idade: 12, altura: 1.8},
-	{ nome: "João", idade: 20, altura: 1.3},
-	{ nome: "Pedro", idade: 15, altura: 1.9},
-	{ nome: "Luciano", idade: 22, altura: 1.8},
-	{ nome: "Artur", idade: 10, altura: 1.2},
-	{ nome: "Soter", idade: 70, altura: 1.9}
+// const pessoas = [
+// 	{ nome: "Paula", idade: 12, altura: 1.8},
+// 	{ nome: "João", idade: 20, altura: 1.3},
+// 	{ nome: "Pedro", idade: 15, altura: 1.9},
+// 	{ nome: "Luciano", idade: 22, altura: 1.8},
+// 	{ nome: "Artur", idade: 10, altura: 1.2},
+// 	{ nome: "Soter", idade: 70, altura: 1.9}
+// ]
+
+// console.log(pessoas)
+
+// // a.
+// const permitidaEntrada = pessoas.filter((pessoa, indice, lista) => {
+//   return pessoa.altura > 1.5 && pessoa.idade > 14 && pessoa.idade < 60
+// })
+
+// console.log(permitidaEntrada)
+
+// // b.
+// const proibidaEntrada = pessoas.filter((pessoa, indice, lista) => {
+//   return pessoa.altura < 1.5 || pessoa.idade < 14 || pessoa.idade > 60
+// })
+
+// console.log(proibidaEntrada)
+
+
+// --- 4.
+const consultas = [
+	{ nome: "João", genero: "masculino", cancelada: true, dataDaConsulta: "01/10/2019" },
+	{ nome: "Pedro", genero: "masculino", cancelada: false, dataDaConsulta: "02/10/2019" },
+	{ nome: "Paula", genero: "feminino", cancelada: true, dataDaConsulta: "03/11/2019" },
+	{ nome: "Márcia", genero: "feminino", cancelada: false, dataDaConsulta: "04/11/2019" }
 ]
 
-console.log(pessoas)
+console.log(consultas)
 
-// a.
-const permitidaEntrada = pessoas.filter((pessoa, indice, lista) => {
-  return pessoa.altura > 1.5 && pessoa.idade > 14 && pessoa.idade < 60
+const confirmadas = consultas.filter((consulta, index, arrayGeral) => {
+  return !consulta.cancelada
 })
 
-console.log(permitidaEntrada)
+console.log(confirmadas)
 
-// b.
-const proibidaEntrada = pessoas.filter((pessoa, indice, lista) => {
-  return pessoa.altura < 1.5 || pessoa.idade < 14 || pessoa.idade > 60
+const mensagemConfirmadas = confirmadas.map((confirmada, index, arrayConfirmadas) => {
+  let msgConfirma1 = ""
+  let msgConfirma2 = ""
+  if (confirmada.genero === "masculino") {
+    msgConfirma1 = "Sr."
+    msgConfirma2 = "lembrá-lo"
+  } else {
+    msgConfirma1 = "Sra."
+    msgConfirma2 = "lembrá-la"
+  }
+  return confirmada.mensagem = `Olá, ${msgConfirma1} ${confirmada.nome}. Estamos enviando esta mensagem para ${msgConfirma2} da sua consulta no dia ${confirmada.dataDaConsulta}. Por favor, acuse o recebimento deste e-mail.`
 })
 
-console.log(proibidaEntrada)
+console.log(mensagemConfirmadas)
+
+const canceladas = consultas.filter((consulta, index, arrayGeral) => {
+  return consulta.cancelada
+})
+
+console.log(canceladas)
+
+const mensagemCanceladas = canceladas.map((cancelada, index, arrayCanceladas) => {
+  let msgCancela = ""
+  if (cancelada.genero === "masculino") {
+    msgCancela = "Sr."
+  } else {
+    msgCancela = "Sra."
+  }
+  return cancelada.mensagem = `Olá, ${msgCancela} ${cancelada.nome}. Infelizmente, sua consulta marcada para o dia ${cancelada.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la.`
+})
+
+console.log(mensagemCanceladas)
+
+
+
+
+
+
+
+// Olá, ${ Sr./Sra. } ${ nome da pessoa }. Estamos enviando esta mensagem para
+// ${ lembrá-lo / lembrá-la } da sua consulta no dia ${ data da consulta }. Por favor, acuse
+// o recebimento deste e-mail.
+
+// Olá, ${ Sr./Sra. } { nome da pessoa }. Infelizmente, sua consulta marcada
+// para o dia ${ data da consulta } foi cancelada. Se quiser, pode entrar em 
+// contato conosco para remarcá-la
