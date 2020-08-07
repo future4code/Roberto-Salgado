@@ -216,18 +216,37 @@
 
 
 // --- 2.
-function criarRetangulo(lado1, lado2) {
-  const retangulo = {
-    largura: lado1,
-    altura: lado2,
-    perimetro: 2 * (lado1 + lado2),
-    area: lado1 * lado2
-  }
-  return retangulo
+// function criarRetangulo(lado1, lado2) {
+//   const retangulo = {
+//     largura: lado1,
+//     altura: lado2,
+//     perimetro: 2 * (lado1 + lado2),
+//     area: lado1 * lado2
+//   }
+//   return retangulo
+// }
+
+// retangulo1 = criarRetangulo(8, 5)
+// console.log(retangulo1)
+
+
+// --- 3.
+const filmeFavorito = {
+  titulo: "Drive",
+  ano: 2011,
+  diretor: "Nicolas Winding Refn",
+  atorPrincipal: "Ryan Gosling",
+  atrizPrincipal: "Carey Mulligan",
+  atorCoadjuvante: "Albert Brooks",
+  atrizCoadjuvante: "Christina Hendricks"
 }
 
-retangulo1 = criarRetangulo(8, 5)
-console.log(retangulo1)
+const mensagem = "Venha assistir ao " + filmeFavorito.titulo + ", de " + 
+  filmeFavorito.ano + ", dirigido por " + filmeFavorito.diretor + 
+  " e  estrelado por " + filmeFavorito.atorPrincipal + ", " + 
+  filmeFavorito.atrizPrincipal + ", " + filmeFavorito.atorCoadjuvante + 
+  " e " + filmeFavorito.atrizCoadjuvante + "."
+console.log(mensagem)
 
 
 // ---
