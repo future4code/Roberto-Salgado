@@ -97,6 +97,20 @@
 // e. true
 
 
+// --- 3.
+// O código não funcionaria porque nenhum valor foi atribuido a const.
+// 
+// Além disso, o laço while entraria em loop infinito, já que o valor de i 
+// não está sendo incrementado e sempre será true a condicional.
+
+// const quantidadeDeNumerosPares = prompt("Digite a quantidade de pares que deseja:")
+// let i = 0
+// while(i <= quantidadeDeNumerosPares) {
+//   console.log(i*2)
+//   i ++
+// }
+
+
 
 
 
