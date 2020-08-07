@@ -231,24 +231,54 @@
 
 
 // --- 3.
-const filmeFavorito = {
-  titulo: "Drive",
-  ano: 2011,
-  diretor: "Nicolas Winding Refn",
-  atorPrincipal: "Ryan Gosling",
-  atrizPrincipal: "Carey Mulligan",
-  atorCoadjuvante: "Albert Brooks",
-  atrizCoadjuvante: "Christina Hendricks"
-}
+// const filmeFavorito = {
+//   titulo: "Drive",
+//   ano: 2011,
+//   diretor: "Nicolas Winding Refn",
+//   atorPrincipal: "Ryan Gosling",
+//   atrizPrincipal: "Carey Mulligan",
+//   atorCoadjuvante: "Albert Brooks",
+//   atrizCoadjuvante: "Christina Hendricks"
+// }
 
-const mensagem = "Venha assistir ao " + filmeFavorito.titulo + ", de " + 
-  filmeFavorito.ano + ", dirigido por " + filmeFavorito.diretor + 
-  " e  estrelado por " + filmeFavorito.atorPrincipal + ", " + 
-  filmeFavorito.atrizPrincipal + ", " + filmeFavorito.atorCoadjuvante + 
-  " e " + filmeFavorito.atrizCoadjuvante + "."
-console.log(mensagem)
+// const mensagem = "Venha assistir ao " + filmeFavorito.titulo + ", de " + 
+//   filmeFavorito.ano + ", dirigido por " + filmeFavorito.diretor + 
+//   " e  estrelado por " + filmeFavorito.atorPrincipal + ", " + 
+//   filmeFavorito.atrizPrincipal + ", " + filmeFavorito.atorCoadjuvante + 
+//   " e " + filmeFavorito.atrizCoadjuvante + "."
+// console.log(mensagem)
+
+
+// --- 4.
+// const pessoaQualquer = {
+//   nome: "Roberto de Abreu Salgado", 
+//   idade: 34,
+//   email: "r.salgado3@gmail.com",
+//   endereco: "Rua Dr. Cons. Moreira de Barros, 683 - Santana - São Paulo/SP"
+// }
+
+// console.log(pessoaQualquer)
+
+// const anonimizarPessoa = (pessoa) => {
+//   const anonimo = {
+//     ...pessoa,
+//     nome: "ANÔNIMO"
+//   }
+//   return anonimo
+// }
+
+// const pessoaAnonima = anonimizarPessoa(pessoaQualquer)
+// console.log(pessoaAnonima)
 
 
 // ---
 
 // ------------------------- Exercícios de Funções de array
+
+// --- 1.
+const pessoas = [
+	{ nome: "Pedro", idade: 20 },
+	{ nome: "João", idade: 10 },
+	{ nome: "Paula", idade: 12 },
+	{ nome: "Artur", idade: 89 } 
+]
