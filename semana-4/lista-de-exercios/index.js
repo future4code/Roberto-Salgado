@@ -84,6 +84,23 @@
 // })
 
 
+// --- 2.
+// const booleano1 = true
+// const booleano2 = false
+// const booleano3 = !booleano2 // => true
+// const booleano4 = !booleano3 // => false
+
+// a. false
+// b. true
+// c. true
+// d. true
+// e. true
+
+
+
+
+
+
 // ------------------------- Exercícios de Funções
 
 // ---
