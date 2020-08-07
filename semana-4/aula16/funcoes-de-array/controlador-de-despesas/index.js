@@ -77,8 +77,13 @@ function filtrarDespesas() {
       totalDespesas += parseInt(despesa.valor)
     })
 
-    filtroDespesas.forEach(inserirExtrato)
+    filtroDespesas.sort(function (valorA, valorB){
+      return Number(valorA.valor) - Number(valorB.valor)
+    })
 
+    console.log(filtroDespesas)
+
+    filtroDespesas.forEach(inserirExtrato)
       
     const valorTotal = document.getElementById("valor-total")
     valorTotal.innerHTML += ` R$ ${totalDespesas},00`
@@ -90,3 +95,20 @@ function limparFiltros() {
   detalheValorMinimo.value = ""
   detalheValorMaximo.value = ""
 }
+
+// const despesas = [
+//   {valor: "30", tipo: "casa", descricao: "Pratos"},
+//   {valor: "50", tipo: "casa", descricao: "Pratos"},
+//   {valor: "100", tipo: "casa", descricao: "Pratos"},
+//   {valor: "20", tipo: "casa", descricao: "Pratos"},
+//   {valor: "4", tipo: "casa", descricao: "Pratos"},
+//   {valor: "222", tipo: "casa", descricao: "Pratos"}
+// ]
+
+// console.log(despesas)
+
+// const despesasOrganizadas = despesas.sort(function (valorA, valorB){
+//   return Number(valorA.valor) - Number(valorB.valor)
+// })
+
+// console.log(despesasOrganizadas)
