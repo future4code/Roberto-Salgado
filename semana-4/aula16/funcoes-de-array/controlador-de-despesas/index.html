@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="index.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+  <title>Controlador de Despesas</title>
+</head>
+<body>
+  <section id="controlador-despesas">
+    <h1>Controlador de Despesas</h1>
+    <h3>Cadastrar despesa</h3>
+    
+    <label for="valor-despesa">Valor:</label>
+    <input type="number" name="valor-despesa" placeholder="R$" id="valor-despesa">
+    <br><br>
+    <label for="tipo-despesa">Tipo:</label>
+    <select name="tipo-despesa" id="tipo-despesa">
+      <option value="selecione">-- selecione --</option>
+      <option value="casa">Casa</option>
+      <option value="comida">Comida</option>
+      <option value="lazer">Lazer</option>
+      <option value="saude">Saúde</option>
+      <option value="transporte">Transporte</option>
+      <option value="educacao">Educação</option>
+      <option value="outros">Outros</option>
+    </select>
+    <br><br>
+    <label for="descricao-despesa">Descrição</label>
+    <input type="text" name="descricao-despesa" id="descricao-despesa">
+    <br><br>
+    <button onclick="cadastrarDespesa()">Cadastrar Despesa</button>
+  </section>
+
+  <section id="detalhe-despesas">
+    <h1>Despesas Detalhadas</h1>
+    
+    <label for="detalhe-tipo-despesa">Tipo:</label>
+    <select name="detalhe-tipo-despesa" id="detalhe-tipo-despesa">
+      <option value="selecione">-- selecione --</option>
+      <option value="casa">Casa</option>
+      <option value="comida">Comida</option>
+      <option value="lazer">Lazer</option>
+      <option value="saude">Saúde</option>
+      <option value="transporte">Transporte</option>
+      <option value="educacao">Educação</option>
+      <option value="outros">Outros</option>
+    </select>
+    <br><br>
+    <label for="detalhe-valor-minimo">Valor Mínimo</label>
+    <input type="number" name="detalhe-valor-minimo" placeholder="R$" id="detalhe-valor-minimo">
+    <br><br>
+    <label for="detalhe-valor-maximo">Valor Máximo</label>
+    <input type="number" name="detalhe-valor-maximo" placeholder="R$" id="detalhe-valor-maximo">
+    <br><br>
+    <button onclick="filtrarDespesas()">Filtrar</button>
+    <button onclick="limparFiltros()">Limpar Filtros</button>
+  </section>
+
+  <section id="extrato-despesas">
+    <h1>Extrato</h1>
+    <div id="despesas-filtradas"></div>
+    <h3>Valor Total:</h3>
+    <span id="valor-total"></span>
+  </section>
+</body>
+</html>
