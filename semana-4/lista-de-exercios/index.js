@@ -362,64 +362,69 @@
 
 
 // --- 4.
-const consultas = [
-	{ nome: "João", genero: "masculino", cancelada: true, dataDaConsulta: "01/10/2019" },
-	{ nome: "Pedro", genero: "masculino", cancelada: false, dataDaConsulta: "02/10/2019" },
-	{ nome: "Paula", genero: "feminino", cancelada: true, dataDaConsulta: "03/11/2019" },
-	{ nome: "Márcia", genero: "feminino", cancelada: false, dataDaConsulta: "04/11/2019" }
-]
+// const consultas = [
+// 	{ nome: "João", genero: "masculino", cancelada: true, dataDaConsulta: "01/10/2019" },
+// 	{ nome: "Pedro", genero: "masculino", cancelada: false, dataDaConsulta: "02/10/2019" },
+// 	{ nome: "Paula", genero: "feminino", cancelada: true, dataDaConsulta: "03/11/2019" },
+// 	{ nome: "Márcia", genero: "feminino", cancelada: false, dataDaConsulta: "04/11/2019" }
+// ]
 
-console.log(consultas)
+// console.log(consultas)
 
-const confirmadas = consultas.filter((consulta, index, arrayGeral) => {
-  return !consulta.cancelada
-})
+// const confirmadas = consultas.filter((consulta, index, arrayGeral) => {
+//   return !consulta.cancelada
+// })
 
-console.log(confirmadas)
+// console.log(confirmadas)
 
-const mensagemConfirmadas = confirmadas.map((confirmada, index, arrayConfirmadas) => {
-  let msgConfirma1 = ""
-  let msgConfirma2 = ""
-  if (confirmada.genero === "masculino") {
-    msgConfirma1 = "Sr."
-    msgConfirma2 = "lembrá-lo"
-  } else {
-    msgConfirma1 = "Sra."
-    msgConfirma2 = "lembrá-la"
-  }
-  return confirmada.mensagem = `Olá, ${msgConfirma1} ${confirmada.nome}. Estamos enviando esta mensagem para ${msgConfirma2} da sua consulta no dia ${confirmada.dataDaConsulta}. Por favor, acuse o recebimento deste e-mail.`
-})
+// const mensagemConfirmadas = confirmadas.map((confirmada, index, arrayConfirmadas) => {
+//   let msgConfirma1 = ""
+//   let msgConfirma2 = ""
+//   if (confirmada.genero === "masculino") {
+//     msgConfirma1 = "Sr."
+//     msgConfirma2 = "lembrá-lo"
+//   } else {
+//     msgConfirma1 = "Sra."
+//     msgConfirma2 = "lembrá-la"
+//   }
+//   return confirmada.mensagem = `Olá, ${msgConfirma1} ${confirmada.nome}. Estamos enviando esta mensagem para ${msgConfirma2} da sua consulta no dia ${confirmada.dataDaConsulta}. Por favor, acuse o recebimento deste e-mail.`
+// })
 
-console.log(mensagemConfirmadas)
+// console.log(mensagemConfirmadas)
 
-const canceladas = consultas.filter((consulta, index, arrayGeral) => {
-  return consulta.cancelada
-})
+// const canceladas = consultas.filter((consulta, index, arrayGeral) => {
+//   return consulta.cancelada
+// })
 
-console.log(canceladas)
+// console.log(canceladas)
 
-const mensagemCanceladas = canceladas.map((cancelada, index, arrayCanceladas) => {
-  let msgCancela = ""
-  if (cancelada.genero === "masculino") {
-    msgCancela = "Sr."
-  } else {
-    msgCancela = "Sra."
-  }
-  return cancelada.mensagem = `Olá, ${msgCancela} ${cancelada.nome}. Infelizmente, sua consulta marcada para o dia ${cancelada.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la.`
-})
+// const mensagemCanceladas = canceladas.map((cancelada, index, arrayCanceladas) => {
+//   let msgCancela = ""
+//   if (cancelada.genero === "masculino") {
+//     msgCancela = "Sr."
+//   } else {
+//     msgCancela = "Sra."
+//   }
+//   return cancelada.mensagem = `Olá, ${msgCancela} ${cancelada.nome}. Infelizmente, sua consulta marcada para o dia ${cancelada.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la.`
+// })
 
-console.log(mensagemCanceladas)
-
-
+// console.log(mensagemCanceladas)
 
 
+// --- 5.
+// const contas = [
+// 	{ cliente: "João", saldoTotal: 1000, compras: [100, 200, 300] },
+// 	{ cliente: "Paula", saldoTotal: 7500, compras: [200, 1040] },
+// 	{ cliente: "Pedro", saldoTotal: 10000, compras: [5140, 6100, 100, 2000] },
+// 	{ cliente: "Luciano", saldoTotal: 100, compras: [100, 200, 1700] },
+// 	{ cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
+// 	{ cliente: "Soter", saldoTotal: 1200, compras: [] }
+// ]
 
+// contas.forEach((conta, indice, lista) => {
+//   for (compra of conta.compras) {
+//     conta.saldoTotal -= compra
+//   }
+// })
 
-
-// Olá, ${ Sr./Sra. } ${ nome da pessoa }. Estamos enviando esta mensagem para
-// ${ lembrá-lo / lembrá-la } da sua consulta no dia ${ data da consulta }. Por favor, acuse
-// o recebimento deste e-mail.
-
-// Olá, ${ Sr./Sra. } { nome da pessoa }. Infelizmente, sua consulta marcada
-// para o dia ${ data da consulta } foi cancelada. Se quiser, pode entrar em 
-// contato conosco para remarcá-la
+// console.log(contas)
