@@ -18,12 +18,71 @@
 // valores na tela. 
 
 // --- 3.
+// Dado um array de vários números, ele gera dois novos array vazios e roda
+// um loop para verificar cada número do array inicial e, caso seja par 
+// colocar este número no array1, e, caso não seja (número ímpar), o coloca 
+// no array2. Depois imprime a quantidade de elementos no array números e os 
+// array de números pares e os ímpares.
 
+// --- 4.
+// Dada um array de números, o código gera dois novos números, um com valor 
+// infinito e outro com valor zero. Aí é rodado um laço em que cada número do 
+// array é verificado por duas condicionais. A primeira testa se este número é 
+// menor ao armazenado na variável numero 1 e, se for, atualiaza a variável 
+// com este novo número. A segunda condicional testa se o número é maior ao 
+// armazenado na variável numero2 e, se for, atribui o número a esta variável. 
+// Ou seja, o laço atualiza a a variável numero1 com o menor valor do array 
+// numeros e a variável numero2 com o mairo valor deste array. Ao final, ele 
+// imprime os dois valores no console.
 
+// ---
 
 // ------------------------ Exercícios de Lógica de Programação
 
-// ---
+// --- 1.
+// Podemos usar os laços while, for (nos quais o começo seja um índice da 
+// lista e a condição seja uma comparação com seu comprimento), ou for...of 
+// (no qual podemos percorrer por cada elemento de uma lista).
+// 
+// Também podemos usar as funções de array forEach() (que executará uma 
+// função callback para cada elemento da lista) ou map() (que gera um novo 
+// array iterando cada elemento do array original por uma função callback).
+
+// // Exemplos:
+// const familia = ["Miriam", "Juca", "Roberto", "Ricardo", "Marcelo"]
+// let i = 0
+
+// // while:
+// while (i < familia.length) {
+//   console.log(familia[i])
+//   i ++
+// }
+
+// // for:
+// for (i = 0 ; i < familia.length; i++) {
+//   console.log(familia[i])
+// } 
+
+// // for...of:
+// for (membro of familia) {
+//   console.log(membro)
+// }
+
+// // forEach:
+// familia.forEach((membro, indice, lista) => console.log(membro))
+
+// // map():
+// const descricaoFamilia = familia.map((membro, indice, lista) => {
+//   if (indice === 0) {
+//     membro = "Mãe: " + membro
+//   } else if (indice === 1) {
+//     membro = "Pai: " + membro
+//   } else {
+//     membro = "Filho: " + membro
+//   }
+//   console.log(membro)
+// })
+
 
 // ------------------------- Exercícios de Funções
 
