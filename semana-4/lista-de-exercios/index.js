@@ -168,32 +168,40 @@
 
 // --- 1.
 
-function segundoMaiorMenor(array) {
-  let maior = -Infinity
-  let segundoMaior = -Infinity
-  let menor = Infinity
-  let segundoMenor = Infinity
-  for (numero of array) {
-    if (numero > maior) {
-      segundoMaior = maior
-      maior = numero
-    } else if (numero < maior && numero > segundoMaior) {
-      segundoMaior = numero
-    } else if (numero < menor) {
-      segundoMenor = menor
-      menor = numero
-    } else if (numero > menor && numero < segundoMenor) {
-      segundoMenor = numero
-    }
-  }
-  const resultado = [segundoMaior, segundoMenor]
-  return resultado
+// function segundoMaiorMenor(array) {
+//   let maior = -Infinity
+//   let segundoMaior = -Infinity
+//   let menor = Infinity
+//   let segundoMenor = Infinity
+//   for (numero of array) {
+//     if (numero > maior) {
+//       segundoMaior = maior
+//       maior = numero
+//     } else if (numero < maior && numero > segundoMaior) {
+//       segundoMaior = numero
+//     } else if (numero < menor) {
+//       segundoMenor = menor
+//       menor = numero
+//     } else if (numero > menor && numero < segundoMenor) {
+//       segundoMenor = numero
+//     }
+//   }
+//   const resultado = [segundoMaior, segundoMenor]
+//   return resultado
+// }
+
+// const listaNumeros = [11, 12, 13, 14, 15, 16, 17, 18, 19, 50, 52, 2, 3, 100, -50, 523, -101]
+// resultado = segundoMaiorMenor(listaNumeros)
+// console.log(resultado[0])
+// console.log(resultado[1])
+
+
+// --- 2.
+let mensagem = () => {
+  alert("Hello Labenu")
 }
 
-const listaNumeros = [11, 12, 13, 14, 15, 16, 17, 18, 19, 50, 52, 2, 3, 100, -50, 523, -101]
-resultado = segundoMaiorMenor(listaNumeros)
-console.log(resultado[0])
-console.log(resultado[1])
+mensagem()
 
 // ---
 
