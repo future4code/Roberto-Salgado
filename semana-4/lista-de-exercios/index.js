@@ -197,15 +197,38 @@
 
 
 // --- 2.
-let mensagem = () => {
-  alert("Hello Labenu")
-}
+// let mensagem = () => {
+//   alert("Hello Labenu")
+// }
 
-mensagem()
+// mensagem()
 
 // ---
 
 // ------------------------- Exercícios de Objetos
+
+// --- 1.
+// Arrays são elementos que armazenam vários dados, como uma lista.
+// Objetos são elementos que armazenam um item que tenham várias propriedades.
+// Arrays podem ser usados para quando precisamos armazenar vários dados similares.
+// Obejtos podem ser usados para armazenar um item que contenham vários dados.
+// Inclusive, podemos fazer um array de objetos.
+
+
+// --- 2.
+function criarRetangulo(lado1, lado2) {
+  const retangulo = {
+    largura: lado1,
+    altura: lado2,
+    perimetro: 2 * (lado1 + lado2),
+    area: lado1 * lado2
+  }
+  return retangulo
+}
+
+retangulo1 = criarRetangulo(8, 5)
+console.log(retangulo1)
+
 
 // ---
 
