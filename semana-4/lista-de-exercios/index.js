@@ -282,3 +282,19 @@ const pessoas = [
 	{ nome: "Paula", idade: 12 },
 	{ nome: "Artur", idade: 89 } 
 ]
+
+console.log(pessoas)
+
+// a.
+const adultos = pessoas.filter((pessoa, indice, array) => {
+  return pessoa.idade >= 20
+})
+
+console.log(adultos)
+
+// b.
+const menoresDeIdade = pessoas.filter((pessoa, indice, array) => {
+  return pessoa.idade < 20
+})
+
+console.log(menoresDeIdade)
