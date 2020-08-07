@@ -111,7 +111,22 @@
 // }
 
 
-
+// --- 4.
+// const ladoA = prompt("Lado A do triângulo:")
+// const ladoB = prompt("Lado B do triângulo:")
+// const ladoC = prompt("Lado C do triângulo:")
+// const a = Number(ladoA)
+// const b = Number(ladoB)
+// const c = Number(ladoC)
+// let tipoTriangulo = ""
+// if (a === b && b === c) {
+//   tipoTriangulo = "Equilátero"
+// } else if (a === b || b === c || a === c) {
+//   tipoTriangulo = "Isóceles"
+// } else {
+//   tipoTriangulo = "Escaleno"
+// }
+// console.log(tipoTriangulo)
 
 
 
