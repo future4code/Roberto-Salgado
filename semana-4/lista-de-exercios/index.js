@@ -130,42 +130,70 @@
 
 
 // --- 5.
-const numero1 = Number(prompt("Digite o 1º número:"))
-const numero2 = Number(prompt("Digite o 2º número:"))
+// const numero1 = Number(prompt("Digite o 1º número:"))
+// const numero2 = Number(prompt("Digite o 2º número:"))
 
-if (numero1 > numero2) {
-  console.log("O maior é:", numero1)
-} else if (numero1 < numero2) {
-  console.log("O maior é:", numero2)
-} else {console.log("Os números são iguais")}
+// if (numero1 > numero2) {
+//   console.log("O maior é:", numero1)
+// } else if (numero1 < numero2) {
+//   console.log("O maior é:", numero2)
+// } else {console.log("Os números são iguais")}
 
-let divisao1 = 0
-if (numero1 % numero2 === 0) {
-  divisao1 = numero1 + " é divisível por " + numero2
-} else {
-  divisao1 = numero1 + " não é divisível por " + numero2
-}
-console.log(divisao1)
+// let divisao1 = 0
+// if (numero1 % numero2 === 0) {
+//   divisao1 = numero1 + " é divisível por " + numero2
+// } else {
+//   divisao1 = numero1 + " não é divisível por " + numero2
+// }
+// console.log(divisao1)
 
-let divisao2 = 0
-if (numero2 % numero1 === 0) {
-  divisao2 = numero2 + " é divisível por " + numero1
-} else {
-  divisao2 = numero2 + " não é divisível por " + numero1
-}
-console.log(divisao2)
+// let divisao2 = 0
+// if (numero2 % numero1 === 0) {
+//   divisao2 = numero2 + " é divisível por " + numero1
+// } else {
+//   divisao2 = numero2 + " não é divisível por " + numero1
+// }
+// console.log(divisao2)
 
-let diferenca = numero1 - numero2
-if (diferenca < 0) {
-  diferenca *= -1
-}
-console.log("A diferença entre eles é", diferenca)
-
-
+// let diferenca = numero1 - numero2
+// if (diferenca < 0) {
+//   diferenca *= -1
+// }
+// console.log("A diferença entre eles é", diferenca)
 
 
+// ---
 
 // ------------------------- Exercícios de Funções
+
+// --- 1.
+
+function segundoMaiorMenor(array) {
+  let maior = -Infinity
+  let segundoMaior = -Infinity
+  let menor = Infinity
+  let segundoMenor = Infinity
+  for (numero of array) {
+    if (numero > maior) {
+      segundoMaior = maior
+      maior = numero
+    } else if (numero < maior && numero > segundoMaior) {
+      segundoMaior = numero
+    } else if (numero < menor) {
+      segundoMenor = menor
+      menor = numero
+    } else if (numero > menor && numero < segundoMenor) {
+      segundoMenor = numero
+    }
+  }
+  const resultado = [segundoMaior, segundoMenor]
+  return resultado
+}
+
+const listaNumeros = [11, 12, 13, 14, 15, 16, 17, 18, 19, 50, 52, 2, 3, 100, -50, 523, -101]
+resultado = segundoMaiorMenor(listaNumeros)
+console.log(resultado[0])
+console.log(resultado[1])
 
 // ---
 
