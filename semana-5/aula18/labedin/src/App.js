@@ -1,7 +1,14 @@
-import React from 'react';
-import './App.css';
-import CardGrande from './components/CardGrande/CardGrande';
-import ImagemButton from './components/ImagemButton/ImagemButton';
+import React from 'react'
+import './App.css'
+import CardGrande from './components/CardGrande/CardGrande'
+import ImagemButton from './components/ImagemButton/ImagemButton'
+import CardPequeno from './components/CardPequeno/CardPequeno'
+
+import foto from './imgs/tansa-sq.jpg'
+import stone from './imgs/stone.png'
+import dta from './imgs/dta.png'
+import refrin from './imgs/refrin.png'
+import metso from './imgs/metso.png'
 
 function App() {
   return (
@@ -9,9 +16,9 @@ function App() {
       <div className="page-section-container">
         <h2>Dados pessoais</h2>
         <CardGrande 
-          imagem="https://uploads-ssl.webflow.com/5d640f4558306be99cf47a0e/5dd57846babb597b77c6bb1d_PerfilFuture4_cor.png" 
-          nome="Astrodev" 
-          descricao="Oi, eu sou o Astrodev. Sou o chefe dos alunos da Labenu. Adoro pedir e-mails na sexta-feira e esperar os alunos responderem só para responder com uma bronca e dar mais trabalho para eles."
+          imagem={ foto } 
+          nome="Roberto de Abreu Salgado" 
+          descricao="Profissional com 8 anos de experiência em projetos de diversos setores, atuando, principalmente, em desenvolvimento de produto, elaboração de documentos, padronização de processos, gerenciamento de entrega, acompanhamento de progresso e conclusão, controle de suprimentos e desenvolvimento de fornecedores.Focado na excelência das entregas respeitando as diversidades, prazos e grau de complexidade em cada projetos, constantemente buscando soluções para problemas previstos, imprevistos e recorrentes."
         />
         
         <ImagemButton 
@@ -23,16 +30,53 @@ function App() {
       <div className="page-section-container">
         <h2>Experiências profissionais</h2>
         <CardGrande 
-          imagem="https://s3.amazonaws.com/future4.com.br/static/headf4-c492117ca2373dc85ca81bf715b3dc2a.png" 
-          nome="Labenu" 
-          descricao="Formando desenvolvedores para o mercado de trabalho!" 
+          imagem={ stone }
+          nome="Stone" 
+          descricao="Agente Comercial" 
         />
         
         <CardGrande 
-          imagem="https://imagens.canaltech.com.br/empresas/4418.400.jpg" 
-          nome="NASA" 
-          descricao="Apontando defeitos." 
+          imagem={ dta }
+          nome="DTA" 
+          descricao="Coordenador de Projeto Mecânico" 
         />
+
+        <CardGrande 
+          imagem={ refrin }
+          nome="Refrin" 
+          descricao="Vendedor Técnico" 
+        />
+        
+        <CardGrande 
+          imagem={ metso }
+          nome="Metso" 
+          descricao="Engenheiro Projetista Trainee" 
+        />
+      </div>
+
+      <div className="page-section-container">
+        <h2>Meus contatos</h2>
+        <CardPequeno
+          informacao="E-mail"
+          detalhe="robertodeabreusalgado@labenu.com.br"
+        />
+
+        <CardPequeno
+          informacao="Endereço"
+          detalhe="Rua Batatinha, 123, ap:13 - Santana, São Paulo/SP"
+        />
+
+        <CardPequeno
+          informacao="Telefone"
+          detalhe="(11)1234.5678"
+        />
+
+        <CardPequeno
+          informacao="Celular"
+          detalhe="(11)987.654.321"
+        />
+
+             
       </div>
 
       <div className="page-section-container">
