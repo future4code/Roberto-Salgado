@@ -8,7 +8,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
 }
 
 .page-section-container {
@@ -25,4 +24,8 @@ h2 {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+}
+
+main {
+  margin-top: 5rem;
 }
