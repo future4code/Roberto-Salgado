@@ -12,7 +12,7 @@ export class SecaoComentario extends Component {
 
 	render() {
 
-		console.log(`Comentário`, this.state.valorComentario)
+		// console.log(`Comentário`, this.state.valorComentario)
 		return (
 			<div className={'comment-container'}>
 				<input

@@ -29,3 +29,11 @@
 .post-photo {
     width: 100%;
 }
+
+.share-container {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 5px;
+}
