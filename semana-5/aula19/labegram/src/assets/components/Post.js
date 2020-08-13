@@ -2,17 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 
 import {IconeComContador} from './IconeComContador'
+import {IconeSimples} from './IconeSimples'
+import {SecaoCompartilhar} from './SecaoCompartilhar'
+
 import iconeCoracaoBranco from '../img/favorite-white.svg'
 import iconeCoracaoPreto from '../img/favorite.svg'
-
-import {IconeSimples} from './IconeSimples'
 import iconeMarcacaoBranco from '../img/bookmark_border-black.svg'
 import iconeMarcacaoPreto from '../img/bookmark-black.svg'
-
-import {SecaoComentario} from './SecaoComentario'
 import iconeComentario from '../img/comment_icon.svg'
-
-import {SecaoCompartilhar} from './SecaoCompartilhar'
 import iconeCompartilhar from '../img/share.svg'
 import iconeInstagram from '../img/instagram.svg'
 import iconeFacebook from '../img/facebook.svg'
@@ -57,8 +54,29 @@ const UserPhoto = styled.img`
 const PostPhoto = styled.img`
   width: 100%;
 `
+const CommentContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	padding: 5px;
+`
 
+const InputComentario = styled.input`
+	width: 100%;
+	margin-right: 5px;
+`
 
+const Comentarios = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 1rem;
+`
+
+const Comentario = styled.p`
+  border-bottom: 1px solid #BBB;
+  padding: 0 0.5rem;
+  margin: 0.5rem 0;
+`
 
 class Post extends React.Component {
   state = {
@@ -68,7 +86,9 @@ class Post extends React.Component {
     numeroComentarios: 0,
     marcado: false,
     compartilhando: false,
-    valorMensagem: ``
+    valorMensagem: ``,
+    valorComentario: ``,
+    listaComentarios: []
   }
 
   onClickCurtida = () => {
@@ -89,10 +109,19 @@ class Post extends React.Component {
     this.setState({ comentando: !this.state.comentando })
   }
 
+  onChangeComentario = (event) => {
+		this.setState({valorComentario: event.target.value})
+	}
+
   aoEnviarComentario = () => {
+    const novoComentario = this.state.valorComentario
+    const novaListaComentarios = [novoComentario, ...this.state.listaComentarios]
+    
     this.setState({
+      listaComentarios: novaListaComentarios,
       comentando: false,
-      numeroComentarios: this.state.numeroComentarios + 1
+      numeroComentarios: this.state.numeroComentarios + 1,
+      valorComentario: ``
     })
   }
 
@@ -141,7 +170,16 @@ class Post extends React.Component {
     let componenteComentario
 
     if(this.state.comentando) {
-      componenteComentario = <SecaoComentario aoEnviar={this.aoEnviarComentario}/>
+      componenteComentario = (
+        <CommentContainer>
+          <InputComentario
+            placeholder={'Comentário'}
+            value={this.state.valorComentario}
+            onChange={this.onChangeComentario}
+          />
+          <button onClick={this.aoEnviarComentario}>Enviar</button>
+        </CommentContainer>
+      )
     }
 
     let componenteCompartilhar
@@ -172,6 +210,13 @@ class Post extends React.Component {
         </PostHeader>
 
         <PostPhoto src={this.props.fotoPost} alt={'Imagem do post'}/>
+        
+        <Comentarios>
+          {this.state.listaComentarios.map((comentario) => {
+            return <Comentario>{comentario}</Comentario>
+          }
+          )}
+        </Comentarios>
 
         <PostFooter>
           <IconeComContador
