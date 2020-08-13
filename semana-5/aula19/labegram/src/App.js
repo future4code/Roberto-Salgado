@@ -1,6 +1,5 @@
 import React from 'react'
-import './App.css'
-import Post from './components/Post/Post'
+import Post from './assets/components/Post'
 import styled from 'styled-components'
 
 const AppContainer = styled.div`

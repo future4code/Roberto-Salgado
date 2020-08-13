@@ -1,22 +1,64 @@
 import React from 'react'
-import './Post.css'
+import styled from 'styled-components'
 
-import {IconeComContador} from '../IconeComContador/IconeComContador'
-import iconeCoracaoBranco from '../../img/favorite-white.svg'
-import iconeCoracaoPreto from '../../img/favorite.svg'
+import {IconeComContador} from './IconeComContador'
+import iconeCoracaoBranco from '../img/favorite-white.svg'
+import iconeCoracaoPreto from '../img/favorite.svg'
 
-import {IconeSimples} from '../IconeSimples/IconeSimples'
-import iconeMarcacaoBranco from '../../img/bookmark_border-black.svg'
-import iconeMarcacaoPreto from '../../img/bookmark-black.svg'
+import {IconeSimples} from './IconeSimples'
+import iconeMarcacaoBranco from '../img/bookmark_border-black.svg'
+import iconeMarcacaoPreto from '../img/bookmark-black.svg'
 
-import {SecaoComentario} from '../SecaoComentario/SecaoComentario'
-import iconeComentario from '../../img/comment_icon.svg'
+import {SecaoComentario} from './SecaoComentario'
+import iconeComentario from '../img/comment_icon.svg'
 
-import {SecaoCompartilhar} from '../SecaoCompartilhar/SecaoCompartilhar'
-import iconeCompartilhar from '../../img/share.svg'
-import iconeInstagram from '../../img/instagram.svg'
-import iconeFacebook from '../../img/facebook.svg'
-import iconeTwitter from '../../img/twitter.svg'
+import {SecaoCompartilhar} from './SecaoCompartilhar'
+import iconeCompartilhar from '../img/share.svg'
+import iconeInstagram from '../img/instagram.svg'
+import iconeFacebook from '../img/facebook.svg'
+import iconeTwitter from '../img/twitter.svg'
+
+const ShareConteiner = styled.div`
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 5px;
+`
+
+const PostContainer = styled.div`
+  border: 1px solid gray;
+  width: 300px;
+  margin-bottom: 10px;
+`
+
+const PostHeader = styled.div`
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+`
+
+const PostFooter = styled.div`
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  justify-content: space-between;
+`
+
+const UserPhoto = styled.img`
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+`
+
+const PostPhoto = styled.img`
+  width: 100%;
+`
+
+
 
 class Post extends React.Component {
   state = {
@@ -105,9 +147,8 @@ class Post extends React.Component {
     let componenteCompartilhar
 
     if(this.state.compartilhando) {
-      componenteCompartilhar = <div className='share-container'>
-				<input 
-					className='input-compartilhar'
+      componenteCompartilhar = <ShareConteiner>
+				<input
 					placeholder='Mensagem'
 					value={this.state.valorMensagem}
 					onChange={this.onChangeMensagem}
@@ -120,19 +161,19 @@ class Post extends React.Component {
           onClickSocial2={this.onClickFacebook}
           onClickSocial3={this.onClickTwitter}
         />
-      </div>
+      </ShareConteiner>
     }
 
     return (
-      <div className={'post-container'}>
-        <div className={'post-header'}>
-          <img className={'user-photo'} src={this.props.fotoUsuario} alt={'Imagem do usuario'}/>
+      <PostContainer>
+        <PostHeader>
+          <UserPhoto src={this.props.fotoUsuario} alt={'Imagem do usuario'}/>
           <p>{this.props.nomeUsuario}</p>
-        </div>
+        </PostHeader>
 
-        <img className={'post-photo'} src={this.props.fotoPost} alt={'Imagem do post'}/>
+        <PostPhoto src={this.props.fotoPost} alt={'Imagem do post'}/>
 
-        <div className={'post-footer'}>
+        <PostFooter>
           <IconeComContador
             icone={iconeCurtida}
             onClickIcone={this.onClickCurtida}
@@ -154,10 +195,10 @@ class Post extends React.Component {
             icone={iconeCompartilhar}
             onClickIcone={this.onClickCompartilhar}
           />
-        </div>
+        </PostFooter>
         {componenteComentario}
         {componenteCompartilhar}
-      </div>
+      </PostContainer>
     )
   }
 }
