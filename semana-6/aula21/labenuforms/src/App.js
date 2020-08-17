@@ -25,18 +25,18 @@ export default class App extends React.Component {
     }
   }
 
-  irParaProximaEtapa = () => {
+  proximaEtapa = () => {
     this.setState({ etapa: this.state.etapa + 1 })
   }
 
   render() {
 
     return (
-      <div>
+      <div className='App'>
         { this.renderizarEtapa() }
         <br />
         {this.state.etapa !== 4 &&(
-          <button onClick={ this.irParaProximaEtapa }>Próxima Etapa</button>
+          <button onClick={ this.proximaEtapa }>Próxima Etapa</button>
         )}
       </div>
     )
