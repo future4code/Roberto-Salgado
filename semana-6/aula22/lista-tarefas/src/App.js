@@ -22,7 +22,8 @@ export default class App extends React.Component {
     state = {
       tarefas: [],
       inputValue: '',
-      filtro: ''
+      filtro: '',
+      filtroNome: ''
     }
 
   componentDidUpdate() {
@@ -30,7 +31,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ tarefas: JSON.parse(localStorage.getItem("tarefas")) });
+    this.setState({ tarefas: JSON.parse(localStorage.getItem("tarefas")) || [] });
   }
 
   onChangeInput = (event) => {
@@ -44,11 +45,11 @@ export default class App extends React.Component {
       completa: false
     }
     this.setState({
-      tarefas: [...this.state.tarefas, novaTarefa],
+      tarefas: [novaTarefa, ...this.state.tarefas],
       inputValue: ''
     })
   }
-
+  
   selectTarefa = id => {
     const novoTarefas = this.state.tarefas.map(tarefa => {
       if (tarefa.id === id) {
@@ -63,13 +64,51 @@ export default class App extends React.Component {
 
     this.setState({ tarefas: novoTarefas })
   }
+    
+  removerTarefa = (id) => {
+    const novoTarefas = this.state.tarefas.filter(tarefa => {
+      return id !== tarefa.id
+    })
+
+    this.setState({ tarefas: novoTarefas })
+  }
 
   onChangeFilter = (event) => {
     this.setState({ filtro: event.target.value })
   }
 
+  aoFiltrarNome = (event) => {
+    this.setState({ filtroNome: event.target.value })
+  }
+
+  limparTarefas = () => {
+    this.setState({ tarefas: [] })
+  }
+
+  ordemCrescente = () => {
+    const tarefasCrescente = [...this.state.tarefas]
+
+    tarefasCrescente.sort((a, b) => {
+      return (a.texto.toLowerCase() > b.texto.toLowerCase()) ? -1 : 1
+    })
+
+    this.setState({ tarefas: tarefasCrescente })
+  }
+  
+  ordemDecrescente = () => {
+    const tarefasDecrescente = [...this.state.tarefas]
+
+    tarefasDecrescente.sort((a, b) => {
+      return (a.texto.toLowerCase() < b.texto.toLowerCase()) ? -1 : 1
+    })
+
+    this.setState({ tarefas: tarefasDecrescente })
+  }
+
   render() {
-    const listaFiltrada = this.state.tarefas.filter(tarefa => {
+
+    const listaFiltrada = [...this.state.tarefas]
+    .filter(tarefa => {
       switch (this.state.filtro) {
         case 'pendentes':
           return !tarefa.completa
@@ -79,6 +118,20 @@ export default class App extends React.Component {
           return true
       }
     })
+    // .filter(tarefa => {
+    //   if (tarefa.texto === this.state.filtroNome) {
+    //     return true
+    //   } else {
+    //     return false
+    //   }
+    // })
+    .sort((a, b) => {
+      return (a.completa > b.completa) ? 1 : -1
+    })
+
+    console.log(this.state.filtroNome)
+
+
 
     return (
       <div className="App">
@@ -87,15 +140,40 @@ export default class App extends React.Component {
           <input onChange={this.onChangeInput} value={this.state.inputValue} />
           <button onClick={this.criaTarefa}>Adicionar</button>
         </InputsContainer>
+        
         <br/>
 
         <InputsContainer>
           <label>Filtro</label>
-          <select onChange={this.onChangeFilter} value={this.state.filter}>
+          <select onChange={this.onChangeFilter} value={this.state.filtro}>
             <option value="">Nenhum</option>
             <option value="pendentes">Pendentes</option>
             <option value="completas">Completas</option>
           </select>
+        </InputsContainer>
+        
+        <br/>
+
+        <InputsContainer>
+          <label>Filtro por nome</label>
+          <select onChange={this.aoFiltrarNome} value={this.state.filtroNome}>
+            <option value="">Nenhum</option>
+            {this.state.tarefas.map(tarefa => {
+              return (
+              <option value={ tarefa.id }>
+                { tarefa.texto }
+              </option>
+              )
+            })}
+          </select>
+        </InputsContainer>
+        
+        <br/>
+
+        <InputsContainer>
+          <button onClick={this.limparTarefas}>Limpar tarefas</button>
+          <button onClick={this.ordemCrescente}>Ordem Crescente</button>
+          <button onClick={this.ordemDecrescente}>Ordem Decrescente</button>
         </InputsContainer>
         <TarefaList>
           {listaFiltrada.map(tarefa => {
@@ -103,6 +181,7 @@ export default class App extends React.Component {
               <Tarefa
                 completa={tarefa.completa}
                 onClick={() => this.selectTarefa(tarefa.id)}
+                onDoubleClick={() => this.removerTarefa(tarefa.id)}
               >
                 {tarefa.texto}
               </Tarefa>
