@@ -69,7 +69,7 @@ export const UsersListItem = styled.li`
   justify-content: space-between;
   border-bottom: 1px dashed crimson;
   padding: 0.8em 1.6em 0.2em 0.4em;
-  cursor: pointer;
+  cursor: help;
 `
 
 export const DeleteButton = styled.span`

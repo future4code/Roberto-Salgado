@@ -14,7 +14,10 @@ export default class App extends React.Component {
     nameValue: '',
     emailValue: '',
     currentSection: 'register',
-    details: {}
+    details: {},
+    editing: false,
+    nameEdit: '',
+    emailEdit: ''
   }
 
   toggleSection = () => {
@@ -111,6 +114,33 @@ export default class App extends React.Component {
     })
   }
 
+  editUser = (user) => {
+    const body = {
+      name: this.state.nameEdit,
+      email: this.state.emailEdit
+    }
+
+    const request = axios.put(
+      `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${user.id}`,
+      body,
+      {
+        headers: {
+          Authorization: 'roberto-salgado-jackson'
+        }
+      }
+    )
+
+    request.then((response) => {
+      alert(`Nome alterado para ${ this.state.nameEdit }\nE-mail alterado para ${ this.state.emailEdit }`)
+      this.detailUser(user)
+      this.setState({ 
+        editing: false,
+        nameEdit: '',
+        emailEdit: ''
+      })
+    })
+  }
+
   onChangeNameValue = e => {
     this.setState({ nameValue: e.target.value })
     // console.log(this.state.nameValue)
@@ -119,6 +149,18 @@ export default class App extends React.Component {
   onChangeEmailValue = e => {
     this.setState({ emailValue: e.target.value })
     // console.log(this.state.emailValue)
+  }
+  
+  onChangeNameEdit = e => {
+    this.setState({ nameEdit: e.target.value })
+  }
+
+  onChangeEmailEdit = e => {
+    this.setState({ emailEdit: e.target.value })
+  }
+
+  toggleEditSection = () => {
+    this.setState({ editing: true })
   }
 
   render() {
@@ -154,6 +196,13 @@ export default class App extends React.Component {
         selectedSection = (
           <UserDetails
             details={ this.state.details }
+            editing={ this.state.editing }
+            handleEditSectionToggle={ this.toggleEditSection }
+            userName={ this.state.nameEdit }
+            onChangeUserName={ this.onChangeNameEdit }
+            userEmail={ this.state.emailEdit }
+            onChangeUserEmail={ this.onChangeEmailEdit }
+            onEditUser={ this.editUser }
             onDeleteUser={ this.deleteUser }
           />
         )
