@@ -13,6 +13,7 @@ export default class App extends React.Component {
     users: [],
     nameValue: '',
     emailValue: '',
+    nameSearch: '',
     currentSection: 'register',
     details: {},
     editing: false,
@@ -138,6 +139,34 @@ export default class App extends React.Component {
         nameEdit: '',
         emailEdit: ''
       })
+    }).catch(error => {
+      console.log(`Ocorreu um erro: ${ error.data}`)
+    })
+  }
+
+  searchUser = (name) => {
+    this.getUsers()
+    const request = axios.get(
+      `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/search?name=${name}`,
+      {
+        headers: {
+          Authorization: 'roberto-salgado-jackson'
+        }
+      }
+    )
+
+    request.then((response) => {
+      const listaFiltrada = this.state.users.filter(user => {
+        return (user.name === response.data[0].name ? true : false)
+      })
+      this.setState({ 
+        nameSearch: '',
+        users: listaFiltrada
+      })
+      console.log(response.data[0].name)
+      
+    }).catch(error => {
+      console.log(`Ocorreu um erro: ${ error.data}`)
     })
   }
 
@@ -149,6 +178,10 @@ export default class App extends React.Component {
   onChangeEmailValue = e => {
     this.setState({ emailValue: e.target.value })
     // console.log(this.state.emailValue)
+  }
+
+  onChangeNameSearch = e => {
+    this.setState({ nameSearch: e.target.value })
   }
   
   onChangeNameEdit = e => {
@@ -184,6 +217,9 @@ export default class App extends React.Component {
         sectionName = 'cadastro'
         selectedSection = (
           <Users
+            handleNameSearch={ this.state.nameSearch }
+            onChangeSearch={ this.onChangeNameSearch }
+            onSearchUser={ this.searchUser }
             onGetUsers={ this.getUsers }
             onDeleteUser={ this.deleteUser }
             onDetailUser={ this.detailUser }

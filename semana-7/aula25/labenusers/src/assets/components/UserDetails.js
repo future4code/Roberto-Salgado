@@ -37,8 +37,8 @@ export class UserDetails extends React.Component {
     return (
       <div>
         <h3>Detalhes do Usuário</h3>
-        <p>Nome: <span>{ this.props.details.name }</span></p>
-        <p>E-mail: <span>{ this.props.details.email }</span></p>
+        <p><b>Nome: </b><span>{ this.props.details.name }</span></p>
+        <p><b>E-mail: </b><span>{ this.props.details.email }</span></p>
         { editSection }
         <br /><br />
         <button onClick={ () => this.props.onDeleteUser(this.props.details) }>
