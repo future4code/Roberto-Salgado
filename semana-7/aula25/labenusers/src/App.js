@@ -1,12 +1,24 @@
 import React from 'react'
 import axios from 'axios'
-import './styles.css'
+import { Register } from './assets/components/Register'
+import { Users } from './assets/components/Users'
+import {
+  AppContainer,
+  ToggleSection
+} from './assets/components/Styles'
 
 export default class App extends React.Component {
   state = {
     users: [],
     nameValue: '',
     emailValue: '',
+    currentSection: 'register'
+  }
+
+  toggleSection = () => {
+    this.setState({
+      currentSection: this.state.currentSection === 'register' ? 'userslist' : 'register'
+    })
   }
 
   getUsers = () => {
@@ -21,7 +33,7 @@ export default class App extends React.Component {
 
     request.then((response) => {
       this.setState({ users: response.data })
-      console.log(this.state.users)
+      // console.log(this.state.users)
     }).catch((error) => {
       console.log(`Ocorreu um erro: ${ error.data }`)
     })
@@ -45,7 +57,7 @@ export default class App extends React.Component {
 
     request.then(response => {
       window.alert(`Usuário(a) ${ this.state.nameValue } criado(a) com sucesso`)
-      this.getUsers()
+      this.toggleSection()
       this.setState({
         nameValue: '',
         emailValue: ''
@@ -73,45 +85,43 @@ export default class App extends React.Component {
     })
   }
 
-  componentDidMount() {
-    this.getUsers()
-  }
-
   onChangeNameValue = e => {
     this.setState({ nameValue: e.target.value })
+    // console.log(this.state.nameValue)
   }
 
   onChangeEmailValue = e => {
     this.setState({ emailValue: e.target.value })
+    // console.log(this.state.emailValue)
   }
 
   render() {
+    const currentSection = this.state.currentSection
+    const sectionName = currentSection === 'register' ? 'lista' : 'cadastro'
+    const selectedSection = 
+      currentSection === 'register' ? (
+        <Register
+          name={ this.state.nameValue }
+          onChangeName={ this.onChangeNameValue }
+          email={ this.state.emailValue }
+          onChangeEmail={ this.onChangeEmailValue }
+          onCreateUser={ this.createUser }
+        />
+      ) : (
+        <Users
+        onGetUsers={ this.getUsers }
+        onDeleteUser={ this.deleteUser }
+        users={ this.state.users }
+        />
+      )
+
     return (
-      <div className='App'>
-        <h1>Criar Usuário</h1>
-        <input 
-          value={ this.state.nameValue }
-          onChange={ this.onChangeNameValue }
-          placeholder={ 'Nome do Usuário' }
-        />
-        <input 
-          value={ this.state.emailValue }
-          onChange={ this.onChangeEmailValue }
-          placeholder={ 'E-mail do Usuário' }
-        />
-        <button onClick={this.createUser}>Criar Usuáiro</button>
-        <h1>Usuários Cadastrados</h1>
-        {this.state.users.map((user) => {
-          return (
-            <p key={user.id}>
-              { user.name }
-              <span onClick={() => this.deleteUser(user)}>
-                X
-              </span>
-            </p>
-          )
-        })}
-      </div>
+      <AppContainer>
+        <ToggleSection onClick={this.toggleSection}>
+          Ir para { sectionName }
+        </ToggleSection>
+        { selectedSection }
+      </AppContainer>
     )
   }
 }
