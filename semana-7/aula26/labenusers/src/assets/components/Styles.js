@@ -16,7 +16,7 @@ export const RegisterContainer = styled.div`
   flex-direction: column;
   align-items: center;
   border: 2px dotted red;
-  width: 25%;
+  min-width: 265px;
   padding: 25px;
 `
 
@@ -58,10 +58,18 @@ export const UsersList = styled.ul`
   padding: 0;
   margin: 0;
   text-align: center;
-  width: 30%;
+  min-width: 300px;
 
   h2 {
     margin: 0.4em 0 0 0;
+  }
+`
+
+export const SearchContainer = styled.div`
+  margin: 1em 0 0.8em 0;
+
+  input {
+    margin-right: 0.4em;
   }
 `
 
@@ -80,5 +88,15 @@ export const DeleteButton = styled.span`
   cursor: pointer;
 `
 
+export const UserDetailsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px dashed crimson;
+`
 
-
+export const UserDetailsCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`

@@ -1,6 +1,7 @@
 import React from 'react'
 import {
   UsersList,
+  SearchContainer,
   UsersListItem,
   DeleteButton
 } from './Styles'
@@ -15,18 +16,19 @@ export class Users extends React.Component {
     return (
       <UsersList>
         <h2>Usuários Cadastrados:</h2>
-        <br />
-        <input 
-          name='search'
-          type='text'
-          value={ this.props.handleNameSearch }
-          onChange={ this.props.onChangeSearch }
-        />
-        <button 
-          onClick={ () => this.props.onSearchUser(this.props.handleNameSearch) }
-        >
-          Buscar
-        </button>
+        <SearchContainer>
+          <input 
+            name='search'
+            type='text'
+            value={ this.props.handleNameSearch }
+            onChange={ this.props.onChangeSearch }
+          />
+          <button 
+            onClick={ () => this.props.onSearchUser(this.props.handleNameSearch) }
+          >
+            Buscar
+          </button>
+        </SearchContainer>
         { this.props.users.map((user) => {
             return (
               <UsersListItem 

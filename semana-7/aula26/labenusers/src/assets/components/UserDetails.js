@@ -1,6 +1,7 @@
 import React from 'react'
 import {
-
+  UserDetailsContainer,
+  UserDetailsCard
 } from './Styles'
 
 export class UserDetails extends React.Component {
@@ -15,7 +16,6 @@ export class UserDetails extends React.Component {
           value={ this.props.userName }
           onChange={ this.props.onChangeUserName }
         />
-        <br />
         <label htmlFor='email'>Novo E-mail: </label>
         <input
           required
@@ -24,7 +24,6 @@ export class UserDetails extends React.Component {
           value={ this.props.userEmail }
           onChange={ this.props.onChangeUserEmail }
         />
-        <br />
         <button onClick={ () => this.props.onEditUser(this.props.details) }>
           Salvar
         </button>
@@ -38,16 +37,17 @@ export class UserDetails extends React.Component {
       this.props.editing ? saveEditChanges : openEditSection
 
     return (
-      <div>
-        <h3>Detalhes do Usuário</h3>
-        <p><b>Nome: </b><span>{ this.props.details.name }</span></p>
-        <p><b>E-mail: </b><span>{ this.props.details.email }</span></p>
-        { editSection }
-        <br /><br />
+      <UserDetailsContainer>
+        <UserDetailsCard>
+          <h3>Detalhes do Usuário:</h3>
+          <p><b>Nome: </b><span>{ this.props.details.name }</span></p>
+          <p><b>E-mail: </b><span>{ this.props.details.email }</span></p>
+          { editSection }
+        </UserDetailsCard>
         <button onClick={ () => this.props.onDeleteUser(this.props.details) }>
           Deletar Usuário
         </button>
-      </div>
+      </UserDetailsContainer>
     )
   }
 }
