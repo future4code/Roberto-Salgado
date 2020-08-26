@@ -56,7 +56,7 @@ export default class App extends React.Component {
     )
 
     request.then(response => {
-      window.alert(`Usuário(a) ${ this.state.nameValue } criado(a) com sucesso`)
+      alert(`Usuário(a) ${ this.state.nameValue } criado(a) com sucesso`)
       this.toggleSection()
       this.setState({
         nameValue: '',
@@ -68,21 +68,23 @@ export default class App extends React.Component {
   }
 
   deleteUser = (user) => {
-    const request = axios.delete(
-      `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${user.id}`,
-      {
-        headers: {
-          Authorization: 'roberto-salgado-jackson'
+    const result = window.confirm('Tem certeza de que deseja deletar?')
+    if(result) {
+      const request = axios.delete(
+        `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${user.id}`,
+        {
+          headers: {
+            Authorization: 'roberto-salgado-jackson'
+          }
         }
-      }
-    )
-
-    request.then((response) => {
-      window.alert(`Usuário(a) ${ user.name } removido`)
-      this.getUsers()
-    }).catch(error => {
-      console.log(`Ocorreu um erro: ${ error.data }`)
-    })
+      )
+      request.then((response) => {
+        alert(`Usuário(a) ${ user.name } removido`)
+        this.getUsers()
+      }).catch(error => {
+        console.log(`Ocorreu um erro: ${ error.data }`)
+      })
+    }
   }
 
   onChangeNameValue = e => {
