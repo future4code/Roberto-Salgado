@@ -17,7 +17,7 @@ export class Users extends React.Component {
         <h2>Usuários Cadastrados:</h2>
         { this.props.users.map((user) => {
             return (
-              <UsersListItem key={user.id}>
+              <UsersListItem key={user.id} onClick={ () => this.props.onDetailUser(user) }>
                 { user.name }
                 <DeleteButton onClick={ () => this.props.onDeleteUser(user) }>
                   X

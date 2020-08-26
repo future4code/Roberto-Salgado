@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Register } from './assets/components/Register'
 import { Users } from './assets/components/Users'
+import { UserDetails } from './assets/components/UserDetails'
 import {
   AppContainer,
   ToggleSection
@@ -12,12 +13,14 @@ export default class App extends React.Component {
     users: [],
     nameValue: '',
     emailValue: '',
-    currentSection: 'register'
+    currentSection: 'register',
+    details: {}
   }
 
   toggleSection = () => {
     this.setState({
-      currentSection: this.state.currentSection === 'register' ? 'userslist' : 'register'
+      currentSection: this.state.currentSection === 'userdetails' ? 'userslist' : (
+        this.state.currentSection === 'register' ? 'userslist' : 'register')
     })
   }
 
@@ -81,10 +84,31 @@ export default class App extends React.Component {
       request.then((response) => {
         alert(`Usuário(a) ${ user.name } removido`)
         this.getUsers()
+        this.setState({ currentSection: 'userslist' })
       }).catch(error => {
         console.log(`Ocorreu um erro: ${ error.data }`)
       })
     }
+  }
+
+  detailUser = (user) => {
+    const request = axios.get(
+      `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${user.id}`,
+      {
+        headers: {
+          Authorization: 'roberto-salgado-jackson'
+        }
+      }  
+    )
+
+    request.then((response) => {
+      this.setState({
+        details: { ...response.data },
+        currentSection: 'userdetails'
+      })
+    }).catch(error => {
+      console.log(`Ocorreu um erro: ${ error.data}`)
+    })
   }
 
   onChangeNameValue = e => {
@@ -99,23 +123,54 @@ export default class App extends React.Component {
 
   render() {
     const currentSection = this.state.currentSection
-    const sectionName = currentSection === 'register' ? 'lista' : 'cadastro'
-    const selectedSection = 
-      currentSection === 'register' ? (
-        <Register
-          name={ this.state.nameValue }
-          onChangeName={ this.onChangeNameValue }
-          email={ this.state.emailValue }
-          onChangeEmail={ this.onChangeEmailValue }
-          onCreateUser={ this.createUser }
-        />
-      ) : (
-        <Users
-        onGetUsers={ this.getUsers }
-        onDeleteUser={ this.deleteUser }
-        users={ this.state.users }
-        />
-      )
+    let sectionName = 'lista'
+    let selectedSection = ''
+    switch(currentSection) {
+      case 'register':
+        sectionName = 'lista'
+        selectedSection = (
+          <Register
+            name={ this.state.nameValue }
+            onChangeName={ this.onChangeNameValue }
+            email={ this.state.emailValue }
+            onChangeEmail={ this.onChangeEmailValue }
+            onCreateUser={ this.createUser }
+          />
+        )
+        break
+      case 'userslist':
+        sectionName = 'cadastro'
+        selectedSection = (
+          <Users
+            onGetUsers={ this.getUsers }
+            onDeleteUser={ this.deleteUser }
+            onDetailUser={ this.detailUser }
+            users={ this.state.users }
+          />
+        )
+        break
+      case 'userdetails':
+        sectionName = 'lista'
+        selectedSection = (
+          <UserDetails
+            details={ this.state.details }
+            onDeleteUser={ this.deleteUser }
+          />
+        )
+        break
+      default:
+        sectionName = 'lista'
+        selectedSection = (
+          <Register
+            name={ this.state.nameValue }
+            onChangeName={ this.onChangeNameValue }
+            email={ this.state.emailValue }
+            onChangeEmail={ this.onChangeEmailValue }
+            onCreateUser={ this.createUser }
+          />
+        )
+        break
+    }
 
     return (
       <AppContainer>
