@@ -45,7 +45,7 @@ export default class App extends React.Component {
     try {
       const response = await axios.get(baseUrl, axiosConfig)
       this.setState({ playlists: response.data.result.list })
-      console.log(this.state.playlists)
+      // console.log(this.state.playlists)
     } catch (error) {
       console.log(`Ocorreu um erro: ${ error.message }`)
     }
@@ -89,8 +89,8 @@ export default class App extends React.Component {
         playlistTracks: response.data.result.tracks,
         currentSection: 'playlistTracks'
       })
-      console.log(this.state.playlistData)
-      console.log(this.state.playlistTracks)
+      // console.log(this.state.playlistData)
+      // console.log(this.state.playlistTracks)
     } catch (error) {
       console.log(`Ocorreu um erro: ${ error.message}`)
     }
@@ -119,26 +119,25 @@ export default class App extends React.Component {
     }
   }
 
-  searchPlaylist = async (name) => {
-    this.getAllPlaylists()
-    try {
-      const response = await axios.get(`${ baseUrl }/search?name=${ name }`, axiosConfig)
-      const filteredPlaylists = this.state.playlists.filter(playlist => {
-        return (playlist.id === response.data.result.playlist.id ? true : false)
-      })
-      this.setState({ 
-        nameSearch: '',
-        playlists: filteredPlaylists
-      })
-      console.log(response.data.result.playlist)
-    } catch (error) {
-      console.log(`Ocorreu um erro: ${ error.message}`)
-    }
-  }
+  // searchPlaylist = async (name) => {
+  //   this.getAllPlaylists()
+  //   try {
+  //     const response = await axios.get(`${ baseUrl }/search?name=${ name }`, axiosConfig)
+  //     const filteredPlaylists = this.state.playlists.filter(playlist => {
+  //       return (playlist.id === response.data.result.playlist.id ? true : false)
+  //     })
+  //     this.setState({ 
+  //       nameSearch: '',
+  //       playlists: filteredPlaylists
+  //     })
+  //     console.log(response.data.result.playlist)
+  //   } catch (error) {
+  //     console.log(`Ocorreu um erro: ${ error.message}`)
+  //   }
+  // }
 
   onChangeNameValue = e => {
     this.setState({ nameValue: e.target.value })
-    // console.log(this.state.nameValue)
   }
 
   onChangeNameSearch = e => {

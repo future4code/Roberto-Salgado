@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   PlaylistsList,
-  SearchContainer,
+  // SearchContainer,
   PlaylistsItem,
   DeleteButton
 } from '../styles/Styles'
@@ -16,7 +16,7 @@ export class Playlists extends React.Component {
     return (
       <PlaylistsList>
         <h2>Playlists:</h2>
-        <SearchContainer>
+        {/* <SearchContainer>
           <input 
             name='search'
             type='text'
@@ -33,7 +33,7 @@ export class Playlists extends React.Component {
           >
             Limpar
           </button>
-        </SearchContainer>
+        </SearchContainer> */}
         { this.props.playlists.map(playlist => {
             return (
               <PlaylistsItem 
