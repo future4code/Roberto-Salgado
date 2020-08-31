@@ -16,7 +16,6 @@ export default class App extends React.Component {
   state = {
     playlists: [],
     nameValue: '',
-    emailValue: '',
     nameSearch: '',
     currentSection: '',
     playlistData: {},
@@ -119,22 +118,26 @@ export default class App extends React.Component {
     }
   }
 
-  // searchPlaylist = async (name) => {
-  //   this.getAllPlaylists()
-  //   try {
-  //     const response = await axios.get(`${ baseUrl }/search?name=${ name }`, axiosConfig)
-  //     const filteredPlaylists = this.state.playlists.filter(playlist => {
-  //       return (playlist.id === response.data.result.playlist.id ? true : false)
-  //     })
-  //     this.setState({ 
-  //       nameSearch: '',
-  //       playlists: filteredPlaylists
-  //     })
-  //     console.log(response.data.result.playlist)
-  //   } catch (error) {
-  //     console.log(`Ocorreu um erro: ${ error.message}`)
-  //   }
-  // }
+  searchPlaylist = async (name) => {
+    this.getAllPlaylists()
+    try {
+      const response = await axios.get(`${ baseUrl }/search?name=${ name }`, axiosConfig)
+      const searchResults = response.data.result.playlist.map(item => {
+        return item.name
+      })
+      const filteredPlaylists = this.state.playlists.filter(playlist => {
+        return searchResults.indexOf(playlist.name) > -1
+      })
+      this.setState({ 
+        nameSearch: '',
+        playlists: filteredPlaylists
+      })
+      console.log(searchResults)
+      console.log(filteredPlaylists)
+    } catch (error) {
+      console.log(`Ocorreu um erro: ${ error.message}`)
+    }
+  }
 
   onChangeNameValue = e => {
     this.setState({ nameValue: e.target.value })
@@ -142,6 +145,11 @@ export default class App extends React.Component {
 
   onChangeNameSearch = e => {
     this.setState({ nameSearch: e.target.value })
+  }
+
+  clearSearch = () => {
+    this.setState({ nameSearch: '' })
+    this.getAllPlaylists()
   }
   
   onChangeNewTrack = e => {
@@ -182,6 +190,7 @@ export default class App extends React.Component {
             handleNameSearch={ this.state.nameSearch }
             onChangeSearch={ this.onChangeNameSearch }
             onSearchPlaylist={ this.searchPlaylist }
+            onClearSearch={ this.clearSearch }
             onGetAllPlaylists={ this.getAllPlaylists }
             onDeletePlaylist={ this.deletePlaylist }
             onGetPlaylistTracks={ this.getPlaylistTracks }

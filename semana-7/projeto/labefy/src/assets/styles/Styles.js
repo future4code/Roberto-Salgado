@@ -67,10 +67,9 @@ export const PlaylistsList = styled.ul`
 
 export const SearchContainer = styled.div`
   margin: 1em 0 0.8em 0;
-
-  input {
-    margin-right: 0.4em;
-  }
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
 `
 
 export const PlaylistsItem = styled.li`
