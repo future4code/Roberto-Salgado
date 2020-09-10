@@ -18,16 +18,16 @@ export const ProfilePicture = styled.img`
 `
 
 export const BlurredBackground = styled.div`
-	${({photo}) => {
+	${ ({ photo }) => {
 		if(photo)
 		return `
-      background-image: url(${photo});
+      background-image: url(${ photo });
       filter: blur(30px);
       height: 100%;
       width: 100%;
       position: absolute;
     `
-	}}
+	} }
 `
 
 export const InfoWrapper = styled.div`

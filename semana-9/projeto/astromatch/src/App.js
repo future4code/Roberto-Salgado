@@ -4,7 +4,6 @@ import ClearButton from './assets/components/ClearButton/ClearButton'
 import Screens from './assets/containers/Screens'
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto');
   body {
     margin: 0;
     background-color: #D0D0D0;

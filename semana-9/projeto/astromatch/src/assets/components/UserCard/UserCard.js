@@ -13,17 +13,17 @@ import {
 const UserCard = props => {
   return (
     <UserCardWrapper>
-      <BlurredBackground photo={props.user.photo}/>
-      <ProfilePicture src={props.user.photo} />
+      <BlurredBackground photo={ props.user.photo } />
+      <ProfilePicture src={ props.user.photo } />
       <InfoWrapper>
         <TitleWrapper>
-          <UserName>{props.user.name}</UserName>
-          <UserAge>{props.user.age}</UserAge>
+          <UserName>{ props.user.name }</UserName>
+          <UserAge>{ props.user.age }</UserAge>
         </TitleWrapper>
-        <UserDescription>{props.user.bio}</UserDescription>
+        <UserDescription>{ props.user.bio }</UserDescription>
       </InfoWrapper>
     </UserCardWrapper>
-  )
+  ) 
 }
 
 export default UserCard

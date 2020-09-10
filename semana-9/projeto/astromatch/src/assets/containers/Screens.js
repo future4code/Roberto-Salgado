@@ -1,25 +1,28 @@
 import React, { useState } from 'react'
 import SwipeScreen from './screens/SwipeScreen/SwipeScreen'
+import MatchesScreen from './screens/MatchesScreen/MatchesScreen'
 
 const Screens = props => {
   
-  const [currentPage, setCurrentPage] = useState('SwipeScreen')
+  const [currentScreen, setCurrentScreen] = useState("SwipeScreen")
 
+  const changeCurrentScreen = (screen) => {
+    setCurrentScreen(screen)
+  }
 
-
-  switch (currentPage) {
+  switch (currentScreen) {
     case "SwipeScreen":
-      return (<SwipeScreen />)
-      break
-    // case "MatchScreen":
-    //   return (<MatchScreen />)
-    //   break
+      return (<SwipeScreen 
+        goToMatchesScreen={ () => changeCurrentScreen("MatchesScreen") }
+      />)
+    case "MatchesScreen":
+      return (<MatchesScreen
+        goToSwipeScreen={ () => changeCurrentScreen("SwipeScreen") }
+      />)
     // case "ProfileScreen":
     //   return (<ProfileScreen />)
-    //   break
     default:
       return (<h1>Error: invalid page selected</h1>)
-      break
   }
 }
 
