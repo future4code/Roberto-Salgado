@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import styled, { createGlobalStyle } from 'styled-components'
+import ClearButton from './assets/components/ClearButton/ClearButton'
+import Screens from './assets/containers/Screens'
 
-function App() {
+const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto');
+  body {
+    margin: 0;
+    background-color: #D0D0D0;
+    font-family: Roboto, sans-serif;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+`
+
+const MainContainer = styled.div`
+  width: 400px;
+  height: 600px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 0 5px #0000000F;
+`
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <div>
+      <GlobalStyle />
+      <MainContainer>
+        <Screens />
+      </MainContainer>
+      <ClearButton />
+    </div>  
+  )
 }
 
-export default App;
+export default App
