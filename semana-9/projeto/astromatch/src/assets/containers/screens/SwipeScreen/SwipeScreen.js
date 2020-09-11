@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import axios from 'axios'
 import { baseUrl } from '../../../constants/axiosConstants'
 import {
@@ -16,10 +16,6 @@ import ClearIcon from '@material-ui/icons/Clear'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 
 const SwipeScreen = props => {
-
-  useEffect(() => {
-    props.getProfile()
-  }, [])
 
   const choosePerson = (like) => {
     if (props.profile) {

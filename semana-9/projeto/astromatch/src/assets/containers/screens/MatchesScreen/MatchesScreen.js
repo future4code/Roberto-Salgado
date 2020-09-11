@@ -8,7 +8,7 @@ import AppBar from '../../../components/AppBar/AppBar'
 const MatchesScreen = props => {
 
   useEffect(() => {
-    props.getMatches()
+    props.getMatches() // eslint-disable-next-line
   }, [props.matches])
   
   return (

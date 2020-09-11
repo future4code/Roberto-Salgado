@@ -16,14 +16,12 @@ const ClearButton = props => {
 			.put(`${ baseUrl }/clear`)
 			.then(response => {
 				console.log(response.data)
-				props.getProfile()
+				!props.profile && props.getProfile()
 			})
 			.catch(err => {
 				console.log(err)
 			})
 	}
-
-
 
 	return (
 			<ClearButtonWrapper onClick={ clear }>

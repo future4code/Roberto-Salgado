@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { baseUrl } from './assets/constants/axiosConstants'
 import styled, { createGlobalStyle } from 'styled-components'
@@ -32,6 +32,10 @@ const MainContainer = styled.div`
 const App = () => {
   const [profile, setProfile] = useState({})
   const [matches, setMatches] = useState([])
+
+  useEffect(() => {
+    getProfile()
+  }, [])
 
   const getProfile = () => {
     axios
@@ -67,6 +71,7 @@ const App = () => {
         />
       </MainContainer>
       <ClearButton 
+        profile={profile}
         getProfile={ getProfile }
         getMatches={ getMatches }
       />
