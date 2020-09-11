@@ -12,17 +12,23 @@ const Screens = props => {
 
   switch (currentScreen) {
     case "SwipeScreen":
-      return (<SwipeScreen 
+      return (<SwipeScreen
+        profile={ props.profile }
+        getProfile={ props.getProfile }
         goToMatchesScreen={ () => changeCurrentScreen("MatchesScreen") }
       />)
     case "MatchesScreen":
       return (<MatchesScreen
+        matches={ props.matches }
+        getMatches={ props.getMatches }
         goToSwipeScreen={ () => changeCurrentScreen("SwipeScreen") }
       />)
-    // case "ProfileScreen":
-    //   return (<ProfileScreen />)
     default:
-      return (<h1>Error: invalid page selected</h1>)
+      return (<SwipeScreen
+        profile={ props.profile }
+        getProfile={ props.getProfile }
+        goToMatchesScreen={ () => changeCurrentScreen("MatchesScreen") }
+      />)
   }
 }
 

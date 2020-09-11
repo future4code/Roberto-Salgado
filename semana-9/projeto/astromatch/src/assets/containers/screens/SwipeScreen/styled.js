@@ -18,18 +18,19 @@ export const ContentWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex: 1;
-	justify-content: flex-center;
+	justify-content: flex-end;
 `
 
 export const ButtonsWrapper = styled.div`
-  display: flex;
+	justify-self: flex-end;
+	display: flex;
   justify-content: space-evenly;
-  align-items: center;
+	align-items: center;
   padding: 10px 0;
 `
 
 
-export const OptionButton = styled.button`
+export const SwipeButton = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;

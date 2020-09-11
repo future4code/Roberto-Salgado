@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
+import { baseUrl } from './assets/constants/axiosConstants'
 import styled, { createGlobalStyle } from 'styled-components'
 import ClearButton from './assets/components/ClearButton/ClearButton'
 import Screens from './assets/containers/Screens'
@@ -27,15 +29,47 @@ const MainContainer = styled.div`
   background-color: white;
   box-shadow: 0 0 5px #0000000F;
 `
-
 const App = () => {
+  const [profile, setProfile] = useState({})
+  const [matches, setMatches] = useState([])
+
+  const getProfile = () => {
+    axios
+      .get(`${ baseUrl }/person`)
+      .then(response => {
+        setProfile(response.data.profile)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  const getMatches = () => {
+    axios
+      .get(`${ baseUrl }/matches`)
+      .then(response => {
+        setMatches(response.data.matches)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   return (
     <div>
       <GlobalStyle />
       <MainContainer>
-        <Screens />
+        <Screens
+          profile={ profile }
+          getProfile={ getProfile } 
+          matches={ matches }
+          getMatches={ getMatches }
+        />
       </MainContainer>
-      <ClearButton />
+      <ClearButton 
+        getProfile={ getProfile }
+        getMatches={ getMatches }
+      />
     </div>  
   )
 }

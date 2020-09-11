@@ -8,6 +8,8 @@ export const MatchIcon = styled(Icon)`
 
 export const List = styled.ul`
   padding: 0 10px;
+  height: 520px;
+  overflow: auto;
 `
 
 export const ListItem = styled.li`

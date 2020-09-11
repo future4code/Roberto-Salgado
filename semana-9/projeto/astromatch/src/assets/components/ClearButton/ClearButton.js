@@ -9,13 +9,14 @@ const ClearButtonWrapper = styled.button`
 	right: 5px;
 `
 
-const ClearButton = () => {
+const ClearButton = props => {
 
 	const clear = () => {
 		axios
 			.put(`${ baseUrl }/clear`)
 			.then(response => {
 				console.log(response.data)
+				props.getProfile()
 			})
 			.catch(err => {
 				console.log(err)
