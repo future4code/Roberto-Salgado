@@ -1,20 +1,13 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import {
+  goToHomePage,
+  goToListTripsPage,
+  goBack
+} from '../../actions/goToPages'
 
 const TripDetailsPage = () => {
   const history = useHistory()
-
-  const goToHomePage = (history) => {
-    history.push("/")
-  }
-  
-  const goToListTripsPage = (history) => {
-    history.push("/trips/list")
-  }
-
-  const goBack = (history) => {
-    history.goBack()
-  }
 
   return (
     <div>

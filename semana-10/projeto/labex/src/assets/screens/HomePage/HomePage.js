@@ -1,16 +1,9 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import { goToApplicationFormPage, goToLoginPage } from '../../actions/goToPages'
 
 const HomePage = () => {
   const history = useHistory()
-
-  const goToApplicationFormPage = (history) => {
-    history.push("/application-form")
-  }
-
-  const goToLoginPage = (history) => {
-    history.push("/login")
-  }
 
   return (
     <div>
