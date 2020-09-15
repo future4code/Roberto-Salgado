@@ -1,19 +1,16 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import HomePage from '../../HomePage/HomePage'
-import ApplicationFormPage from '../../ApplicationFormPage/ApplicationFormPage'
-import LoginPage from '../../LoginPage/LoginPage'
-import CreateTripPage from '../../CreateTripPage/CreateTripPage'
-import ListTripsPage from '../../ListTripsPage/ListTripsPage'
-import TripDetailsPage from '../../TripDetailsPage/TripDetailsPage'
+import HomePage from '../HomePage/HomePage'
+import ApplicationFormPage from '../ApplicationFormPage/ApplicationFormPage'
+import LoginPage from '../LoginPage/LoginPage'
+import CreateTripPage from '../CreateTripPage/CreateTripPage'
+import ListTripsPage from '../ListTripsPage/ListTripsPage'
+import TripDetailsPage from '../TripDetailsPage/TripDetailsPage'
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route  exact path="/">
-          <HomePage />
-        </Route>
         <Route  exact path="/application-form">
           <ApplicationFormPage />
         </Route>
@@ -28,6 +25,9 @@ const Router = () => {
         </Route>
         <Route  exact path="/trips/details">
           <TripDetailsPage />
+        </Route>
+        <Route  exact path="/">
+          <HomePage />
         </Route>
         <Route>
           <div>404: Página não encontrada</div>

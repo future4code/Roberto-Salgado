@@ -12,7 +12,7 @@ const HomePage = () => {
         Ir para Formulário de Inscrição
       </button>
       <button onClick={ () => goToLoginPage(history) }>
-        Ir para Formulário de Inscrição
+        Ir para Login
       </button>
     </div>
   )
