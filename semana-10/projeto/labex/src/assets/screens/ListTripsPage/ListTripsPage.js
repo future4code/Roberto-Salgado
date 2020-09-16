@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { 
   goToHomePage, 
@@ -9,6 +9,13 @@ import {
 
 const ListTripsPage = () => {
   const history = useHistory()
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token")
+
+    // token ? getTripsList() : history.push("/login")
+    token || history.push("/login")
+  })
 
   return (
     <div>

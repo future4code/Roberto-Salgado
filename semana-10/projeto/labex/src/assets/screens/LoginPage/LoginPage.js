@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 import { 
   goToHomePage, 
   goToListTripsPage, 
@@ -29,7 +30,7 @@ const LoginPage = () => {
   useEffect(() => {
     const token = window.localStorage.getItem("token")
 
-    token && history.push("/trip/list")
+    token && history.push("/trips/list")
   }, [history])
 
   const handleLogin = () => {
@@ -42,7 +43,7 @@ const LoginPage = () => {
       .post(`${ baseUrl }/login`, body)
       .then(response => {
         localStorage.setItem("token", response.data.token)
-        history.push("/trip/list")
+        history.push("/trips/list")
       })
       .catch(err => {
         console.log(err)
@@ -69,18 +70,20 @@ const LoginPage = () => {
         />
       </label>
       <button onClick={ handleLogin } >Fazer Login</button>
-      <button onClick={ () => goToHomePage(history) }>
-        Ir para Home
-      </button>
-      <button onClick={ () => goToListTripsPage(history) }>
-        Ir para Lista de Viagens
-      </button>
-      <button onClick={ () => goToCreateTripPage(history) }>
-        Criar Viagem
-      </button>
-      <button onClick={ () => goBack(history) }>
-        Voltar
-      </button>
+      <div>
+        <button onClick={ () => goToHomePage(history) }>
+          Ir para Home
+        </button>
+        <button onClick={ () => goToListTripsPage(history) }>
+          Ir para Lista de Viagens
+        </button>
+        <button onClick={ () => goToCreateTripPage(history) }>
+          Criar Viagem
+        </button>
+        <button onClick={ () => goBack(history) }>
+          Voltar
+        </button>
+      </div>
     </div>
   )
 }
