@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { 
   goToHomePage, 
+  goToLoginPage,
   goToTripDetailsPage, 
   goToCreateTripPage, 
   goBack 
@@ -14,8 +15,8 @@ const ListTripsPage = () => {
     const token = window.localStorage.getItem("token")
 
     // token ? getTripsList() : history.push("/login")
-    token || history.push("/login")
-  })
+    token || goToLoginPage(history)
+  }, [history])
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { 
@@ -7,19 +7,8 @@ import {
   goToCreateTripPage, 
   goBack 
 } from '../../actions/goToPages'
-
-const useInput = () => {
-  const [value, updateValue] = useState ("")
-
-  const handleValue = event => {
-    updateValue(event.target.value)
-  }
-
-  return [value, handleValue]
-}
-
-const baseUrl = 
-  "https://us-central1-labenu-apis.cloudfunctions.net/labeX/roberto-salgado-jackson"
+import { useInput } from '../../hooks/useInput'
+import { baseUrl } from '../../constants/axiosConstants'
 
 const LoginPage = () => {
   const history = useHistory()
@@ -30,7 +19,7 @@ const LoginPage = () => {
   useEffect(() => {
     const token = window.localStorage.getItem("token")
 
-    token && history.push("/trips/list")
+    token && goToListTripsPage(history)
   }, [history])
 
   const handleLogin = () => {
@@ -43,7 +32,7 @@ const LoginPage = () => {
       .post(`${ baseUrl }/login`, body)
       .then(response => {
         localStorage.setItem("token", response.data.token)
-        history.push("/trips/list")
+        goToListTripsPage(history)
       })
       .catch(err => {
         console.log(err)

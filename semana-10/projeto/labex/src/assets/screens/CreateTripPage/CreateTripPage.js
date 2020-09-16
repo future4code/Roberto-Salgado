@@ -15,7 +15,7 @@ const CreateTripPage = () => {
 
     // token ? getTripsList() : history.push("/login")
     token || history.push("/login")
-  })
+  }, [history])
 
   return (
     <div>
