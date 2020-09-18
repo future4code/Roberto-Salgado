@@ -49,13 +49,12 @@ const ApplicationFormPage = () => {
   }
 
 
-
   const handleSubmittion = event => {
     event.preventDefault()
 
     const body = {
       name: form.name,
-      planet: form.age,
+      age: Number(form.age),
       applicationText: form.applicationText,
       profession: form.profession,
       country: form.country
@@ -63,6 +62,10 @@ const ApplicationFormPage = () => {
     const tripId = form.tripId
 
     applyToTrip(tripId, body)
+
+    // console.log(form)
+    // console.log(body)
+    // console.log(tripId)
 
     resetState()
   }
