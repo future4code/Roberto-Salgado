@@ -5,7 +5,7 @@ import {
   goToHomePage,
   goToTripDetailsPage,
   goToListTripsPage,
-  goBack
+  goBack,
 } from '../../actions/goToPages'
 import { useForm } from '../../hooks/useForm'
 import { baseUrl } from '../../constants/axiosConstants'
@@ -16,7 +16,7 @@ const CreateTripPage = () => {
     planet: "",
     date: "",
     description: "",
-    durationInDays: 0
+    durationInDays: 0,
   })
   const history = useHistory()
 
@@ -54,6 +54,9 @@ const CreateTripPage = () => {
         resetState()
         goToListTripsPage(history)
       })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   return (
@@ -78,8 +81,10 @@ const CreateTripPage = () => {
             value={ form.planet }
             name="planet"
             onChange={ handleInputChange }
+            title="Escolha um planeta"
             required
           >
+            <option value=""></option>
             <option value="Mercúrio">Mercúrio</option>
             <option value="Venus">Venus</option>
             <option value="Terra">Terra</option>
@@ -98,6 +103,7 @@ const CreateTripPage = () => {
             onChange={ handleInputChange }
             type="date"
             min={ (new Date()).toISOString().slice(0, 10) }
+            title="Escolha uma data futura"
             required
           />
         </label>
@@ -120,7 +126,7 @@ const CreateTripPage = () => {
             onChange={ handleInputChange }
             type="number"
             min="50"
-            title="No minimo 50"
+            title="Maior do que 50"
             required
           />
         </label>
