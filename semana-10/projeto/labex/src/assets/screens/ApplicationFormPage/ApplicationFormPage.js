@@ -40,7 +40,7 @@ const ApplicationFormPage = () => {
     axios
       .post(`${ baseUrl }/trips/${ tripId }/apply`, body)
       .then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         alert(response.data.message)
       })
       .catch(err => {

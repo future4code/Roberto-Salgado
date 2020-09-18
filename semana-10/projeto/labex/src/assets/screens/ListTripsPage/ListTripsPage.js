@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 import { 
   goToHomePage, 
   goToLoginPage,
@@ -7,20 +8,40 @@ import {
   goToCreateTripPage, 
   goBack 
 } from '../../actions/goToPages'
+import { baseUrl } from '../../constants/axiosConstants'
 
 const ListTripsPage = () => {
+  const [tripsList, setTripsList] = useState([])
   const history = useHistory()
 
   useEffect(() => {
     const token = window.localStorage.getItem("token")
 
-    // token ? getTripsList() : history.push("/login")
-    token || goToLoginPage(history)
+    token ? getTrips() : goToLoginPage(history)
+    // token || goToLoginPage(history)
   }, [history])
+
+  const getTrips = () => {
+    axios
+      .get(`${ baseUrl }/trips`)
+      .then(response => {
+        setTripsList(response.data.trips)
+      })
+      .catch(error => {})
+  }
 
   return (
     <div>
-      <p>Lista de Viagens</p>
+      <h2>Lista de Viagens</h2>
+      {tripsList.map(item => {
+        return (
+          <div key={ item.id }>
+            <h3>{ item.name }</h3>
+            <p>{ item.date } - <strong>{ item.planet }</strong></p>
+          </div>
+        )
+      })}
+      
       <button onClick={ () => goToHomePage(history) }>
         Ir para Home
       </button>
