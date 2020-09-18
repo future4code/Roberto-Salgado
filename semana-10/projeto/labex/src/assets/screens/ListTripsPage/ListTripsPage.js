@@ -30,12 +30,19 @@ const ListTripsPage = () => {
       .catch(error => {})
   }
 
+  const handleTripClick = (tripId) => {
+    goToTripDetailsPage(history, tripId)
+  }
+
   return (
     <div>
       <h2>Lista de Viagens</h2>
       {tripsList.map(item => {
         return (
-          <div key={ item.id }>
+          <div 
+            key={ item.id }
+            onClick={ () => handleTripClick(item.id) }
+          >
             <h3>{ item.name }</h3>
             <p>{ item.date } - <strong>{ item.planet }</strong></p>
           </div>
@@ -44,9 +51,6 @@ const ListTripsPage = () => {
       
       <button onClick={ () => goToHomePage(history) }>
         Ir para Home
-      </button>
-      <button onClick={ () => goToTripDetailsPage(history) }>
-        Ir para Detalhes da Viagem
       </button>
       <button onClick={ () => goToCreateTripPage(history) }>
         Criar Viagem
