@@ -1,26 +1,82 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { baseUrl } from './assets/constants/axiosConstants'
+import styled, { createGlobalStyle } from 'styled-components'
+import ClearButton from './assets/components/ClearButton/ClearButton'
+import Screens from './assets/containers/Screens'
 
-function App() {
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    background-color: #D0D0D0;
+    font-family: Roboto, sans-serif;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+`
+
+const MainContainer = styled.div`
+  width: 400px;
+  height: 600px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 0 5px #0000000F;
+`
+const App = () => {
+  const [profile, setProfile] = useState({})
+  const [matches, setMatches] = useState([])
+
+  useEffect(() => {
+    getProfile()
+  }, [])
+
+  const getProfile = () => {
+    axios
+      .get(`${ baseUrl }/person`)
+      .then(response => {
+        setProfile(response.data.profile)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  const getMatches = () => {
+    axios
+      .get(`${ baseUrl }/matches`)
+      .then(response => {
+        setMatches(response.data.matches)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <div>
+      <GlobalStyle />
+      <MainContainer>
+        <Screens
+          profile={ profile }
+          getProfile={ getProfile } 
+          matches={ matches }
+          getMatches={ getMatches }
+        />
+      </MainContainer>
+      <ClearButton 
+        profile={profile}
+        getProfile={ getProfile }
+        getMatches={ getMatches }
+      />
+    </div>  
+  )
 }
 
-export default App;
+export default App
