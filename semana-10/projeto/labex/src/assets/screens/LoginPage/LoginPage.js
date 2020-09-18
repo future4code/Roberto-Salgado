@@ -7,14 +7,16 @@ import {
   goToCreateTripPage, 
   goBack 
 } from '../../actions/goToPages'
-import { useInput } from '../../hooks/useInput'
+import { useForm } from '../../hooks/useForm'
 import { baseUrl } from '../../constants/axiosConstants'
 
 const LoginPage = () => {
-  const history = useHistory()
+  const { form, onChange, resetState } = useForm({
+    email: "",
+    password: ""
+  })
 
-  const [email, handleEmail] = useInput()
-  const [password, handlePassword] = useInput()
+  const history = useHistory()
 
   useEffect(() => {
     const token = window.localStorage.getItem("token")
@@ -22,16 +24,25 @@ const LoginPage = () => {
     token && goToListTripsPage(history)
   }, [history])
 
-  const handleLogin = () => {
+  const handleInputChange = event => {
+    const { name, value } = event.target
+
+    onChange(name, value)
+  }
+
+  const handleSubmittion = event => {
+    event.preventDefault()
+
     const body = {
-      email: email,
-      password: password
+      email: form.email,
+      password: form.password
     }
 
     axios
       .post(`${ baseUrl }/login`, body)
       .then(response => {
         localStorage.setItem("token", response.data.token)
+        resetState()
         goToListTripsPage(history)
       })
       .catch(err => {
@@ -42,23 +53,29 @@ const LoginPage = () => {
   return (
     <div>
       <p>Login</p>
-      <label>
-        E-Mail:
-        <input 
-          type="email"
-          value={ email }
-          onChange={ handleEmail }
-        />
-      </label>
-      <label>
-        Senha:
-        <input 
-          type="password"
-          value={ password }
-          onChange={ handlePassword }
-        />
-      </label>
-      <button onClick={ handleLogin } >Fazer Login</button>
+      <form onSubmit={ handleSubmittion } >
+        <label>
+          E-Mail:
+          <input 
+            value={ form.email }
+            name="email"
+            onChange={ handleInputChange }
+            type="email"
+            required
+          />
+        </label>
+        <label>
+          Senha:
+          <input 
+            value={ form.password }
+            name="password"
+            onChange={ handleInputChange }
+            type="password"
+            required
+          />
+        </label>
+        <button>Enviar</button>
+      </form>
       <div>
         <button onClick={ () => goToHomePage(history) }>
           Ir para Home
