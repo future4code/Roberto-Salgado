@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { goToHomePage } from '../../actions/goToPages'
 import { useForm } from '../../hooks/useForm'
 import { baseUrl } from '../../constants/axiosConstants'
-import { countriesList } from '../../constants/countriesList'
+import { countriesList } from '../../constants/Lists'
 import { useGetTrips } from '../../hooks/useRequestData'
 import { applyToTrip } from '../../actions/requests'
 import { 

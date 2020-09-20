@@ -38,3 +38,19 @@ export const applyToTrip = (url, body) => {
       console.log(err.message)
     })
 }
+
+export const createTrip = (url, body, history) => {
+  axios
+    .post(url, body, {
+      headers: {
+        auth: localStorage.getItem("token")
+      }
+    })
+    .then(response => {
+      alert(`Viagem "${ response.data.trip.name }" criada com sucesso!`)
+      goToListTripsPage(history)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}

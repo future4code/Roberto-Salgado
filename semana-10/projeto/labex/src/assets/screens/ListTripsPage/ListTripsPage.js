@@ -22,7 +22,7 @@ const ListTripsPage = () => {
   useEffect(() => {
     const token = window.localStorage.getItem("token")
 
-    !token && goToLoginPage(history)
+    token || goToLoginPage(history)
   }, [history])
 
   const handleTripClick = (tripId) => {

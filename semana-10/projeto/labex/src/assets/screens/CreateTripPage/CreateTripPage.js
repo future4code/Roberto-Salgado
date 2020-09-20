@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
 import {
   goToHomePage,
-  goToTripDetailsPage,
   goToListTripsPage,
-  goBack,
 } from '../../actions/goToPages'
 import { useForm } from '../../hooks/useForm'
 import { baseUrl } from '../../constants/axiosConstants'
+import { planetsList } from '../../constants/Lists'
+import { createTrip } from '../../actions/requests'
 import {
   CreateTripScreenWrapper,
   FormWrapper,
@@ -16,7 +15,7 @@ import {
 } from './styled'
 
 const CreateTripPage = () => {
-  const { form, onChange, resetState } = useForm({
+  const { form, onChange } = useForm({
     name: "",
     planet: "",
     date: "",
@@ -48,20 +47,7 @@ const CreateTripPage = () => {
       durationInDays: form.durationInDays
     }
 
-    axios
-      .post(`${ baseUrl }/trips`, body, {
-        headers: {
-          auth: localStorage.getItem("token")
-        }
-      })
-      .then(response => {
-        console.log(response.data)
-        resetState()
-        goToListTripsPage(history)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    createTrip(`${ baseUrl }/trips`, body, history)
   }
 
   return (
@@ -75,7 +61,7 @@ const CreateTripPage = () => {
             name="name"
             onChange={ handleInputChange }
             type="text"
-            pattern="[A-Za-z]{5,}"
+            pattern="[A-Za-z\s]{5,}"
             title="No minimo 5 letras"
             required
           />
@@ -90,14 +76,11 @@ const CreateTripPage = () => {
             required
           >
             <option value=""></option>
-            <option value="Mercúrio">Mercúrio</option>
-            <option value="Venus">Venus</option>
-            <option value="Terra">Terra</option>
-            <option value="Marte">Marte</option>
-            <option value="Júpiter">Júpiter</option>
-            <option value="Saturno">Saturno</option>
-            <option value="Urano">Urano</option>
-            <option value="Netuno">Netuno</option>
+            { planetsList.map(planet => {
+              return (
+                <option key={ planet } value={ planet }>{ planet }</option>
+              )
+            }) }
           </select>
         </label>
         <label>
