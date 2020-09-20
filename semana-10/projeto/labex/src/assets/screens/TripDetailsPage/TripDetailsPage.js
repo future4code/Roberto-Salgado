@@ -4,9 +4,21 @@ import axios from 'axios'
 import {
   goToHomePage,
   goToListTripsPage,
-  goBack
 } from '../../actions/goToPages'
 import { baseUrl } from '../../constants/axiosConstants'
+import {
+  TripDetailsScreenWrapper,
+  TripDetailsWrapper,
+  TripDescriptionLabel,
+  TripDescription,
+  DetailsSpan,
+  CandidatesTitle,
+  CandidateListWrapper,
+  CandidateCard,
+  CandidateApplicationTextLabel,
+  CandidateApplicationText,
+  NavButtonsWrapper,
+} from './styled'
 
 const TripDetailsPage = () => {
   const [trip, setTrip] = useState({})
@@ -37,43 +49,43 @@ const TripDetailsPage = () => {
   }
 
   return (
-    <div>
+    <TripDetailsScreenWrapper>
       <h2>Detalhes da Viagem</h2>
       <div>
-        <h3>{ trip.name }</h3>
-        <h4>Destino: <span>{ trip.planet }</span></h4>
-        <h4>Data: <span>{ trip.date }</span></h4>
-        <h4>Duração: <span>{ trip.durationInDays } dias</span></h4>
-        <h4>Descrição:</h4>
-        <p>{ trip.description }</p>
-        <div>
-          <h4>Candidatos:</h4>
+        <TripDetailsWrapper>
+          <h3>{ trip.name }</h3>
+          <h4>Destino: <DetailsSpan>{ trip.planet }</DetailsSpan></h4>
+          <h4>Data: <DetailsSpan>{ trip.date }</DetailsSpan></h4>
+          <h4>Duração: <DetailsSpan>{ trip.durationInDays } dias</DetailsSpan></h4>
+          <TripDescriptionLabel>Descrição:</TripDescriptionLabel>
+          <TripDescription>{ trip.description }</TripDescription>
+        </TripDetailsWrapper>
+        <CandidatesTitle>Candidatos:</CandidatesTitle>
+        <CandidateListWrapper>
           { trip.candidates && (
             trip.candidates.map(item => {
               return (
-                <div key={ item.id }>
-                  <h5>Nome: <span>{ item.name }</span></h5>
-                  <h5>Idade: <span>{ item.age }</span></h5>
-                  <h5>País: <span>{ item.country }</span></h5>
-                  <h5>Texto de inscrição:</h5>
-                  <p>{ item.applicationText }</p>
-                </div>
+                <CandidateCard key={ item.id }>
+                  <h5>Nome: <DetailsSpan>{ item.name }</DetailsSpan></h5>
+                  <h5>Idade: <DetailsSpan>{ item.age }</DetailsSpan></h5>
+                  <h5>País: <DetailsSpan>{ item.country }</DetailsSpan></h5>
+                  <CandidateApplicationTextLabel>Texto de inscrição:</CandidateApplicationTextLabel>
+                  <CandidateApplicationText>{ item.applicationText }</CandidateApplicationText>
+                </CandidateCard>
               )
             })
           ) }
-        </div>
+        </CandidateListWrapper>
       </div>
-
-      <button onClick={ () => goToHomePage(history) }>
-        Ir para Home
-      </button>
-      <button onClick={ () => goToListTripsPage(history) }>
-        Ir para Lista de Viagens
-      </button>
-      <button onClick={ () => goBack(history) }>
-        Voltar
-      </button>
-    </div>
+      <NavButtonsWrapper>
+        <button onClick={ () => goToListTripsPage(history) }>
+          Voltar para Lista de Viagens
+        </button>
+        <button onClick={ () => goToHomePage(history) }>
+          Ir para Home
+        </button>
+      </NavButtonsWrapper>
+    </TripDetailsScreenWrapper>
   )
 }
 

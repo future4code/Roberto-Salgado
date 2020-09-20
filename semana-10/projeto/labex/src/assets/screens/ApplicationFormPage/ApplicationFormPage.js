@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-import { goToHomePage, goBack } from '../../actions/goToPages'
+import { goToHomePage } from '../../actions/goToPages'
 import { useForm } from '../../hooks/useForm'
 import { baseUrl } from '../../constants/axiosConstants'
+import { 
+  ApplicationScreenWrapper,
+  FormWrapper, 
+  NavButtonsWrapper, 
+} from './styled'
 
 const ApplicationFormPage = () => {
   const [tripsList, setTripsList] = useState([])
@@ -71,11 +76,11 @@ const ApplicationFormPage = () => {
   }
 
   return (
-    <div>
-      <p>Formulário de Inscrição</p>
-      <form onSubmit={ handleSubmittion } >
+    <ApplicationScreenWrapper>
+      <h2>Formulário de Inscrição</h2>
+      <FormWrapper onSubmit={ handleSubmittion } >
         <label>
-          Nome:
+          Nome: {" "}
           <input 
             value={ form.name }
             name="name"
@@ -83,11 +88,12 @@ const ApplicationFormPage = () => {
             type="text"
             pattern="[A-Za-z]{3,}"
             title="No minimo 3 letras"
+            width="320px"
             required
           />
         </label>
         <label>
-          Idade:
+          Idade: {" "}
           <input 
             value={ form.age }
             name="age"
@@ -98,19 +104,20 @@ const ApplicationFormPage = () => {
             required
           />
         </label>
-        <label>
-          Porque sou um bom candidato(a)?:
-          <textarea 
+        <label >
+          Texto de Inscrição:
+          <textarea
             value={ form.applicationText }
             name="applicationText"
             onChange={ handleInputChange }
             minLength="30"
             title="No minimo 30 letras"
+            placeholder="Porque sou um bom candidato(a)?"
             required
           />
         </label>
         <label>
-          Profissão:
+          Profissão: {" "}
           <input 
             value={ form.profession }
             name="profession"
@@ -123,7 +130,7 @@ const ApplicationFormPage = () => {
 
         </label>
         <label>
-          País:
+          País: {" "}
           <select 
             value={ form.country }
             name="country"
@@ -385,7 +392,7 @@ const ApplicationFormPage = () => {
           </select>
         </label>
         <label>
-          Viagem:
+          Viagem: {" "}
           <select 
             value={ form.tripId }
             name="tripId"
@@ -404,15 +411,13 @@ const ApplicationFormPage = () => {
           </select>
         </label>
         <button>Inscrever-se</button>
-      </form>
-
-      <button onClick={ () => goToHomePage(history) }>
-        Ir para Home
-      </button>
-      <button onClick={ () => goBack(history) }>
-        Voltar
-      </button>
-    </div>
+      </FormWrapper>
+      <NavButtonsWrapper>
+        <button onClick={ () => goToHomePage(history) }>
+          Voltar para Home
+        </button>
+      </NavButtonsWrapper>
+    </ApplicationScreenWrapper>
   )
 }
 

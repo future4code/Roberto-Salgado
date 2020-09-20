@@ -9,6 +9,12 @@ import {
   goBack 
 } from '../../actions/goToPages'
 import { baseUrl } from '../../constants/axiosConstants'
+import {
+  ListTripsScreenWrapper,
+  TripsListWrapper,
+  TripsListItem,
+  NavButtonsWrapper,
+} from './styled'
 
 const ListTripsPage = () => {
   const [tripsList, setTripsList] = useState([])
@@ -35,30 +41,30 @@ const ListTripsPage = () => {
   }
 
   return (
-    <div>
+    <ListTripsScreenWrapper>
       <h2>Lista de Viagens</h2>
-      {tripsList.map(item => {
-        return (
-          <div 
-            key={ item.id }
-            onClick={ () => handleTripClick(item.id) }
-          >
-            <h3>{ item.name }</h3>
-            <p>{ item.date } - <strong>{ item.planet }</strong></p>
-          </div>
-        )
-      })}
-      
-      <button onClick={ () => goToHomePage(history) }>
-        Ir para Home
-      </button>
-      <button onClick={ () => goToCreateTripPage(history) }>
-        Criar Viagem
-      </button>
-      <button onClick={ () => goBack(history) }>
-        Voltar
-      </button>
-    </div>
+      <TripsListWrapper>
+        {tripsList.map(item => {
+          return (
+            <TripsListItem 
+              key={ item.id }
+              onClick={ () => handleTripClick(item.id) }
+            >
+              <h3>{ item.name }</h3>
+              <p>{ item.date } { "->" } <strong>{ item.planet }</strong></p>
+            </TripsListItem>
+          )
+        })}
+        <button onClick={ () => goToCreateTripPage(history) }>
+          Criar Viagem
+        </button>
+      </TripsListWrapper>
+      <NavButtonsWrapper>
+        <button onClick={ () => goToHomePage(history) }>
+          Ir para Home
+        </button>
+      </NavButtonsWrapper>
+    </ListTripsScreenWrapper>
   )
 }
 

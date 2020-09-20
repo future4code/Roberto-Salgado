@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
 import { 
   goToHomePage, 
-  goToListTripsPage, 
-  goToCreateTripPage, 
-  goBack 
+  goToListTripsPage,
 } from '../../actions/goToPages'
 import { useForm } from '../../hooks/useForm'
-import { baseUrl } from '../../constants/axiosConstants'
+import { login } from '../../actions/requests'
+import {
+  LoginScreenWrapper,
+  FormWrapper,
+  NavButtonsWrapper,
+} from './styled'
 
 const LoginPage = () => {
   const { form, onChange, resetState } = useForm({
@@ -17,7 +19,7 @@ const LoginPage = () => {
   })
 
   const history = useHistory()
-
+  
   useEffect(() => {
     const token = window.localStorage.getItem("token")
 
@@ -38,22 +40,13 @@ const LoginPage = () => {
       password: form.password
     }
 
-    axios
-      .post(`${ baseUrl }/login`, body)
-      .then(response => {
-        localStorage.setItem("token", response.data.token)
-        resetState()
-        goToListTripsPage(history)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    login(body, history, resetState)
   }
 
   return (
-    <div>
-      <p>Login</p>
-      <form onSubmit={ handleSubmittion } >
+    <LoginScreenWrapper>
+      <h2>Login</h2>
+      <FormWrapper onSubmit={ handleSubmittion } >
         <label>
           E-Mail:
           <input 
@@ -75,22 +68,13 @@ const LoginPage = () => {
           />
         </label>
         <button>Enviar</button>
-      </form>
-      <div>
+      </FormWrapper>
+      <NavButtonsWrapper>
         <button onClick={ () => goToHomePage(history) }>
-          Ir para Home
+          Voltar para Home
         </button>
-        <button onClick={ () => goToListTripsPage(history) }>
-          Ir para Lista de Viagens
-        </button>
-        <button onClick={ () => goToCreateTripPage(history) }>
-          Criar Viagem
-        </button>
-        <button onClick={ () => goBack(history) }>
-          Voltar
-        </button>
-      </div>
-    </div>
+      </NavButtonsWrapper>
+    </LoginScreenWrapper>
   )
 }
 

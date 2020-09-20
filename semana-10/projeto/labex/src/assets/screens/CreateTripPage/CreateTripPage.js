@@ -9,6 +9,11 @@ import {
 } from '../../actions/goToPages'
 import { useForm } from '../../hooks/useForm'
 import { baseUrl } from '../../constants/axiosConstants'
+import {
+  CreateTripScreenWrapper,
+  FormWrapper,
+  NavButtonsWrapper,
+} from './styled'
 
 const CreateTripPage = () => {
   const { form, onChange, resetState } = useForm({
@@ -60,9 +65,9 @@ const CreateTripPage = () => {
   }
 
   return (
-    <div>
-      <p>Criar Viagem</p>
-      <form onSubmit={ handleSubmittion } >
+    <CreateTripScreenWrapper>
+      <h2>Criar Viagem</h2>
+      <FormWrapper onSubmit={ handleSubmittion } >
         <label>
           Nome:
           <input 
@@ -131,21 +136,16 @@ const CreateTripPage = () => {
           />
         </label>
         <button>Criar</button>
-      </form>
-
-      <button onClick={ () => goToHomePage(history) }>
-        Ir para Home
-      </button>
-      <button onClick={ () => goToTripDetailsPage(history) }>
-        Ir para Detalhes da Viagem
-      </button>
-      <button onClick={ () => goToListTripsPage(history) }>
-        Ir para Lista de Viagens
-      </button>
-      <button onClick={ () => goBack(history) }>
-        Voltar
-      </button>
-    </div>
+      </FormWrapper>
+      <NavButtonsWrapper>
+        <button onClick={ () => goToListTripsPage(history) }>
+          Voltar para Lista de Viagens
+        </button>
+        <button onClick={ () => goToHomePage(history) }>
+          Ir para Home
+        </button>
+      </NavButtonsWrapper>
+    </CreateTripScreenWrapper>
   )
 }
 
