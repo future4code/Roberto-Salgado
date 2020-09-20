@@ -1,12 +1,11 @@
 import axios from 'axios'
-import { baseUrl } from '../constants/axiosConstants'
 import { 
   goToListTripsPage,
 } from '../actions/goToPages'
 
-export const login = (body, history, parameter) => {
+export const login = (url, body, history, parameter) => {
   axios
-    .post(`${ baseUrl }/login`, body)
+    .post(url, body)
     .then(response => {
       localStorage.setItem("token", response.data.token)
       goToListTripsPage(history)
@@ -15,5 +14,27 @@ export const login = (body, history, parameter) => {
       console.log(err.message)
       alert("E-mail e/ou senha inválidos")
       parameter()
+    })
+}
+
+export const getTrips = (url, setData) => {
+  axios
+    .get(url)
+    .then(response => {
+      setData(response.data.trips)
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+}
+
+export const applyToTrip = (url, body) => {
+  axios
+    .post(url, body)
+    .then(response => {
+      alert(response.data.message)
+    })
+    .catch(err => {
+      console.log(err.message)
     })
 }

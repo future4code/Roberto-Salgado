@@ -1,18 +1,14 @@
 import { useState, useEffect } from 'react'
 import {
-  login,
+  getTrips,
 } from '../actions/requests'
 
-export const useLogin = (url, initialState) => {
+export const useGetTrips = (url, initialState) => {
   const [data, setData] = useState(initialState)
 
   useEffect(() => {
-    login(url, setData)
+    getTrips(url, setData)
   }, [url])
 
-  const updateData = () => {
-    login(url, setData)
-  }
-
-  return [data, updateData]
+  return data
 }

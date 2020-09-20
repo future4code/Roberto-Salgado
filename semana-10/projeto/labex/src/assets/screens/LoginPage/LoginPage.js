@@ -6,6 +6,7 @@ import {
 } from '../../actions/goToPages'
 import { useForm } from '../../hooks/useForm'
 import { login } from '../../actions/requests'
+import { baseUrl } from '../../constants/axiosConstants'
 import {
   LoginScreenWrapper,
   FormWrapper,
@@ -40,7 +41,7 @@ const LoginPage = () => {
       password: form.password
     }
 
-    login(body, history, resetState)
+    login(`${ baseUrl }/login`, body, history, resetState)
   }
 
   return (

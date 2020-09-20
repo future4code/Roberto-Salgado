@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
 import { goToHomePage } from '../../actions/goToPages'
 import { useForm } from '../../hooks/useForm'
 import { baseUrl } from '../../constants/axiosConstants'
+import { useGetTrips } from '../../hooks/useRequestData'
+import { applyToTrip } from '../../actions/requests'
 import { 
   ApplicationScreenWrapper,
   FormWrapper, 
@@ -11,7 +12,7 @@ import {
 } from './styled'
 
 const ApplicationFormPage = () => {
-  const [tripsList, setTripsList] = useState([])
+  const tripsList = useGetTrips(`${ baseUrl }/trips`, [])
   const { form, onChange, resetState } = useForm({
     name: "",
     age: 0,
@@ -22,37 +23,11 @@ const ApplicationFormPage = () => {
   })
   const history = useHistory()
 
-  useEffect(() => {
-    getTrips()
-  }, [history])
-
-  const getTrips = () => {
-    axios
-      .get(`${ baseUrl }/trips`)
-      .then(response => {
-        setTripsList(response.data.trips)
-      })
-      .catch(error => {})
-  }
-
   const handleInputChange = event => {
     const { name, value } = event.target
 
     onChange(name, value)
   }
-
-  const applyToTrip = (tripId, body) => {
-    axios
-      .post(`${ baseUrl }/trips/${ tripId }/apply`, body)
-      .then(response => {
-        // console.log(response.data)
-        alert(response.data.message)
-      })
-      .catch(err => {
-        console.log(err.message)
-      })
-  }
-
 
   const handleSubmittion = event => {
     event.preventDefault()
@@ -66,11 +41,7 @@ const ApplicationFormPage = () => {
     }
     const tripId = form.tripId
 
-    applyToTrip(tripId, body)
-
-    // console.log(form)
-    // console.log(body)
-    // console.log(tripId)
+    applyToTrip(`${ baseUrl }/trips/${ tripId }/apply`, body)
 
     resetState()
   }
@@ -123,7 +94,7 @@ const ApplicationFormPage = () => {
             name="profession"
             onChange={ handleInputChange }
             type="text"
-            pattern="[A-Za-z]{10,}"
+            pattern="[A-Za-z\s]{10,}"
             title="No minimo 10 caracteres"
             required
           />

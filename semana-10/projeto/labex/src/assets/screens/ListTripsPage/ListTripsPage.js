@@ -19,12 +19,11 @@ import {
 const ListTripsPage = () => {
   const [tripsList, setTripsList] = useState([])
   const history = useHistory()
-
+  
   useEffect(() => {
     const token = window.localStorage.getItem("token")
 
     token ? getTrips() : goToLoginPage(history)
-    // token || goToLoginPage(history)
   }, [history])
 
   const getTrips = () => {
