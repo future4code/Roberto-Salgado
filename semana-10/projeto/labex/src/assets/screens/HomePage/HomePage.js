@@ -1,6 +1,11 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { goToApplicationFormPage, goToLoginPage } from '../../actions/goToPages'
+import {
+  goToApplicationFormPage,
+  goToLoginPage,
+  goToSignupPage,
+  goToListTripsPage,
+} from '../../actions/goToPages'
 import { 
   HomePageWrapper, 
   NavButtonsWrapper, 
@@ -9,6 +14,8 @@ import {
 const HomePage = () => {
   const history = useHistory()
 
+  const token = window.localStorage.getItem("token")
+
   return (
     <HomePageWrapper>
       <h2>Home</h2>
@@ -16,9 +23,21 @@ const HomePage = () => {
         <button onClick={ () => goToApplicationFormPage(history) }>
           Ir para Formulário de Inscrição
         </button>
-        <button onClick={ () => goToLoginPage(history) }>
-          Ir para Login
-        </button>
+        { token ? (
+          <button onClick={ () => goToListTripsPage(history) }>
+            Ir para Área do Usuário
+          </button>
+        ) : (
+          <div>
+            <button onClick={ () => goToSignupPage(history) }>
+              Criar novo usuário
+            </button>
+            <button onClick={ () => goToLoginPage(history) }>
+              Fazer Login
+            </button>
+          </div>
+        ) }
+        
       </NavButtonsWrapper>
     </HomePageWrapper>
   )

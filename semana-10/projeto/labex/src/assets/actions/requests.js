@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { 
   goToListTripsPage,
+  goToLoginPage,
 } from '../actions/goToPages'
 
 export const login = (url, body, history, parameter) => {
@@ -53,22 +54,22 @@ export const createTrip = (url, body, history) => {
     .catch(err => {
       console.log(err.message)
     })
-}
-
-export const getTripDetails = (url, setData) => {
-  axios
-    .get(url, {
-      headers: {
-        auth: localStorage.getItem("token")
-      }
-    })
-    .then(response => {
-      setData(response.data.trip)
-    })
-    .catch(err => {
-      console.log(err.message)
-    })
-}
+  }
+  
+  export const getTripDetails = (url, setData) => {
+    axios
+      .get(url, {
+        headers: {
+          auth: localStorage.getItem("token")
+        }
+      })
+      .then(response => {
+        setData(response.data.trip)
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+  }
 
 export const decideCandidate = (url, approve, parameter) => {
   const body = {
@@ -85,6 +86,18 @@ export const decideCandidate = (url, approve, parameter) => {
       console.log(response.data)
       alert(response.data.message)
       parameter()
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+}
+
+export const signUp = (url, body, history) => {
+  axios
+    .post(url, body)
+    .then(response => {
+      alert("Usuário criado com sucesso")
+      goToLoginPage(history)
     })
     .catch(err => {
       console.log(err.message)

@@ -19,6 +19,11 @@ export const NavButtonsWrapper = styled.div`
   align-items: center;
   padding: 1em 0;
 
+  div {
+    display: inline-block;
+    width: 320px;
+  }
+
   button {
     display: inline-block;
     width: 320px;

@@ -6,8 +6,8 @@ export const useProtectPage = () => {
   const history = useHistory();
 
   useEffect(() => {
-    const token = window.localStorage.getItem("token");
+    const token = window.localStorage.getItem("token")
 
     token || goToLoginPage(history)
-  }, [history]);
+  }, [history])
 };
