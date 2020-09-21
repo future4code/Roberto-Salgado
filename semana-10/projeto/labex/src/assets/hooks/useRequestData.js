@@ -21,5 +21,9 @@ export const useGetTripDetails = (url, initialState) => {
     getTripDetails(url, setData)
   }, [url])
 
-  return data
+  const updateData = () => {
+    getTripDetails(url, setData)
+  }
+
+  return [data, updateData]
 }

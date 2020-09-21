@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 import {
   goToHomePage,
   goToListTripsPage,
 } from '../../actions/goToPages'
 import { useForm } from '../../hooks/useForm'
+import { useProtectPage } from '../../hooks/useProtectedPage'
 import { baseUrl } from '../../constants/axiosConstants'
 import { planetsList } from '../../constants/Lists'
 import { createTrip } from '../../actions/requests'
@@ -24,11 +25,7 @@ const CreateTripPage = () => {
   })
   const history = useHistory()
 
-  useEffect(() => {
-    const token = window.localStorage.getItem("token")
-
-    token || history.push("/login")
-  }, [history])
+  useProtectPage()
 
   const handleInputChange = event => {
     const { name, value } = event.target

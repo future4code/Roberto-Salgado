@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import {
   goToHomePage,
   goToListTripsPage,
 } from '../../actions/goToPages'
 import { baseUrl } from '../../constants/axiosConstants'
+import { useProtectPage } from '../../hooks/useProtectedPage'
 import { useGetTripDetails } from '../../hooks/useRequestData'
 import CandidateCard from '../../components/CandidateCard/CandidateCard'
 import ApprovedCard from '../../components/ApprovedCard/ApprovedCard'
@@ -21,17 +22,13 @@ import {
 
 const TripDetailsPage = () => {
   const pathParams = useParams()
-  const trip = useGetTripDetails(
+  const [trip, updateTrip] = useGetTripDetails(
     `${ baseUrl }/trip/${ pathParams.tripId }`, 
     []
   )
   const history = useHistory()
 
-  useEffect(() => {
-    const token = window.localStorage.getItem("token")
-
-    token || history.push("/login")
-  }, [history, trip])
+  useProtectPage()
 
   return (
     <TripDetailsScreenWrapper>
@@ -59,6 +56,7 @@ const TripDetailsPage = () => {
                     candidateCountry={ item.country }
                     candidateApplicationText={ item.applicationText }
                     url={ `${ baseUrl }/trips/${ trip.id }/candidates/${ item.id }/decide` }
+                    updateTrip={ updateTrip }
                   />
                 )
               }) }

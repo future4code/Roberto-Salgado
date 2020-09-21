@@ -70,7 +70,7 @@ export const getTripDetails = (url, setData) => {
     })
 }
 
-export const decideCandidate = (url, approve) => {
+export const decideCandidate = (url, approve, parameter) => {
   const body = {
     approve: approve
   }
@@ -82,8 +82,9 @@ export const decideCandidate = (url, approve) => {
       }
     })
     .then(response => {
-      // alert(`Inscrição aprovada com sucesso`)
-      console.log(response.data.message)
+      console.log(response.data)
+      alert(response.data.message)
+      parameter()
     })
     .catch(err => {
       console.log(err.message)

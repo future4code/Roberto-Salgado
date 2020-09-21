@@ -1,12 +1,12 @@
-import React, {  useEffect } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { 
-  goToHomePage, 
-  goToLoginPage,
+  goToHomePage,
   goToTripDetailsPage, 
   goToCreateTripPage,
 } from '../../actions/goToPages'
 import { baseUrl } from '../../constants/axiosConstants'
+import { useProtectPage } from '../../hooks/useProtectedPage'
 import { useGetTrips } from '../../hooks/useRequestData'
 import {
   ListTripsScreenWrapper,
@@ -18,12 +18,8 @@ import {
 const ListTripsPage = () => {
   const tripsList = useGetTrips(`${ baseUrl }/trips`, [])
   const history = useHistory()
-  
-  useEffect(() => {
-    const token = window.localStorage.getItem("token")
 
-    token || goToLoginPage(history)
-  }, [history])
+  useProtectPage()
 
   const handleTripClick = (tripId) => {
     goToTripDetailsPage(history, tripId)

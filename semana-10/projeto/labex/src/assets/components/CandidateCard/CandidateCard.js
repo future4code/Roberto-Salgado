@@ -24,12 +24,12 @@ const CandidateCard = (props) => {
       </CandidateApplicationText>
       <DecideCandidateButtonWrapper>
         <RejectButton 
-          onClick={ () => decideCandidate(props.url, false) }
+          onClick={ () => decideCandidate(props.url, false, props.updateTrip) }
         >
           Reprovar
         </RejectButton>
         <ApproveButton
-          onClick={ () => decideCandidate(props.url, true) }
+          onClick={ () => decideCandidate(props.url, true, props.updateTrip) }
         >
           Aprovar          
         </ApproveButton>
