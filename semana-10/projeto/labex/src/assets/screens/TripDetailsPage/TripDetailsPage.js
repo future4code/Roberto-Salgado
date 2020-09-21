@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import axios from 'axios'
 import {
   goToHomePage,
   goToListTripsPage,
 } from '../../actions/goToPages'
 import { baseUrl } from '../../constants/axiosConstants'
+import { useGetTripDetails } from '../../hooks/useRequestData'
+import CandidateCard from '../../components/CandidateCard/CandidateCard'
+import ApprovedCard from '../../components/ApprovedCard/ApprovedCard'
 import {
   TripDetailsScreenWrapper,
   TripDetailsWrapper,
@@ -14,39 +16,22 @@ import {
   DetailsSpan,
   CandidatesTitle,
   CandidateListWrapper,
-  CandidateCard,
-  CandidateApplicationTextLabel,
-  CandidateApplicationText,
   NavButtonsWrapper,
 } from './styled'
 
 const TripDetailsPage = () => {
-  const [trip, setTrip] = useState({})
   const pathParams = useParams()
+  const trip = useGetTripDetails(
+    `${ baseUrl }/trip/${ pathParams.tripId }`, 
+    []
+  )
   const history = useHistory()
 
   useEffect(() => {
     const token = window.localStorage.getItem("token")
-    const tripId = pathParams.tripId
 
-    token ? getTripDetails(tripId, token) : history.push("/login")
-    // token || history.push("/login")
-  }, [history, pathParams.tripId])
-
-  const getTripDetails = (tripId, token) => {
-    axios
-      .get(`${ baseUrl }/trip/${ tripId }`, {
-        headers: {
-          auth: token
-        }
-      })
-      .then(response => {
-        setTrip(response.data.trip)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+    token || history.push("/login")
+  }, [history, trip])
 
   return (
     <TripDetailsScreenWrapper>
@@ -60,22 +45,46 @@ const TripDetailsPage = () => {
           <TripDescriptionLabel>Descrição:</TripDescriptionLabel>
           <TripDescription>{ trip.description }</TripDescription>
         </TripDetailsWrapper>
-        <CandidatesTitle>Candidatos:</CandidatesTitle>
-        <CandidateListWrapper>
-          { trip.candidates && (
-            trip.candidates.map(item => {
-              return (
-                <CandidateCard key={ item.id }>
-                  <h5>Nome: <DetailsSpan>{ item.name }</DetailsSpan></h5>
-                  <h5>Idade: <DetailsSpan>{ item.age }</DetailsSpan></h5>
-                  <h5>País: <DetailsSpan>{ item.country }</DetailsSpan></h5>
-                  <CandidateApplicationTextLabel>Texto de inscrição:</CandidateApplicationTextLabel>
-                  <CandidateApplicationText>{ item.applicationText }</CandidateApplicationText>
-                </CandidateCard>
-              )
-            })
-          ) }
-        </CandidateListWrapper>
+        { trip.candidates && (
+          <div>
+            <CandidatesTitle>Candidatos:</CandidatesTitle>
+            <CandidateListWrapper>
+            { trip.candidates.map(item => {
+                return (
+                  <CandidateCard 
+                    key={ item.id }
+                    candidateId={ item.id }
+                    candidateName={ item.name }
+                    candidateIdade={ item.idade }
+                    candidateCountry={ item.country }
+                    candidateApplicationText={ item.applicationText }
+                    url={ `${ baseUrl }/trips/${ trip.id }/candidates/${ item.id }/decide` }
+                  />
+                )
+              }) }
+            </CandidateListWrapper>
+          </div>
+        ) }
+        { trip.approved && (
+          <div>
+            <CandidatesTitle>Aprovados:</CandidatesTitle>
+            <CandidateListWrapper>
+            { trip.approved.map(item => {
+                return (
+                  <ApprovedCard 
+                    key={ item.id }
+                    candidateName={ item.name }
+                    candidateIdade={ item.idade }
+                    candidateCountry={ item.country }
+                    candidateApplicationText={ item.applicationText }
+                  />
+                )
+              }) }
+            </CandidateListWrapper>
+          </div>
+        ) }
+
+        
       </div>
       <NavButtonsWrapper>
         <button onClick={ () => goToListTripsPage(history) }>

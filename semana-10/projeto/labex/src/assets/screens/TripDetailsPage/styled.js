@@ -44,22 +44,6 @@ export const CandidateListWrapper = styled.div`
   gap: 0.8em;
 `
 
-export const CandidateCard = styled.div`
-  width: 28%;
-  height: 240px;
-  padding: 0 0.8em;
-  border: 1px dotted crimson;
-`
-
-export const CandidateApplicationTextLabel = styled.h5`
-  margin-bottom: 0.2em;
-`
-
-export const CandidateApplicationText = styled.p`
-  margin-top: 0.2em;
-  font-size: 0.8em;
-`
-
 export const DetailsSpan = styled.span`
   font-weight: normal;
 `

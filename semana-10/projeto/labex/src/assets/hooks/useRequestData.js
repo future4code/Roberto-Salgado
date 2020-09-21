@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import {
   getTrips,
+  getTripDetails,
 } from '../actions/requests'
 
 export const useGetTrips = (url, initialState) => {
@@ -8,6 +9,16 @@ export const useGetTrips = (url, initialState) => {
 
   useEffect(() => {
     getTrips(url, setData)
+  }, [url])
+
+  return data
+}
+
+export const useGetTripDetails = (url, initialState) => {
+  const [data, setData] = useState(initialState)
+
+  useEffect(() => {
+    getTripDetails(url, setData)
   }, [url])
 
   return data

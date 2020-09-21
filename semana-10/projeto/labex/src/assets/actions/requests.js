@@ -51,6 +51,41 @@ export const createTrip = (url, body, history) => {
       goToListTripsPage(history)
     })
     .catch(err => {
-      console.log(err)
+      console.log(err.message)
+    })
+}
+
+export const getTripDetails = (url, setData) => {
+  axios
+    .get(url, {
+      headers: {
+        auth: localStorage.getItem("token")
+      }
+    })
+    .then(response => {
+      setData(response.data.trip)
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+}
+
+export const decideCandidate = (url, approve) => {
+  const body = {
+    approve: approve
+  }
+
+  axios
+    .put(url, body, {
+      headers: {
+        auth: localStorage.getItem("token")
+      }
+    })
+    .then(response => {
+      // alert(`Inscrição aprovada com sucesso`)
+      console.log(response.data.message)
+    })
+    .catch(err => {
+      console.log(err.message)
     })
 }
