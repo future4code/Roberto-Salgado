@@ -30,6 +30,8 @@ const TripDetailsPage = () => {
 
   useProtectPage()
 
+
+
   return (
     <TripDetailsScreenWrapper>
       <h2>Detalhes da Viagem</h2>
@@ -42,7 +44,7 @@ const TripDetailsPage = () => {
           <TripDescriptionLabel>Descrição:</TripDescriptionLabel>
           <TripDescription>{ trip.description }</TripDescription>
         </TripDetailsWrapper>
-        { trip.candidates && (
+        { trip.candidates && trip.candidates.length ? (
           <div>
             <CandidatesTitle>Candidatos:</CandidatesTitle>
             <CandidateListWrapper>
@@ -62,8 +64,10 @@ const TripDetailsPage = () => {
               }) }
             </CandidateListWrapper>
           </div>
+        ) : (
+          <div></div>
         ) }
-        { trip.approved && (
+        { trip.approved && trip.approved.length ? (
           <div>
             <CandidatesTitle>Aprovados:</CandidatesTitle>
             <CandidateListWrapper>
@@ -80,6 +84,8 @@ const TripDetailsPage = () => {
               }) }
             </CandidateListWrapper>
           </div>
+        ) : (
+          <div></div>
         ) }
 
         
