@@ -111,3 +111,77 @@ describe ("Funcionalidade apagar post", () => {
     expect(postsList).toBeNull()
   })
 })
+
+describe ("Funcionalidade limpar input", () => {
+  test("Limpar input quando usuário cria post", () => {
+    const {
+      getByText,
+      getByPlaceholderText
+    } = render(<App />)
+
+    typePost(getByPlaceholderText, "test")
+
+    addPost(getByText)
+
+    const inputPost = getByPlaceholderText(/Novo post/i)
+
+    expect(inputPost).toHaveValue("")
+  })
+})
+
+describe("Mensagem de lista de post vazia", () => {
+  test("Mensagem 'Nennum post' aparece quando post estão vazios", () => {
+    const { getByText, queryByText } = render(<App />)
+
+    getByText("Nenhum post")
+
+    expect(queryByText("Nenhum post")).not.toBeNull()
+  })
+
+  test("Mensagem 'Nennum post' some quando há algum post", () => {
+    const { getByPlaceholderText, getByText, queryByText } = render(<App />)
+
+    getByText("Nenhum post")
+    
+    typePost(getByPlaceholderText, "test")
+    addPost(getByText)
+
+    expect(queryByText("Nenhum post")).toBeNull()
+  })
+})
+
+describe("Funcionalidade contador de posts", () => {
+  test("Quantidade de post exibe o número correto", () => {
+    const { getByPlaceholderText, getByText, queryByText, getAllByTestId } = render(<App />)
+
+    expect(queryByText(/Quantidade de posts/)).toBeNull()
+
+    typePost(getByPlaceholderText, "test 1")
+    addPost(getByText)
+    typePost(getByPlaceholderText, "test 2")
+    addPost(getByText)
+
+    const amount = getByText(/Quantidade de posts/)
+
+    expect(getAllByTestId("post-content").length).toEqual(2)
+
+    expect(amount).toHaveTextContent("Quantidade de posts: 2")
+  })
+})
+
+describe("Funcionalidade mensagem de erro para post vazio", () => {
+  test("", () => {
+    const { getByPlaceholderText, queryByTestId, getByText, queryByText } = render(<App />);
+    expect(queryByText("Digite algo para criar o post!")).toBeNull();
+
+    typePost(getByPlaceholderText, "")
+    addPost(getByText)
+
+    expect(queryByTestId("post-content")).toBeNull()
+    getByText("Digite algo para criar o post!")
+
+    typePost(getByPlaceholderText, "bananinha")
+    addPost(getByText)
+    expect(queryByText("Digite algo para criar o post!")).toBeNull()
+  })
+})
