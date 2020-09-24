@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getTasks } from '../actions/requests'
 
-export const useGetTaks = (url, initialState) => {
+export const useGetTasks = (url, initialState) => {
   const [data, setData] = useState(initialState)
 
   useEffect(() => {

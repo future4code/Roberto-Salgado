@@ -5,16 +5,23 @@ export const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.8rem;
+
+  form {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
 
   button {
-    padding: 0 0.4rem;
-    margin-left: 0.4rem;
+    height: 19px;
   }
 `
 
 export const TasksContainer = styled.div`
+  height: 85vh;
+  padding: 0 0.8em;
   display: flex;
   justify-content: space-evenly;
   gap: 0.8em;
-  height: 90vh;
 `

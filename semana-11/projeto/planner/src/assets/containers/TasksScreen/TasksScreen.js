@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from '../../hooks/useForm'
 import { useGetTasks } from '../../hooks/useRequestData'
-import { createTask } from '../../actions/requests'
+import { createTask, editTask, deleteTask } from '../../actions/requests'
 import { baseUrl } from '../../constants/axiosConstants'
 import { daysOfTheWeek, hoursOfTheDay } from '../../constants/lists'
 import DayCard from '../../components/DayCard/DayCard'
@@ -11,7 +11,7 @@ const TasksScreen = () => {
   const [tasks, updateTasks] = useGetTasks(`${ baseUrl }`, [])
   const { form, onChange, resetState } = useForm({
     task: "",
-    weekday: "",
+    day: "",
     hour: "",
   })
 
@@ -24,13 +24,26 @@ const TasksScreen = () => {
   const handleSubmission = event => {
     event.preventDefault()
 
-    const body = {
+    const newTask = {
       task: form.task,
-      weekday: form.weekday,
+      day: form.day,
       hour: Number(form.hour),
+      done: false,
     }
 
-    createTask(`${ baseUrl }`, body, resetState)
+    createTask(`${ baseUrl }`, newTask, resetState, updateTasks)
+  }
+
+  const handleClick = task => {
+    const toggleDone = {
+      done: !task.done
+    }
+    
+    editTask(`${ baseUrl }/${ task.id }`, toggleDone, updateTasks)
+  }
+
+  const handleDoubleClick = taskId => {
+    deleteTask(`${ baseUrl }/${ taskId }`, updateTasks)
   }
 
   return (
@@ -48,8 +61,8 @@ const TasksScreen = () => {
             />
           </label>
           <select
-            value={ form.weekday }
-            name="weekday"
+            value={ form.day }
+            name="day"
             onChange={ handleInputChange }
             title="Escolha um dia da semana"
             required
@@ -62,8 +75,8 @@ const TasksScreen = () => {
             }) }
           </select>
           <select
-            value={ form.weekday }
-            name="weekday"
+            value={ form.hour }
+            name="hour"
             onChange={ handleInputChange }
             title="Escolha um horário"
             required
@@ -85,7 +98,13 @@ const TasksScreen = () => {
             return item.day === day
           })
           return (
-            <DayCard day={ day } tasks={ tasksOfTheDay } />
+            <DayCard
+              key ={ day }
+              day={ day }
+              tasks={ tasksOfTheDay }
+              click={ handleClick }
+              doubleClick={ handleDoubleClick }
+            />
           )
         }) }
       </TasksContainer>
