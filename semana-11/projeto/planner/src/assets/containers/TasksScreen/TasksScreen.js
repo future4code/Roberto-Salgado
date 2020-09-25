@@ -65,6 +65,7 @@ const TasksScreen = () => {
               name="task"
               onChange={ handleInputChange }
               type="text"
+              placeholder="..."
               required
             />
           </label>
@@ -72,13 +73,19 @@ const TasksScreen = () => {
             value={ form.day }
             name="day"
             onChange={ handleInputChange }
-            title="Escolha um dia da semana"
+            title="Dia da semana"
             required
           >
             <option value=""></option>
             { daysOfTheWeek.map(day => {
               return (
-                <option key={ day } value={ day }>{ day }</option>
+                <option 
+                  key={ day } 
+                  value={ day }
+                  data-testid={ day }
+                >
+                  { day }
+                </option>
               )
             }) }
           </select>
@@ -86,13 +93,19 @@ const TasksScreen = () => {
             value={ form.hour }
             name="hour"
             onChange={ handleInputChange }
-            title="Escolha um horário"
+            title="Horário"
             required
           >
             <option value=""></option>
             { hoursOfTheDay.map(hour => {
               return (
-                <option key={ hour } value={ hour }>{ hour } h</option>
+                <option 
+                  key={ hour } 
+                  value={ hour }
+                  data-testid={ `hora-${ hour }` }
+                >
+                  { hour } h
+                </option>
               )
             }) }
           </select>
