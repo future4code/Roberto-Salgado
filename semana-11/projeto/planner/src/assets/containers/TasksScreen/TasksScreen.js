@@ -43,7 +43,15 @@ const TasksScreen = () => {
   }
 
   const handleDoubleClick = taskId => {
-    deleteTask(`${ baseUrl }/${ taskId }`, updateTasks)
+    deleteTask(`${ baseUrl }/${ taskId }`)
+    updateTasks()
+  }
+
+  const clearTasks = () => {
+    tasks.forEach(item => {
+      deleteTask(`${ baseUrl }/${ item.id }`)
+    })
+    updateTasks()
   }
 
   return (
@@ -90,7 +98,7 @@ const TasksScreen = () => {
           </select>
           <button>Criar tarefa</button>
         </form>
-        <button>Limpar tarefas</button>
+        <button onClick={ clearTasks } >Limpar tarefas</button>
       </Header>
       <TasksContainer>
         { daysOfTheWeek.map(day => {

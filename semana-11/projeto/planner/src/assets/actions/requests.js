@@ -37,12 +37,11 @@ export const editTask = (url, body, update) => {
     })
 }
 
-export const deleteTask = (url, update) => {
+export const deleteTask = (url) => {
   axios
     .delete(url)
     .then(response => {
       console.log(response.data)
-      update()
     })
     .catch(err => {
       console.log(err)
