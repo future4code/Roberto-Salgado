@@ -43,15 +43,13 @@ const TasksScreen = () => {
   }
 
   const handleDoubleClick = taskId => {
-    deleteTask(`${ baseUrl }/${ taskId }`)
-    updateTasks()
+    deleteTask(`${ baseUrl }/${ taskId }`, updateTasks)
   }
 
   const clearTasks = () => {
     tasks.forEach(item => {
-      deleteTask(`${ baseUrl }/${ item.id }`)
+      deleteTask(`${ baseUrl }/${ item.id }`, updateTasks)
     })
-    updateTasks()
   }
 
   return (
@@ -65,7 +63,7 @@ const TasksScreen = () => {
               name="task"
               onChange={ handleInputChange }
               type="text"
-              placeholder="..."
+              placeholder="Tarefa..."
               required
             />
           </label>

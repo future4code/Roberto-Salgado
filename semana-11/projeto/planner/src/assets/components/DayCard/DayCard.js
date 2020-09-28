@@ -3,7 +3,7 @@ import { CardContainer, TaskListItem } from './styled'
 
 const DayCard = props => {
   return (
-    <CardContainer>
+    <CardContainer data-testid={ "planner-day-card" } >
       <h3>{ props.day }</h3>
       <ul>
         { props.tasks.sort((a, b) => {
@@ -12,7 +12,7 @@ const DayCard = props => {
             return (
               <TaskListItem
                 key={ item.id }
-                data-testid="task-content"
+                data-testid={ `task-${ props.day }` }
                 done={ item.done }
                 onClick={ () => props.click(item) }
                 onDoubleClick={ () => props.doubleClick(item.id) }

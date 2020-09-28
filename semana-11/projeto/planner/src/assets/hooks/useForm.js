@@ -9,9 +9,7 @@ export const useForm = initialState => {
     setForm(newForm)
   }
 
-  const resetState = () => {
-    setForm(initialState)
-  }
+  const resetState = () => setForm(initialState)
 
   return { form, onChange, resetState }
 }
