@@ -1,7 +1,7 @@
 import { createMuiTheme } from '@material-ui/core'
 import { contrastColor, neutralColor, primaryColor } from './colors'
 
-const theme = createMuiTheme( options, {
+const theme = createMuiTheme({
   palette: {
     primary: {
       main: primaryColor,
