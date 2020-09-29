@@ -1,10 +1,8 @@
 import React from 'react'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Button from '@material-ui/core/Button'
+import { AppBar, Toolbar, Button } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { goToFeed } from '../../routes/Coordinator'
-import { ButtonContainer, HeaderTitle, LogoIcon } from './styled'
+import { ButtonContainer, HeaderTitle, LogoIcon, LogTitle } from './styled'
 import { mdiRacingHelmet } from '@mdi/js'
 
 const Header = () => {
@@ -15,13 +13,13 @@ const Header = () => {
         <ButtonContainer>
           <Button color={'inherit'} onClick={() => goToFeed(history)}>
             <LogoIcon
-              size={1}
+              size={1.3}
               path={mdiRacingHelmet}
             />
-            <HeaderTitle variant={'h6'}>Labeddit</HeaderTitle>
+            <HeaderTitle variant={'h6'}>LabEddit</HeaderTitle>
           </Button>
-          <Button color={'inherit'} onClick={() => null}>
-            <HeaderTitle variant={'h6'}>Logout</HeaderTitle>
+          <Button color={'inherit'} variant={'contained'} onClick={() => null}>
+            <LogTitle color={'primary'} variant={'h6'}>LogOut</LogTitle>
           </Button>
         </ButtonContainer>
       </Toolbar>
