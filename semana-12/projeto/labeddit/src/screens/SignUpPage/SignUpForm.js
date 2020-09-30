@@ -7,7 +7,7 @@ import { signUp } from '../../services/user'
 
 const SignUpForm = props => {
   const history = useHistory()
-  const [form, handleInputChange] = useForm({name: '', email: '', password: ''})
+  const [form, handleInputChange] = useForm({username: '', email: '', password: ''})
 
   const onClickSignUp = event => {
     event.preventDefault()
@@ -24,10 +24,10 @@ const SignUpForm = props => {
       <SignUpFormContainer>
         <InputsContainer>
           <TextField
-            value={form.name}
-            name={'name'}
+            value={form.username}
+            name={'username'}
             onChange={handleInputChange}
-            label={'Nome'}
+            label={'Nome de Usuário'}
             variant={'outlined'}
             margin={'normal'}
             fullWidth

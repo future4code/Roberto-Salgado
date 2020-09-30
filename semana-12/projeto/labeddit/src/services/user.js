@@ -23,7 +23,7 @@ export const signUp = (body, history, setButtonName) => {
     setButtonName('Logout')
   })
   .catch(err => {
-    console.log(err)
+    console.log(err.message)
     alert("Falha no cadastro, tente novamente")
   })
 }
