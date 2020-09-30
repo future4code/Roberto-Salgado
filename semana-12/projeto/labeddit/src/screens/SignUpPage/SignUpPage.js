@@ -1,8 +1,16 @@
 import React from 'react'
+import LabEdditLogo from '../../assets/img/logo.png'
+import { ScreenContainer, LogoImage } from './styled'
+import SignUpForm from './SignUpForm'
+import useUnprotectedPage from '../../hooks/useUnprotectedPage'
 
-const SignUpPage = () => {
+const SignUpPage = props => {
+  useUnprotectedPage()
   return (
-    <div>Sign Up Page</div>
+    <ScreenContainer>
+      <LogoImage alt={'logo'} src={LabEdditLogo} />
+      <SignUpForm setButtonName={props.setButtonName}/>
+    </ScreenContainer>
   )
 }
 

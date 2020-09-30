@@ -12,7 +12,7 @@ export const LogoImage = styled.img`
   max-width: 240px;
 `
 
-export const LoginFormContainer = styled.div`
+export const SignUpFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 80vw;
@@ -24,9 +24,4 @@ export const InputsContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-`
-
-export const SignUpButtonContainer = styled.div`
-  width: 80vw;
-  max-width: 450px;
 `

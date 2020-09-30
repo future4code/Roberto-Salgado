@@ -1,31 +1,29 @@
 import React from 'react'
 import LabEdditLogo from '../../assets/img/logo.png'
-import { Button, TextField } from '@material-ui/core'
+import { Button } from '@material-ui/core'
+import { ScreenContainer, LogoImage, SignUpButtonContainer } from './styled'
+import LoginForm from './LoginForm'
+import { useHistory } from 'react-router-dom'
+import { goToSignUp } from '../../routes/Coordinator'
+import useUnprotectedPage from '../../hooks/useUnprotectedPage'
 
-const LoginPage = () => {
+const LoginPage = props => {
+  const history = useHistory()
+  useUnprotectedPage()
   return (
-    <div>
-      <img alt={'logo'} src={LabEdditLogo} />
-      <form>
-        <TextField
-          label={'E-mail'}
-          variant={'outlined'}
-          type={'email'}
-        />
-        <TextField
-          label={'Senha'}
-          variant={'outlined'}
-          type={'password'}
-        />
+    <ScreenContainer>
+      <LogoImage alt={'logo'} src={LabEdditLogo} />
+      <LoginForm setButtonName={props.setButtonName}/>
+      <SignUpButtonContainer>
         <Button
+          onClick={() => goToSignUp(history)}
           color={'primary'}
-          variant={'contained'}
-          type={'submit'}
+          fullWidth
         >
-          Fazer Login
+          Não tem cadastro? Cique aqui
         </Button>
-      </form>
-    </div>
+      </SignUpButtonContainer>
+    </ScreenContainer>
   )
 }
 
