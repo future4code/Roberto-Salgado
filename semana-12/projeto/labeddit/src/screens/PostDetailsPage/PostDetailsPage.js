@@ -10,7 +10,11 @@ import { timePassed } from '../../actions/timePassed'
 const PostDetailsPage = () => {
   useProtectedPage()
   const {id} = useParams()
-  const post = useRequestData({}, `/posts/${id}`).post
+  const [details, updadateDetails] = useRequestData({}, `/posts/${id}`)
+
+  const post = details.post
+
+  const comments = post.commentsCount
 
   const renderDetails = () => (
     <DetailsCardContainer>
@@ -35,6 +39,7 @@ const PostDetailsPage = () => {
   )
   
   console.log(post)
+  console.log(comments)
   
   return (
     <DetailsContainer>

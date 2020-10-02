@@ -1,17 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PostCard from './PostCard'
 import useProtectedPage from '../../hooks/useProtectedPage'
-import useRequestData from '../../hooks/useRequestData'
 import Loading from '../../components/Loading/Loading'
 import { AddPostButton, FeedContainer } from './styled'
-import { goToAddPost, goToPostDetails } from '../../routes/Coordinator'
+import { goToPostDetails } from '../../routes/Coordinator'
 import { useHistory } from 'react-router-dom'
 import { Add } from '@material-ui/icons'
+import Dialog from '@material-ui/core/Dialog'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import AddPostForm from './AddPostForm'
+import useGetPosts from '../../hooks/useRequestData'
 
 const PostsFeedPage = () => {
   useProtectedPage()
   const history = useHistory()
-  const posts = useRequestData({}, '/posts').posts
+  const [open, setOpen] = useState(false)
+  const [feed, updateFeed] = useGetPosts({}, '/posts')
+
+  const posts = feed.posts
 
   const renderPosts = () => (
     posts.sort((a, b) => b.createdAt - a.createdAt).map(item => {
@@ -31,6 +38,14 @@ const PostsFeedPage = () => {
     })
   )
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   console.log(posts)
 
   return (
@@ -41,13 +56,24 @@ const PostsFeedPage = () => {
       <AddPostButton 
         variant="extended" 
         color="primary"
-        onClick={()=>goToAddPost(history)}
+        onClick={handleClickOpen}
       >
         <Add/>
         Novo post
       </AddPostButton>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Adicionar Novo Post</DialogTitle>
+        <DialogContent>
+          <AddPostForm handleClose={handleClose} updatePosts={updateFeed}/>
+        </DialogContent>
+      </Dialog>
     </>
   )
 }
 
-export default PostsFeedPage 
+export default PostsFeedPage
+
+
+
+      
+    

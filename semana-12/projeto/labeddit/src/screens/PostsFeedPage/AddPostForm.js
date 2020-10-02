@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { Button, CircularProgress, TextField } from '@material-ui/core'
+import { Button, CircularProgress, DialogActions, TextField } from '@material-ui/core'
 import { AddPostFormContainer, InputsContainer } from './styled'
 import { useHistory } from 'react-router-dom'
 import useForm from '../../hooks/useForm'
 import { addPost } from '../../services/posts'
 
-const AddPostForm = () => {
+const AddPostForm = props => {
   const history = useHistory()
   const [form, handleInputChange] = useForm({title: '', text: ''})
   const [isLoading, setIsLoading] = useState(false)
@@ -17,6 +17,8 @@ const AddPostForm = () => {
     element.reportValidity()
     if (isValid) {
       addPost(form, '/posts', history, setIsLoading)
+      props.handleClose()
+      props.updatePosts()
     }
   }
 
@@ -50,18 +52,21 @@ const AddPostForm = () => {
             required
           />
         </InputsContainer>
-        <Button
-          color={'primary'}
-          variant={'contained'}
-          type={'submit'}
-          size={'large'}
-          fullWidth
-          disabled={isLoading}
-          onClick={onClickAddPost}
-          // onClick={toggleLoading}
-        >
-          {isLoading ? <CircularProgress color={"primary"} size={26}/> : "Postar"}
-        </Button>
+        <DialogActions>
+          <Button onClick={props.handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button
+            color={'primary'}
+            variant={'contained'}
+            type={'submit'}
+            disabled={isLoading}
+            onClick={onClickAddPost}
+            // onClick={toggleLoading}
+          >
+            {isLoading ? <CircularProgress color={"primary"} size={26}/> : "Postar"}
+          </Button>
+        </DialogActions>
       </AddPostFormContainer>
     </form>
   )

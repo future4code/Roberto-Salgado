@@ -19,3 +19,17 @@ export const AddPostButton = styled(Fab)`
   right: 15px;
   bottom: 15px;
 `
+
+export const AddPostFormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  max-width: 450px;
+  margin-bottom: 20px;
+`
+
+export const InputsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+`
