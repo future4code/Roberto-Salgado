@@ -4,14 +4,14 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { PostCardContainer } from './styled'
+import { timePassed } from '../../actions/timePassed'
 
 const PostCard = props => {
-
   return (
     <PostCardContainer onClick={props.onClick}>
       <CardContent>
         <Typography variant='caption' component='span' color="textSecondary" gutterBottom>
-          Postado por {props.username} as {props.createdAt}
+          Postado por u/{props.username} {timePassed(props.createdAt)}
         </Typography>
         <Typography variant="h6" component="h3">
           {props.title}
