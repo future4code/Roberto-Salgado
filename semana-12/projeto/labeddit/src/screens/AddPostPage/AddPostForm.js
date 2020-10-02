@@ -1,22 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, CircularProgress, TextField } from '@material-ui/core'
-import { InputsContainer, LoginFormContainer } from './styled'
-import { login } from '../../services/user'
+import { AddPostFormContainer, InputsContainer } from './styled'
 import { useHistory } from 'react-router-dom'
 import useForm from '../../hooks/useForm'
+import { addPost } from '../../services/posts'
 
-const LoginForm = props => {
-  const [form, handleInputChange] = useForm({email: '', password: ''})
+const AddPostForm = () => {
   const history = useHistory()
+  const [form, handleInputChange] = useForm({title: '', text: ''})
   const [isLoading, setIsLoading] = useState(false)
 
-  const onClickLogin = event => {
+  const onClickAddPost = event => {
     event.preventDefault()
-    const element = document.getElementById('login-form')
+    const element = document.getElementById('addpost-form')
     const isValid = element.checkValidity()
     element.reportValidity()
     if (isValid) {
-      login(form, history, props.setButtonName, setIsLoading)
+      addPost(form, '/posts', history, setIsLoading)
     }
   }
 
@@ -25,29 +25,27 @@ const LoginForm = props => {
   // }
 
   return (
-    <form id={'login-form'}>
-      <LoginFormContainer>
+    <form id={'addpost-form'}>
+      <AddPostFormContainer>
         <InputsContainer>
           <TextField
-            value={form.email}
-            name={'email'}
+            value={form.title}
+            name={'title'}
             onChange={handleInputChange}
-            label={'E-mail'}
+            label={'Título'}
             variant={'outlined'}
             margin={'normal'}
-            type={'email'}
             fullWidth
             autoFocus
             required
           />
           <TextField
-            value={form.password}
-            name={'password'}
+            value={form.text}
+            name={'text'}
             onChange={handleInputChange}
-            label={'Senha'}
+            label={'Escreva seu post'}
             variant={'outlined'}
             margin={'normal'}
-            type={'password'}
             fullWidth
             required
           />
@@ -58,14 +56,15 @@ const LoginForm = props => {
           type={'submit'}
           size={'large'}
           fullWidth
-          onClick={onClickLogin}
+          disabled={isLoading}
+          onClick={onClickAddPost}
           // onClick={toggleLoading}
         >
-          {isLoading ? <CircularProgress color={"primary"} size={26}/> : "Fazer Login"}          
+          {isLoading ? <CircularProgress color={"primary"} size={26}/> : "Postar"}
         </Button>
-      </LoginFormContainer>
+      </AddPostFormContainer>
     </form>
   )
 }
 
-export default LoginForm
+export default AddPostForm

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, TextField } from '@material-ui/core'
+import { Button, CircularProgress, TextField } from '@material-ui/core'
 import { InputsContainer, SignUpFormContainer } from './styled'
 import { useHistory } from 'react-router-dom'
 import useForm from '../../hooks/useForm'
@@ -8,6 +8,7 @@ import { signUp } from '../../services/user'
 const SignUpForm = props => {
   const history = useHistory()
   const [form, handleInputChange] = useForm({username: '', email: '', password: ''})
+  const [isLoading, setIsLoading] = useState(false)
 
   const onClickSignUp = event => {
     event.preventDefault()
@@ -15,9 +16,15 @@ const SignUpForm = props => {
     const isValid = element.checkValidity()
     element.reportValidity()
     if (isValid) {
-      signUp(form, history, props.setButtonName)
+      signUp(form, history, props.setButtonName, setIsLoading)
     }
   }
+
+  
+
+  // const toggleLoading = () => {
+  //   setIsLoading(!IsLoading)
+  // }
 
   return (
     <form id={'signup-form'}>
@@ -58,14 +65,15 @@ const SignUpForm = props => {
           />
         </InputsContainer>
         <Button
-          onClick={onClickSignUp}
           color={'primary'}
           variant={'contained'}
           type={'submit'}
           size={'large'}
           fullWidth
+          onClick={onClickSignUp}
+          // onClick={toggleLoading}
         >
-          Fazer Cadastro
+          {isLoading ? <CircularProgress color={"primary"} size={26}/> : "Fazer Cadastro"}          
         </Button>
       </SignUpFormContainer>
     </form>

@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import LoginPage from '../screens/LoginPage/LoginPage'
 import SignUpPage from '../screens/SignUpPage/SignUpPage'
 import PostsFeedPage from '../screens/PostsFeedPage/PostsFeedPage'
+import AddPostPage from '../screens/AddPostPage/AddPostPage'
 import PostDetailsPage from '../screens/PostDetailsPage/PostDetailsPage'
 import ErrorPage from '../screens/ErrorPage/ErrorPage'
 
@@ -17,6 +18,9 @@ const Router = props => {
       </Route>
       <Route exact path={['/posts', '/']}>
         <PostsFeedPage />
+      </Route>
+      <Route exact path={['/posts/add']}>
+        <AddPostPage />
       </Route>
       <Route exact path={'/posts/:id'}>
         <PostDetailsPage />

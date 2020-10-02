@@ -1,15 +1,51 @@
-import React, { useLayoutEffect } from 'react'
-import { useHistory } from 'react-router-dom'
-import PostCard from '../../components/PostCard/PostCard'
+import React from 'react'
+import PostCard from './PostCard'
 import useProtectedPage from '../../hooks/useProtectedPage'
-import { goToLogin } from '../../routes/Coordinator'
+import useRequestData from '../../hooks/useRequestData'
+import Loading from '../../components/Loading/Loading'
+import { AddPostButton, FeedContainer } from './styled'
+import { goToAddPost, goToPostDetails } from '../../routes/Coordinator'
+import { useHistory } from 'react-router-dom'
+import { Add } from '@material-ui/icons'
 
 const PostsFeedPage = () => {
   useProtectedPage()
+  const history = useHistory()
+  const posts = useRequestData({}, '/posts').posts
+  console.log(posts)
+
+  const renderPosts = () => (
+    posts.map(item => {
+      return (
+        <PostCard
+          key={item.id}
+          onClick={() => goToPostDetails(history, item.id)}
+          username={item.username}
+          createdAt={item.createdAt}
+          title={item.title}
+          text={item.text}
+          commentsCount={item.commentsCount}
+          userVoteDirection={item.userVoteDirection}
+          votesCount={item.votesCount}
+        />
+      )
+    })
+  )
+
   return (
-    <div>
-      <PostCard/>
-    </div>
+    <>
+      <FeedContainer>
+        {posts ? renderPosts() : <Loading/>}
+      </FeedContainer>
+      <AddPostButton 
+        variant="extended" 
+        color="primary"
+        onClick={()=>goToAddPost(history)}
+      >
+        <Add/>
+        Novo post
+      </AddPostButton>
+    </>
   )
 }
 
