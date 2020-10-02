@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { Button, CircularProgress, DialogActions, TextField } from '@material-ui/core'
 import { AddPostFormContainer, InputsContainer } from './styled'
-import { useHistory } from 'react-router-dom'
 import useForm from '../../hooks/useForm'
 import { addPost } from '../../services/posts'
 
 const AddPostForm = props => {
-  const history = useHistory()
   const [form, handleInputChange] = useForm({title: '', text: ''})
   const [isLoading, setIsLoading] = useState(false)
 

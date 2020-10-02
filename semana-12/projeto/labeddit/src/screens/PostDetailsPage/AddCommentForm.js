@@ -14,9 +14,7 @@ const AddCommentForm = props => {
     const isValid = element.checkValidity()
     element.reportValidity()
     if (isValid) {
-      addComment(form, `/posts/${props.postId}/comment`, setIsLoading)
-      props.updateComments()
-      resetState()
+      addComment(form, `/posts/${props.postId}/comment`, resetState, props.updateComments, setIsLoading)
     }
   }
 

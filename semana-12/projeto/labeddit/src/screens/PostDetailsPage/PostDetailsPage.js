@@ -2,11 +2,9 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import useProtectedPage from '../../hooks/useProtectedPage'
 import useRequestData from '../../hooks/useRequestData'
-import { Button, CardActions, CardContent, Typography } from '@material-ui/core'
 import Loading from '../../components/Loading/Loading'
-import { DetailsCardContainer, DetailsContainer } from './styled'
-import { timePassed } from '../../actions/timePassed'
 import PostDetailsCard from './PostDetailsCard'
+import { DetailsContainer } from './styled'
 
 const PostDetailsPage = () => {
   useProtectedPage()
