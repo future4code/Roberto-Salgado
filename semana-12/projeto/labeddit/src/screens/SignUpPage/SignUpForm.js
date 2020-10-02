@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, CircularProgress, TextField } from '@material-ui/core'
 import { InputsContainer, SignUpFormContainer } from './styled'
 import { useHistory } from 'react-router-dom'

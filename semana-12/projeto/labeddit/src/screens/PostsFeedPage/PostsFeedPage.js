@@ -12,10 +12,9 @@ const PostsFeedPage = () => {
   useProtectedPage()
   const history = useHistory()
   const posts = useRequestData({}, '/posts').posts
-  console.log(posts)
 
   const renderPosts = () => (
-    posts.map(item => {
+    posts.sort((a, b) => b.createdAt - a.createdAt).map(item => {
       return (
         <PostCard
           key={item.id}
@@ -31,6 +30,8 @@ const PostsFeedPage = () => {
       )
     })
   )
+
+  console.log(posts)
 
   return (
     <>
