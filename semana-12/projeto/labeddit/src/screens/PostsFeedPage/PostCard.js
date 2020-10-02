@@ -11,7 +11,7 @@ const PostCard = props => {
     <PostCardContainer onClick={props.onClick}>
       <CardContent>
         <Typography variant='caption' component='span' color="textSecondary" gutterBottom>
-          Postado por u/{props.username} {timePassed(props.createdAt)}
+          Postado por u/{props.username} · {timePassed(props.createdAt)}
         </Typography>
         <Typography variant="h6" component="h3">
           {props.title}
@@ -22,7 +22,11 @@ const PostCard = props => {
       </CardContent>
       <CardActions>
         <Button size="small">
-          <CommentsCounter color="textSecondary" >{props.commentsCount} Comentários</CommentsCounter>
+          <CommentsCounter color="textSecondary">
+          {props.commentsCount}
+          {" "}
+          {props.commentsCount === 1 ? "Comentário" : "Comentários"}
+          </CommentsCounter>
         </Button>
       </CardActions>
     </PostCardContainer>

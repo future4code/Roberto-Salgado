@@ -14,7 +14,7 @@ export const getPosts = (endpoint, setData) => {
     })
 }
 
-export const addPost = (body, endpoint, setIsLoading) => {
+export const addPost = (body, endpoint, /* setIsLoading */) => {
   // setIsLoading(true)
   axios.post(`${baseUrl}${endpoint}`, body, {
     headers:{

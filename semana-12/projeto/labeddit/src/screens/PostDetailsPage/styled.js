@@ -21,6 +21,16 @@ export const PostCardDetailsContainer = styled(Card)`
 `
 
 export const CommentsCounter = styled(Typography)`
-  text-transform: none;
   font-weight: 700;
+`
+
+export const CommentCardContainer = styled.div`
+  margin: 20px 0;
+`
+
+export const AddCommentFormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
 `

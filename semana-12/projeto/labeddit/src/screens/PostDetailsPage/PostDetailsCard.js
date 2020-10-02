@@ -3,11 +3,27 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { CommentsCounter, PostCardDetailsContainer } from './styled'
 import { timePassed } from '../../actions/timePassed'
-import { Button, CardActions } from '@material-ui/core'
+import Loading from '../../components/Loading/Loading'
+import CommentCard from './CommentsCard'
+import AddCommentForm from './AddCommentForm'
 
 const PostDetailsCard = props => {
+  const comments = props.comments
+  const renderComments = () => (
+    comments.sort((a, b) => a.createdAt - b.createdAt).map(item => {
+      return (
+        <CommentCard
+          key={item.id}
+          username={item.username}
+          createdAt={item.createdAt}
+          text={item.text}
+          userVoteDirection={item.userVoteDirection}
+          votesCount={item.votesCount}
+        />
+      )
+    })
+  )
   
-
   return (
     <PostCardDetailsContainer onClick={props.onClick}>
       <CardContent>
@@ -20,14 +36,18 @@ const PostDetailsCard = props => {
         <Typography variant="body2" component="p" gutterBottom>
           {props.text}
         </Typography>
+        <CommentsCounter color="textSecondary" >
+          {props.commentsCount}
+          {" "}
+          {props.commentsCount === 1 ? "Comentário" : "Comentários"}
+        </CommentsCounter>
       </CardContent>
-      <CardActions>
-        <Button size="small">
-          <CommentsCounter color="textSecondary" >{props.commentsCount} Comentários</CommentsCounter>
-        </Button>
-      </CardActions>
+
+
+      <AddCommentForm postId={props.postId} updateComments={props.updateDetails}/>
+      
       <CardContent>
-        <Typography>Blablabla</Typography>
+        {comments ? renderComments() : <Loading/>}
       </CardContent>
     </PostCardDetailsContainer>
   );

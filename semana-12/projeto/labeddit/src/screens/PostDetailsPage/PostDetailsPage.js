@@ -11,18 +11,20 @@ import PostDetailsCard from './PostDetailsCard'
 const PostDetailsPage = () => {
   useProtectedPage()
   const {id} = useParams()
-  const [details, updadateDetails] = useRequestData({}, `/posts/${id}`)
+  const [details, updateDetails] = useRequestData({}, `/posts/${id}`)
 
   const post = details.post
 
   const renderDetails = () => (
     <PostDetailsCard
+      postId={post.id}
       username={post.username}
       createdAt={post.createdAt}
       title={post.title}
       text={post.text}
       commentsCount={post.commentsCount}
       comments={post.comments}
+      updateDetails={updateDetails}
     />
   )
   
