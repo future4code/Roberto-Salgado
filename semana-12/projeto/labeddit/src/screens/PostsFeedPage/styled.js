@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Card, Fab } from '@material-ui/core'
+import { Card, Fab, Typography } from '@material-ui/core'
 
 export const PostCardContainer = styled(Card)`
   width: 80vw;
@@ -32,4 +32,9 @@ export const InputsContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+`
+
+export const CommentsCounter = styled(Typography)`
+  text-transform: none;
+  font-weight: 700;
 `

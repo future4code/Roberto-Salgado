@@ -6,6 +6,7 @@ import { Button, CardActions, CardContent, Typography } from '@material-ui/core'
 import Loading from '../../components/Loading/Loading'
 import { DetailsCardContainer, DetailsContainer } from './styled'
 import { timePassed } from '../../actions/timePassed'
+import PostDetailsCard from './PostDetailsCard'
 
 const PostDetailsPage = () => {
   useProtectedPage()
@@ -14,32 +15,18 @@ const PostDetailsPage = () => {
 
   const post = details.post
 
-  const comments = post.commentsCount
-
   const renderDetails = () => (
-    <DetailsCardContainer>
-      <CardContent>
-        <Typography variant='caption' component='span' color="textSecondary" gutterBottom>
-          Postado por u/{post.username} {timePassed(post.createdAt)}
-        </Typography>
-        <Typography variant="h6" component="h3">
-          {post.title}
-        </Typography>
-        <Typography variant="body2" component="p">
-          {post.text}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">{post.commentsCount} comentários</Button>
-      </CardActions>
-      <CardContent>
-        <Typography>Blablabla</Typography>
-      </CardContent>
-    </DetailsCardContainer>
+    <PostDetailsCard
+      username={post.username}
+      createdAt={post.createdAt}
+      title={post.title}
+      text={post.text}
+      commentsCount={post.commentsCount}
+      comments={post.comments}
+    />
   )
   
   console.log(post)
-  console.log(comments)
   
   return (
     <DetailsContainer>

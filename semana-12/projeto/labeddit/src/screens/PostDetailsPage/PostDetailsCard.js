@@ -1,26 +1,35 @@
 import React from 'react'
-import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import { PostCardContainer } from './styled'
+import { CommentsCounter, PostCardDetailsContainer } from './styled'
 import { timePassed } from '../../actions/timePassed'
+import { Button, CardActions } from '@material-ui/core'
 
 const PostDetailsCard = props => {
+  
+
   return (
-    <PostCardContainer onClick={props.onClick}>
+    <PostCardDetailsContainer onClick={props.onClick}>
       <CardContent>
         <Typography variant='caption' component='span' color="textSecondary" gutterBottom>
           u/{props.username} {timePassed(props.createdAt)}
         </Typography>
-        <Typography variant="body2" component="p">
+        <Typography variant="h6" component="h3">
+          {props.title}
+        </Typography>
+        <Typography variant="body2" component="p" gutterBottom>
           {props.text}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">{props.commentsCount} comentários</Button>
+        <Button size="small">
+          <CommentsCounter color="textSecondary" >{props.commentsCount} Comentários</CommentsCounter>
+        </Button>
       </CardActions>
-    </PostCardContainer>
+      <CardContent>
+        <Typography>Blablabla</Typography>
+      </CardContent>
+    </PostCardDetailsContainer>
   );
 }
 
