@@ -5,7 +5,7 @@ import useForm from '../../hooks/useForm'
 import { addComment } from '../../services/comments'
 
 const AddCommentForm = props => {
-  const [form, handleInputChange] = useForm({text: ''})
+  const [form, handleInputChange, resetState] = useForm({text: ''})
   const [isLoading, setIsLoading] = useState(false)
 
   const onClickAddComment = event => {
@@ -16,6 +16,7 @@ const AddCommentForm = props => {
     if (isValid) {
       addComment(form, `/posts/${props.postId}/comment`, setIsLoading)
       props.updateComments()
+      resetState()
     }
   }
 

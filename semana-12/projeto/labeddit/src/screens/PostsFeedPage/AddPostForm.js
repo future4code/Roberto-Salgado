@@ -16,14 +16,12 @@ const AddPostForm = props => {
     const isValid = element.checkValidity()
     element.reportValidity()
     if (isValid) {
-      addPost(form, '/posts', history, setIsLoading)
-      props.handleClose()
-      props.updatePosts()
+      addPost(form, '/posts', props.handleClose, props.updatePosts, setIsLoading)
     }
   }
 
   // const toggleLoading = () => {
-  //   setIsLoading(!IsLoading)
+  //   setIsLoading(!isLoading)
   // }
 
   return (

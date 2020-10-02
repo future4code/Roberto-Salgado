@@ -8,7 +8,9 @@ const useForm = (initialState) => {
     setForm({...form, [name]: value})
   }
 
-  return [form, handleInputChange]
+  const resetState = () => setForm(initialState)
+
+  return [form, handleInputChange, resetState]
 }
 
 export default useForm
