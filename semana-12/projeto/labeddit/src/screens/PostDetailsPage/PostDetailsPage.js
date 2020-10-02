@@ -5,18 +5,18 @@ import useRequestData from '../../hooks/useRequestData'
 import { Button, CardActions, CardContent, Typography } from '@material-ui/core'
 import Loading from '../../components/Loading/Loading'
 import { DetailsCardContainer, DetailsContainer } from './styled'
+import { timePassed } from '../../actions/timePassed'
 
 const PostDetailsPage = () => {
   useProtectedPage()
   const {id} = useParams()
   const post = useRequestData({}, `/posts/${id}`).post
-  console.log(post)
 
   const renderDetails = () => (
     <DetailsCardContainer>
       <CardContent>
         <Typography variant='caption' component='span' color="textSecondary" gutterBottom>
-          Postado por {post.username} as {post.createdAt}
+          Postado por u/{post.username} {timePassed(post.createdAt)}
         </Typography>
         <Typography variant="h6" component="h3">
           {post.title}
@@ -33,6 +33,8 @@ const PostDetailsPage = () => {
       </CardContent>
     </DetailsCardContainer>
   )
+  
+  console.log(post)
   
   return (
     <DetailsContainer>
