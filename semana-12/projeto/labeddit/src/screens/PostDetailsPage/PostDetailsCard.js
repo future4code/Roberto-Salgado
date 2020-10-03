@@ -1,11 +1,17 @@
 import React from 'react'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
-import { CommentsCounter, PostCardDetailsContainer } from './styled'
+import {
+  CommentsContainer,
+  CommentsCounter,
+  PostDetailsCardContainer,
+  PostDetailsContainer,
+} from './styled'
 import { timePassed } from '../../actions/timePassed'
 import Loading from '../../components/Loading/Loading'
 import CommentCard from './CommentsCard'
 import AddCommentForm from './AddCommentForm'
+import PostVotes from './PostVotes'
 
 const PostDetailsCard = props => {
   const comments = props.comments
@@ -25,31 +31,31 @@ const PostDetailsCard = props => {
   )
   
   return (
-    <PostCardDetailsContainer onClick={props.onClick}>
-      <CardContent>
-        <Typography variant='caption' component='span' color="textSecondary" gutterBottom>
-          u/{props.username} {timePassed(props.createdAt)}
-        </Typography>
-        <Typography variant="h6" component="h3">
-          {props.title}
-        </Typography>
-        <Typography variant="body2" component="p" gutterBottom>
-          {props.text}
-        </Typography>
-        <CommentsCounter color="textSecondary" >
-          {props.commentsCount}
-          {" "}
-          {props.commentsCount === 1 ? "Comentário" : "Comentários"}
-        </CommentsCounter>
-      </CardContent>
-
-
-      <AddCommentForm postId={props.postId} updateComments={props.updateDetails}/>
-      
-      <CardContent>
+    <PostDetailsCardContainer onClick={props.onClick}>
+      <PostDetailsContainer>
+        <PostVotes votesCount={props.votesCount} />
+        <CardContent>
+          <Typography variant='caption' component='span' color="textSecondary" gutterBottom>
+            u/{props.username} {timePassed(props.createdAt)}
+          </Typography>
+          <Typography variant="h6" component="h3">
+            {props.title}
+          </Typography>
+          <Typography variant="body2" component="p" gutterBottom>
+            {props.text}
+          </Typography>
+          <CommentsCounter variant="caption" color="textSecondary" >
+            {props.commentsCount}
+            {" "}
+            {props.commentsCount === 1 ? "Comentário" : "Comentários"}
+          </CommentsCounter>
+        </CardContent>
+      </PostDetailsContainer>
+      <AddCommentForm postId={props.postId} updateComments={props.updateDetails}/>      
+      <CommentsContainer>
         {comments ? renderComments() : <Loading/>}
-      </CardContent>
-    </PostCardDetailsContainer>
+      </CommentsContainer>
+    </PostDetailsCardContainer>
   );
 }
 

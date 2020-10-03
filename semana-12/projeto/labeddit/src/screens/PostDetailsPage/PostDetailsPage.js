@@ -20,6 +20,7 @@ const PostDetailsPage = () => {
       createdAt={post.createdAt}
       title={post.title}
       text={post.text}
+      votesCount={post.votesCount}
       commentsCount={post.commentsCount}
       comments={post.comments}
       updateDetails={updateDetails}
