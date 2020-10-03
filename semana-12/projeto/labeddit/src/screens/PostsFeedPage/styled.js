@@ -37,4 +37,7 @@ export const InputsContainer = styled.div`
 export const CommentsCounter = styled(Typography)`
   text-transform: none;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
 `

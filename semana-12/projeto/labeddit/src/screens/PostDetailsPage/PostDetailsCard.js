@@ -12,9 +12,12 @@ import Loading from '../../components/Loading/Loading'
 import CommentCard from './CommentsCard'
 import AddCommentForm from './AddCommentForm'
 import PostVotes from './PostVotes'
+import Icon from '@mdi/react'
+import { mdiComment } from '@mdi/js'
 
 const PostDetailsCard = props => {
   const comments = props.comments
+  
   const renderComments = () => (
     comments.sort((a, b) => a.createdAt - b.createdAt).map(item => {
       return (
@@ -44,11 +47,12 @@ const PostDetailsCard = props => {
           <Typography variant="body2" component="p" gutterBottom>
             {props.text}
           </Typography>
-          <CommentsCounter variant="caption" color="textSecondary" >
-            {props.commentsCount}
-            {" "}
-            {props.commentsCount === 1 ? "Comentário" : "Comentários"}
-          </CommentsCounter>
+            <CommentsCounter variant="caption" color="textSecondary" >
+              <Icon size={0.6} path={mdiComment}/>
+              {props.commentsCount}
+              {" "}
+              {props.commentsCount === 1 ? "Comentário" : "Comentários"}
+            </CommentsCounter>
         </CardContent>
       </PostDetailsContainer>
       <AddCommentForm postId={props.postId} updateComments={props.updateDetails}/>      

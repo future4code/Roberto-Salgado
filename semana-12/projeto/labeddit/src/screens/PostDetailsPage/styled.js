@@ -32,7 +32,7 @@ export const PostVotesContainer = styled.div`
 `
 
 export const VoteButton = styled(Button)`
-  /* height: 24px; */
+  height: 24px;
   min-width: 24px;
   padding: 0;
 `
@@ -59,6 +59,9 @@ export const VotesCounter = styled(Typography)`
 
 export const CommentsCounter = styled(Typography)`
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
 `
 
 export const CommentCardContainer = styled.div`
@@ -69,6 +72,7 @@ export const AddCommentFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 80%;
+  max-width: 600px;
   margin: 0 auto;
 `
 
