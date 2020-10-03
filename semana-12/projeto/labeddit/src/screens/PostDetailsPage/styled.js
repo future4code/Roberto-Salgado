@@ -28,6 +28,7 @@ export const PostDetailsContainer = styled.div`
 export const PostVotesContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 1em 0 0 1em;
 `
 
@@ -37,20 +38,12 @@ export const VoteButton = styled(Button)`
   padding: 0;
 `
 
-export const UpVoteIcon = styled(Icon)`
+export const VoteIcon = styled(Icon)`
   color: #878A8C;
 
   :hover {
-    color: #CC3600;
+    color: ${props => props.up ? "#CC3600" : "#5A75CC"}
   }
-`
-
-export const DownVoteIcon = styled(Icon)`
-  color: #878A8C;
-
-:hover {
-  color: #5A75CC;
-}
 `
 
 export const VotesCounter = styled(Typography)`
@@ -62,10 +55,6 @@ export const CommentsCounter = styled(Typography)`
   display: flex;
   align-items: center;
   gap: 0.4em;
-`
-
-export const CommentCardContainer = styled.div`
-  margin: 20px 0;
 `
 
 export const AddCommentFormContainer = styled.div`
@@ -80,4 +69,25 @@ export const CommentsContainer = styled(CardContent)`
   display: flex;
   flex-direction: column;
   gap: 20px;
+`
+
+export const CommentCardContainer = styled.div`
+  margin: 20px 0;
+  display: flex;
+`
+
+export const CommentHeader = styled.div`
+  display: flex;
+  gap: 0.5em;
+`
+
+export const CommentWrapper = styled.div`
+  margin-left: 16px;
+`
+
+export const CommentVotesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 1em 0 0 1em; */
 `
