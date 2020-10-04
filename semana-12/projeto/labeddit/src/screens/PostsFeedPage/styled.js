@@ -5,6 +5,11 @@ export const PostCardContainer = styled(Card)`
   width: 80vw;
   max-width: 800px;
   margin: 10px;
+  display: flex;
+`
+
+export const PostContentWrapper = styled.div`
+    cursor: pointer;
 `
 
 export const FeedContainer = styled.div`

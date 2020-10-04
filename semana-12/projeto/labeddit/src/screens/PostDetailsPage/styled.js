@@ -25,13 +25,6 @@ export const PostDetailsContainer = styled.div`
   display: flex;
 `
 
-export const PostVotesContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1em 0 0 1em;
-`
-
 export const VoteButton = styled(Button)`
   height: 24px;
   min-width: 24px;

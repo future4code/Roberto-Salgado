@@ -3,8 +3,6 @@ import PostCard from './PostCard'
 import useProtectedPage from '../../hooks/useProtectedPage'
 import Loading from '../../components/Loading/Loading'
 import { AddPostButton, FeedContainer } from './styled'
-import { goToPostDetails } from '../../routes/Coordinator'
-import { useHistory } from 'react-router-dom'
 import { Add } from '@material-ui/icons'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -14,25 +12,27 @@ import useGetPosts from '../../hooks/useRequestData'
 
 const PostsFeedPage = () => {
   useProtectedPage()
-  const history = useHistory()
   const [open, setOpen] = useState(false)
   const [feed, updateFeed] = useGetPosts({}, '/posts')
 
   const posts = feed.posts
 
   const renderPosts = () => (
-    posts.sort((a, b) => b.createdAt - a.createdAt).map(item => {
+    posts.filter(item => {
+      return typeof item.title === 'string'
+    }).sort((a, b) => b.createdAt - a.createdAt).map(item => {
       return (
         <PostCard
           key={item.id}
-          onClick={() => goToPostDetails(history, item.id)}
+          postId={item.id}
           username={item.username}
           createdAt={item.createdAt}
           title={item.title}
           text={item.text}
-          commentsCount={item.commentsCount}
           userVoteDirection={item.userVoteDirection}
           votesCount={item.votesCount}
+          commentsCount={item.commentsCount}
+          updatePosts={updateFeed}
         />
       )
     })

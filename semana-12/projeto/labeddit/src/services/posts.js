@@ -33,3 +33,13 @@ export const addPost = (body, endpoint, close, update, setIsLoading) => {
       alert(err.message)
     })
 }
+
+export const votePost = (body, endpoint, update) => {
+  axios.put(`${baseUrl}${endpoint}`, body, {
+    headers:{
+      Authorization: localStorage.getItem("token")
+    }
+  })
+    .then(() => update())   
+    .catch((err) => console.log(err))   
+}
