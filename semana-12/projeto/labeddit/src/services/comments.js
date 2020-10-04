@@ -20,3 +20,13 @@ export const addComment = (body, endpoint, clear, update, setIsLoading) => {
       alert(err.message)
     })
 }
+
+export const voteComment = (body, endpoint, update) => {
+  axios.put(`${baseUrl}${endpoint}`, body, {
+    headers:{
+      Authorization: localStorage.getItem("token")
+    }
+  })
+    .then(() => update())   
+    .catch((err) => console.log(err))   
+}

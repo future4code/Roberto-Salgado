@@ -7,7 +7,13 @@ import CommentVotes from './CommentVotes'
 const CommentCard = props => {
   return (
     <CommentCardContainer>
-      <CommentVotes/>
+      <CommentVotes
+        votesCount={props.votesCount}
+        postId={props.postId}          
+        commentId={props.commentId}          
+        userVoteDirection={props.userVoteDirection}
+        updateComments={props.updateComments}
+      />
       <CommentWrapper>
         <CommentHeader>
           <Typography variant='caption' component='span' gutterBottom>

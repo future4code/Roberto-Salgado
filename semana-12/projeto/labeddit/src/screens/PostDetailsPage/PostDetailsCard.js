@@ -23,11 +23,14 @@ const PostDetailsCard = props => {
       return (
         <CommentCard
           key={item.id}
+          postId={props.postId}
+          commentId={item.id}
           username={item.username}
           createdAt={item.createdAt}
           text={item.text}
           userVoteDirection={item.userVoteDirection}
           votesCount={item.votesCount}
+          updateComments={props.updatePosts}
         />
       )
     })
@@ -38,7 +41,7 @@ const PostDetailsCard = props => {
       <PostDetailsContainer>
         <PostVotes 
           votesCount={props.votesCount}
-          postId={props.postId}
+          postId={props.postId}          
           userVoteDirection={props.userVoteDirection}
           updatePosts={props.updatePosts}
         />
