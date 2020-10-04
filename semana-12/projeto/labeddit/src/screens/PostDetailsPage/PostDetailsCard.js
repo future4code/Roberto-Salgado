@@ -1,9 +1,9 @@
 import React from 'react'
-import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import {
   CommentsContainer,
   CommentsCounter,
+  PostContentWrapper,
   PostDetailsCardContainer,
   PostDetailsContainer,
 } from './styled'
@@ -45,7 +45,7 @@ const PostDetailsCard = props => {
           userVoteDirection={props.userVoteDirection}
           updatePosts={props.updatePosts}
         />
-        <CardContent>
+        <PostContentWrapper>
           <Typography variant='caption' component='span' color="textSecondary" gutterBottom>
             u/{props.username} {timePassed(props.createdAt)}
           </Typography>
@@ -55,13 +55,13 @@ const PostDetailsCard = props => {
           <Typography variant="body2" component="p" gutterBottom>
             {props.text}
           </Typography>
-            <CommentsCounter variant="caption" color="textSecondary" >
-              <Icon size={0.6} path={mdiComment}/>
-              {props.commentsCount}
-              {" "}
-              {props.commentsCount === 1 ? "Comentário" : "Comentários"}
-            </CommentsCounter>
-        </CardContent>
+          <CommentsCounter variant="caption" color="textSecondary" >
+            <Icon size={0.6} path={mdiComment}/>
+            {props.commentsCount}
+            {" "}
+            {props.commentsCount === 1 ? "Comentário" : "Comentários"}
+          </CommentsCounter>
+        </PostContentWrapper>
       </PostDetailsContainer>
       <AddCommentForm postId={props.postId} updateComments={props.updatePosts}/>      
       <CommentsContainer>

@@ -1,9 +1,7 @@
 import React from 'react'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import { CommentsCounter, PostCardContainer, PostContentWrapper } from './styled'
+import { CommentsCounter, PostActionsWrapper, PostCardContainer, PostContentWrapper, PostVotesWrapper, PostWrapper } from './styled'
 import { timePassed } from '../../actions/timePassed'
 import Icon from '@mdi/react'
 import { mdiComment } from '@mdi/js'
@@ -15,14 +13,16 @@ const PostCard = props => {
   const history = useHistory()
   return (
     <PostCardContainer>
-      <PostVotes
-        votesCount={props.votesCount}
-        postId={props.postId}
-        userVoteDirection={props.userVoteDirection}
-        updatePosts={props.updatePosts}
-      />
-      <PostContentWrapper>
-        <CardContent onClick={() => goToPostDetails(history, props.postId)}>
+      <PostVotesWrapper>
+        <PostVotes
+          votesCount={props.votesCount}
+          postId={props.postId}
+          userVoteDirection={props.userVoteDirection}
+          updatePosts={props.updatePosts}
+        />
+      </PostVotesWrapper>
+      <PostWrapper onClick={() => goToPostDetails(history, props.postId)}>
+        <PostContentWrapper>
           <Typography variant='caption' component='span' color="textSecondary" gutterBottom>
             Postado por u/{props.username} · {timePassed(props.createdAt)}
           </Typography>
@@ -32,8 +32,8 @@ const PostCard = props => {
           <Typography variant="body2" component="p">
             {props.text}
           </Typography>
-        </CardContent>
-        <CardActions>
+        </PostContentWrapper>
+        <PostActionsWrapper>
           <Button size="small" onClick={props.goToPostDetails}>
             <CommentsCounter variant='caption' color="textSecondary">
               <Icon size={0.6} path={mdiComment}/>
@@ -42,8 +42,8 @@ const PostCard = props => {
               {props.commentsCount === 1 ? "Comentário" : "Comentários"}
             </CommentsCounter>
           </Button>
-        </CardActions>
-      </PostContentWrapper>
+        </PostActionsWrapper>
+      </PostWrapper>
     </PostCardContainer>
   );
 }

@@ -1,5 +1,5 @@
 import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core'
-import { contrastColor, neutralColor, primaryColor } from './colors'
+import { bgColor,contrastColor, neutralColor, primaryColor } from './colors'
 
 const theme = createMuiTheme({
   palette: {
@@ -9,6 +9,9 @@ const theme = createMuiTheme({
     },
     text: {
       primary: neutralColor
+    },
+    background: {
+      default: bgColor
     }
   }
 })

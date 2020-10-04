@@ -6,7 +6,7 @@ export const PostVotesContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1em 0 0 1em;
+  padding: 0.5rem;
 `
 
 export const VoteButton = styled(Button)`

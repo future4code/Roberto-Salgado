@@ -25,6 +25,14 @@ export const PostDetailsContainer = styled.div`
   display: flex;
 `
 
+export const PostContentWrapper = styled(CardContent)`
+  padding: 0.5rem;
+
+  :last-child {
+    padding-bottom: 0.5rem;
+  }
+`
+
 export const VoteButton = styled(Button)`
   height: 24px;
   min-width: 24px;
@@ -48,6 +56,7 @@ export const CommentsCounter = styled(Typography)`
   display: flex;
   align-items: center;
   gap: 0.4em;
+  padding-top: 0.5rem;
 `
 
 export const AddCommentFormContainer = styled.div`
@@ -61,11 +70,12 @@ export const AddCommentFormContainer = styled.div`
 export const CommentsContainer = styled(CardContent)`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0.5rem;
+  padding: 0.5rem;
 `
 
 export const CommentCardContainer = styled.div`
-  margin: 20px 0;
+  margin-top: 1rem;
   display: flex;
 `
 
@@ -75,12 +85,11 @@ export const CommentHeader = styled.div`
 `
 
 export const CommentWrapper = styled.div`
-  margin-left: 16px;
+  margin-left: 1rem;
 `
 
 export const CommentVotesContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* padding: 1em 0 0 1em; */
 `

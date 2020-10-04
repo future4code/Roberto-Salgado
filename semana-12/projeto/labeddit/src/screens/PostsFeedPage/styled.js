@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Card, Fab, Typography } from '@material-ui/core'
+import { Card, CardActions, CardContent, Fab, Typography } from '@material-ui/core'
 
 export const PostCardContainer = styled(Card)`
   width: 80vw;
@@ -8,8 +8,20 @@ export const PostCardContainer = styled(Card)`
   display: flex;
 `
 
-export const PostContentWrapper = styled.div`
-    cursor: pointer;
+export const PostVotesWrapper = styled.div`
+  background-color: #F8F9FA;
+`
+
+export const PostWrapper = styled.div`
+  cursor: pointer;
+`
+
+export const PostContentWrapper = styled(CardContent)`
+  padding: 0.5rem;
+`
+
+export const PostActionsWrapper = styled(CardActions)`
+  padding: 0.5rem;
 `
 
 export const FeedContainer = styled.div`
