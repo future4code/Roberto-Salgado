@@ -28,7 +28,7 @@ const PostDetailsCard = props => {
           username={item.username}
           createdAt={item.createdAt}
           text={item.text}
-          userVoteDirection={item.userVoteDirection}
+          uservotedirection={item.userVoteDirection}
           votesCount={item.votesCount}
           updateComments={props.updatePosts}
         />
@@ -42,7 +42,7 @@ const PostDetailsCard = props => {
         <PostVotes 
           votesCount={props.votesCount}
           postId={props.postId}          
-          userVoteDirection={props.userVoteDirection}
+          uservotedirection={props.uservotedirection}
           updatePosts={props.updatePosts}
         />
         <PostContentWrapper>

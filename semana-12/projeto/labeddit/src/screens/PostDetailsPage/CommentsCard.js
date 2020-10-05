@@ -11,7 +11,7 @@ const CommentCard = props => {
         votesCount={props.votesCount}
         postId={props.postId}          
         commentId={props.commentId}          
-        userVoteDirection={props.userVoteDirection}
+        uservotedirection={props.uservotedirection}
         updateComments={props.updateComments}
       />
       <CommentWrapper>

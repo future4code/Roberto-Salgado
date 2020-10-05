@@ -21,7 +21,7 @@ const PostDetailsPage = () => {
       title={post.title}
       text={post.text}
       votesCount={post.votesCount}
-      userVoteDirection={post.userVoteDirection}
+      uservotedirection={post.userVoteDirection}
       commentsCount={post.commentsCount}
       comments={post.comments}
       updatePosts={updateDetails}

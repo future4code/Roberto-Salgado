@@ -29,7 +29,7 @@ const PostsFeedPage = () => {
           createdAt={item.createdAt}
           title={item.title}
           text={item.text}
-          userVoteDirection={item.userVoteDirection}
+          uservotedirection={item.userVoteDirection}
           votesCount={item.votesCount}
           commentsCount={item.commentsCount}
           updatePosts={updateFeed}

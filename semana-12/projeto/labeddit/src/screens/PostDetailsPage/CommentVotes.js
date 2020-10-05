@@ -10,7 +10,7 @@ import { voteComment } from '../../services/comments'
 const CommentVotes = props => {
 
   const onClickUpVoteComment = () => {
-    const body = {direction: props.userVoteDirection === 1 ? 0 : 1}
+    const body = {direction: props.uservotedirection === 1 ? 0 : 1}
     voteComment(
       body,
       `/posts/${props.postId}/comment/${props.commentId}/vote`,
@@ -19,7 +19,7 @@ const CommentVotes = props => {
   }
 
   const onClickDownVoteComment = () => {
-    const body = {direction: props.userVoteDirection === -1 ? 0 : -1}
+    const body = {direction: props.uservotedirection === -1 ? 0 : -1}
     voteComment(
       body,
       `/posts/${props.postId}/comment/${props.commentId}/vote`,
@@ -33,7 +33,7 @@ const CommentVotes = props => {
         <VoteIcon
           vote="up"
           size={0.8}
-          userVoteDirection={props.userVoteDirection}
+          uservotedirection={props.uservotedirection}
           path={mdiArrowUpBold}
         />
       </VoteButton>
@@ -41,7 +41,7 @@ const CommentVotes = props => {
         <VoteIcon 
           vote="down"
           size={0.8}
-          userVoteDirection={props.userVoteDirection}
+          uservotedirection={props.uservotedirection}
           path={mdiArrowDownBold}
         />
       </VoteButton>

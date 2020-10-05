@@ -17,7 +17,7 @@ const PostCard = props => {
         <PostVotes
           votesCount={props.votesCount}
           postId={props.postId}
-          userVoteDirection={props.userVoteDirection}
+          uservotedirection={props.uservotedirection}
           updatePosts={props.updatePosts}
         />
       </PostVotesWrapper>

@@ -2,13 +2,16 @@ import axios from "axios"
 import { baseUrl } from "../constants/urls"
 
 export const getPosts = (endpoint, setData) => {
-  axios.get(`${baseUrl}${endpoint}`, {
-    headers: {
-      Authorization: localStorage.getItem('token')
-    }
-  })
-    .then(response => setData(response.data))
-    .catch(err => alert(err.message))
+  const token = localStorage.getItem('token')
+  if (token) {
+    axios.get(`${baseUrl}${endpoint}`, {
+      headers: {
+        Authorization: token
+      }
+    })
+      .then(response => setData(response.data))
+      .catch(err => console.log(err.message))
+  }
 }
 
 export const addPost = (body, endpoint, close, update, setIsLoading) => {

@@ -12,19 +12,19 @@ const PostVotes = props => {
   
   const style = {
     color: (
-      props.userVoteDirection === 1 ? "#FF4500" : (
-        props.userVoteDirection === -1 ? "#7193FF" : "inherit"
+      props.uservotedirection === 1 ? "#FF4500" : (
+        props.userdotedirection === -1 ? "#7193FF" : "inherit"
       )
     )
   }
 
   const onClickUpVotePost = () => {
-    const body = {direction: props.userVoteDirection === 1 ? 0 : 1}
+    const body = {direction: props.uservotedirection === 1 ? 0 : 1}
     votePost(body, `/posts/${props.postId}/vote`, props.updatePosts)
   }
 
   const onClickDownVotePost = () => {
-    const body = {direction: props.userVoteDirection === -1 ? 0 : -1}
+    const body = {direction: props.uservotedirection === -1 ? 0 : -1}
     votePost(body, `/posts/${props.postId}/vote`, props.updatePosts)
   }
 
@@ -34,14 +34,14 @@ const PostVotes = props => {
         <VoteIcon
           vote="up"
           size={0.8}
-          userVoteDirection={props.userVoteDirection}
+          uservotedirection={props.uservotedirection}
           path={mdiArrowUpBold}
         />
       </VoteButton>
       <VotesCounter
         variant="caption"
         style={style}
-        userVoteDirection={props.userVoteDirection}
+        uservotedirection={props.uservotedirection}
       >
         {props.votesCount}
       </VotesCounter>
@@ -49,7 +49,7 @@ const PostVotes = props => {
         <VoteIcon
           vote="down"
           size={0.8}
-          userVoteDirection={props.userVoteDirection}
+          uservotedirection={props.uservotedirection}
           path={mdiArrowDownBold}
         />
       </VoteButton>
