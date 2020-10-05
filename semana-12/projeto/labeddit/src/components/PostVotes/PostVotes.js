@@ -9,6 +9,14 @@ import { mdiArrowDownBold, mdiArrowUpBold } from '@mdi/js'
 import { votePost } from '../../services/posts'
 
 const PostVotes = props => {
+  
+  const style = {
+    color: (
+      props.userVoteDirection === 1 ? "#FF4500" : (
+        props.userVoteDirection === -1 ? "#7193FF" : "inherit"
+      )
+    )
+  }
 
   const onClickUpVotePost = () => {
     const body = {direction: props.userVoteDirection === 1 ? 0 : 1}
@@ -23,11 +31,27 @@ const PostVotes = props => {
   return (
     <PostVotesContainer>
       <VoteButton onClick={onClickUpVotePost}>
-        <VoteIcon vote="up" size={0.8} path={mdiArrowUpBold}/>
+        <VoteIcon
+          vote="up"
+          size={0.8}
+          userVoteDirection={props.userVoteDirection}
+          path={mdiArrowUpBold}
+        />
       </VoteButton>
-      <VotesCounter variant="caption" >{props.votesCount}</VotesCounter>
+      <VotesCounter
+        variant="caption"
+        style={style}
+        userVoteDirection={props.userVoteDirection}
+      >
+        {props.votesCount}
+      </VotesCounter>
       <VoteButton onClick={onClickDownVotePost}>
-        <VoteIcon vote="down" size={0.8} path={mdiArrowDownBold}/>
+        <VoteIcon
+          vote="down"
+          size={0.8}
+          userVoteDirection={props.userVoteDirection}
+          path={mdiArrowDownBold}
+        />
       </VoteButton>
     </PostVotesContainer>
   )

@@ -30,10 +30,20 @@ const CommentVotes = props => {
   return (
     <CommentVotesContainer>
       <VoteButton onClick={onClickUpVoteComment}>
-        <VoteIcon vote="down"  size={0.8} path={mdiArrowUpBold}/>
+        <VoteIcon
+          vote="up"
+          size={0.8}
+          userVoteDirection={props.userVoteDirection}
+          path={mdiArrowUpBold}
+        />
       </VoteButton>
       <VoteButton onClick={onClickDownVoteComment}>
-        <VoteIcon vote="down"  size={0.8} path={mdiArrowDownBold}/>
+        <VoteIcon 
+          vote="down"
+          size={0.8}
+          userVoteDirection={props.userVoteDirection}
+          path={mdiArrowDownBold}
+        />
       </VoteButton>
     </CommentVotesContainer>
   )

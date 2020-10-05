@@ -40,10 +40,20 @@ export const VoteButton = styled(Button)`
 `
 
 export const VoteIcon = styled(Icon)`
-  color: #878A8C;
+  color: ${props => {
+    if (props.vote === "up" && props.userVoteDirection === 1) {return "#FF4400"}
+    if (props.vote === "up" && props.userVoteDirection !== 1) {return "#878A8C"}
+    if (props.vote === "down" && props.userVoteDirection === -1) {return "#7193FF"}
+    if (props.vote === "down" && props.userVoteDirection !== -1) {return "#878A8C"}
+  }};
 
   :hover {
-    color: ${props => props.up ? "#CC3600" : "#5A75CC"}
+    color: ${props => {
+      if (props.vote === "up" && props.userVoteDirection === 1) {return "#FF4400"}
+      if (props.vote === "up" && props.userVoteDirection !== 1) {return "#CC3600"}
+      if (props.vote === "down" && props.userVoteDirection === -1) {return "#7193FF"}
+      if (props.vote === "down" && props.userVoteDirection !== -1) {return "#5A75CC"}
+    }}
   }
 `
 
