@@ -20,10 +20,6 @@ const LoginForm = props => {
     }
   }
 
-  // const toggleLoading = () => {
-  //   setIsLoading(!IsLoading)
-  // }
-
   return (
     <form id={'login-form'}>
       <LoginFormContainer>
@@ -59,7 +55,6 @@ const LoginForm = props => {
           size={'large'}
           fullWidth
           onClick={onClickLogin}
-          // onClick={toggleLoading}
         >
           {isLoading ? <CircularProgress color={"primary"} size={26}/> : "Fazer Login"}          
         </Button>

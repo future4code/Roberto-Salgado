@@ -8,14 +8,12 @@ export const addComment = (body, endpoint, clear, update, setIsLoading) => {
       Authorization: localStorage.getItem("token")
     }
   })
-    .then(response => {
+    .then(() => {
       clear()
       update()
       setIsLoading(false)
-      // alert("Comentário adicionado com sucesso!")
     })
     .catch(err => {
-      console.log(err)
       setIsLoading(false)
       alert(err.message)
     })

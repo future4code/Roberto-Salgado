@@ -8,10 +8,10 @@ const ErrorPage = () => {
     <ErrorPageContainer>
       <ErrorImage alt={'Erro404'} src={ErrorImageSource} />
       <Typography color={'primary'} variant={'h4'} align={'center'} >
-        Erro 404 - Página não encontrada :(
+        {"Erro 404 - Página não encontrada :("}
       </Typography>
     </ErrorPageContainer>
-   )
+  )
 }
 
 export default ErrorPage

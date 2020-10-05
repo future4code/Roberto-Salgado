@@ -19,7 +19,7 @@ const PostsFeedPage = () => {
 
   const renderPosts = () => (
     posts.filter(item => {
-      return typeof item.title === 'string'
+      return typeof item.title === 'string' // filtro para corrigir um dado no endpoint da API que não estava no formato esperado
     }).sort((a, b) => b.createdAt - a.createdAt).map(item => {
       return (
         <PostCard
@@ -45,8 +45,6 @@ const PostsFeedPage = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  console.log(posts)
 
   return (
     <>

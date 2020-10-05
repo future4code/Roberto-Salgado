@@ -20,12 +20,6 @@ const SignUpForm = props => {
     }
   }
 
-  
-
-  // const toggleLoading = () => {
-  //   setIsLoading(!IsLoading)
-  // }
-
   return (
     <form id={'signup-form'}>
       <SignUpFormContainer>
@@ -71,7 +65,6 @@ const SignUpForm = props => {
           size={'large'}
           fullWidth
           onClick={onClickSignUp}
-          // onClick={toggleLoading}
         >
           {isLoading ? <CircularProgress color={"primary"} size={26}/> : "Fazer Cadastro"}          
         </Button>

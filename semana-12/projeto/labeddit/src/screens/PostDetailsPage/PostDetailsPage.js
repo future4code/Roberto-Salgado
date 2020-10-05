@@ -28,8 +28,6 @@ const PostDetailsPage = () => {
     />
   )
   
-  console.log(post)
-  
   return (
     <DetailsContainer>
       {post ? renderDetails(): <Loading/>}

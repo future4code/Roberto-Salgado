@@ -8,10 +8,7 @@ export const getPosts = (endpoint, setData) => {
     }
   })
     .then(response => setData(response.data))
-    .catch(err => {
-      console.log(err)
-      alert(err.message)
-    })
+    .catch(err => alert(err.message))
 }
 
 export const addPost = (body, endpoint, close, update, setIsLoading) => {
@@ -21,14 +18,12 @@ export const addPost = (body, endpoint, close, update, setIsLoading) => {
       Authorization: localStorage.getItem("token")
     }
   })
-    .then(response => {
+    .then(() => {
       close()
       update()
       setIsLoading(false)
-      // alert("Post adicionado com sucesso!")
     })
     .catch(err => {
-      console.log(err)
       setIsLoading(false)
       alert(err.message)
     })

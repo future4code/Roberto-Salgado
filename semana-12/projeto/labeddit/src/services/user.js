@@ -11,10 +11,7 @@ export const login = (body, history, setButtonName, setIsLoading) => {
       goToPostsFeed(history)
       setButtonName('Logout')
     })
-    .catch(err => {
-      console.log(err)
-      alert("Falha no login, tente novamente")
-    })
+    .catch(err => alert("Falha no login, tente novamente"))
 }
 
 export const signUp = (body, history, setButtonName, setIsLoading) => {
@@ -26,8 +23,5 @@ export const signUp = (body, history, setButtonName, setIsLoading) => {
     goToPostsFeed(history)
     setButtonName('Logout')
   })
-  .catch(err => {
-    console.log(err.message)
-    alert("Falha no cadastro, tente novamente")
-  })
+  .catch(err => alert("Falha no cadastro, tente novamente"))
 }

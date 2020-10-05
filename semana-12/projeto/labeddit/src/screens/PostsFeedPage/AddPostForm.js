@@ -18,10 +18,6 @@ const AddPostForm = props => {
     }
   }
 
-  // const toggleLoading = () => {
-  //   setIsLoading(!isLoading)
-  // }
-
   return (
     <form id={'addpost-form'}>
       <AddPostFormContainer>
@@ -58,7 +54,6 @@ const AddPostForm = props => {
             type={'submit'}
             disabled={isLoading}
             onClick={onClickAddPost}
-            // onClick={toggleLoading}
           >
             {isLoading ? <CircularProgress color={"primary"} size={26}/> : "Postar"}
           </Button>

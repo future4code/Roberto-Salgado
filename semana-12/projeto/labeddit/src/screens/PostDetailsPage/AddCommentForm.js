@@ -18,10 +18,6 @@ const AddCommentForm = props => {
     }
   }
 
-  // const toggleLoading = () => {
-  //   setIsLoading(!IsLoading)
-  // }
-
   return (
     <form id={'addcomment-form'}>
       <AddCommentFormContainer>
@@ -41,7 +37,6 @@ const AddCommentForm = props => {
           type={'submit'}
           disabled={isLoading}
           onClick={onClickAddComment}
-          // onClick={toggleLoading}
         >
           {isLoading ? <CircularProgress color={"primary"} size={26}/> : "Comentar"}
         </Button>
