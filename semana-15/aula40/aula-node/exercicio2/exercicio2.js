@@ -25,7 +25,7 @@ const result = (operation, num1, num2) => {
 if(!operation && !num1 && !num2){
   console.log(`Favor passar os parâmetros (Uma operação matemática e dois números).`)
 }else if(!num1 && !num2){
-  console.log(`Favor passar os números para fazer a operação ${operation}`)
+  console.log(`Favor passar os números para fazer a operação ${operation}.`)
 }else if(!num2){
   console.log(`Esperava dois números para fazer a operação ${operation}. Só recebi um.`)
 }else{

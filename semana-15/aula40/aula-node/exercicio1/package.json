@@ -1,7 +1,7 @@
 {
   "name": "exercicio1",
   "version": "1.0.0",
-  "description": "Exercício 1",
+  "description": "Semana-15 aula40: Node e package.json -> Exercício 1",
   "main": "exercicio1a.js",
   "scripts": {
     "test": "jest",
