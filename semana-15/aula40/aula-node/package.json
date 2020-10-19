@@ -4,7 +4,9 @@
   "description": "Semana-15 aula40: Node e package.json",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "exercicio2": "node ./exercicio2.js",
+    "exercicio3": "node ./exercicio3.js"
   },
   "author": "rpontosalgado",
   "license": "ISC"
