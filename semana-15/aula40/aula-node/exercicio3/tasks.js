@@ -1,0 +1,1 @@
+["Fazer almoço","Levar gata no vet","Ir ao mercado","Lavar roupa","Lavar louça","Tomar remédio"]
