@@ -1,0 +1,11 @@
+{
+  "name": "aula-node",
+  "version": "1.0.0",
+  "description": "Semana-15 aula40: Node e package.json",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "rpontosalgado",
+  "license": "ISC"
+}
