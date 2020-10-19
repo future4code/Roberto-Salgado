@@ -1,0 +1,12 @@
+{
+  "name": "exercicio2",
+  "version": "1.0.0",
+  "description": "Exercício 2",
+  "main": "exercicio2.js",
+  "scripts": {
+    "test": "jest",
+    "exercicio2": "node exercicio2.js"
+  },
+  "author": "rpontosalgado",
+  "license": "ISC"
+}
