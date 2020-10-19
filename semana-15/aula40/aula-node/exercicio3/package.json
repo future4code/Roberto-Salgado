@@ -1,11 +1,10 @@
 {
   "name": "aula-node",
   "version": "1.0.0",
-  "description": "Semana-15 aula40: Node e package.json",
+  "description": "Semana-15 aula40: Node e package.json -> Exercício 3",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "exercicio2": "node ./exercicio2.js",
     "exercicio3": "node ./exercicio3.js"
   },
   "author": "rpontosalgado",
