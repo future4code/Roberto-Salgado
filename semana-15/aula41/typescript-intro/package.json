@@ -6,6 +6,7 @@
   "scripts": {
     "ex1": "clear && echo \"Starting Exercício 1...\n\" && tsc && node ./build/ex1.js",
     "ex2": "clear && echo \"Starting Exercício 2...\n\" && tsc && node ./build/ex2.js",
+    "ex3": "clear && echo \"Starting Exercício 3...\n\" && tsc && node ./build/ex3.js",
     "test": "jest"
   },
   "keywords": [],
