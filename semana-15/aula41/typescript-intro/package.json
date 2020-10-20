@@ -1,0 +1,13 @@
+{
+  "name": "typescript-intro",
+  "version": "1.0.0",
+  "description": "Semana 15 - aula 41: Introdução a Typescript",
+  "main": "index.js",
+  "scripts": {
+    "ex1": "clear && echo \"Starting Exercício 1...\n\" && tsc && node ./build/ex1.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "rpontosalgado",
+  "license": "ISC"
+}
