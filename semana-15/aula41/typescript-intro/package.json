@@ -8,6 +8,7 @@
     "ex2": "clear && echo \"Starting Exercício 2...\n\" && tsc && node ./build/ex2.js",
     "ex3": "clear && echo \"Starting Exercício 3...\n\" && tsc && node ./build/ex3.js",
     "ex5": "clear && echo \"Starting Exercício 5...\n\" && tsc && node ./build/ex5.js",
+    "ex6": "clear && echo \"Starting Exercício 6...\n\" && tsc && node ./build/ex6.js",
     "test": "jest"
   },
   "keywords": [],
