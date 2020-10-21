@@ -43,7 +43,7 @@ app.get("/countries/search", (req: Request, res: Response)=>{
     )
   }
 
-  if(result.length >= 1) {
+  if(result.length) {
     res.status(200).send(result)
   } else {
     res.status(404).send("Not found")
@@ -64,32 +64,40 @@ app.get("/countries/:id", (req: Request, res: Response)=>{
 
 app.put("/countries/edit/:id", (req: Request, res: Response)=>{
   let errorCode: number = 401
+  let errorMessage: string = "Unauthorized"
 
   try {
     if(!req.headers.authorization){
       throw new Error()
     }
-    if(Object.keys(req.params.id).length === 0 || Object.keys(req.body).length === 0){
+    if((!req.body.name && !req.body.capital) || !req.params.id){
       errorCode = 400
+      errorMessage = "Favor informar parâmetros."
+      throw new Error()
+    }
+    if(req.body.id || req.body.continent){
+      errorCode = 400
+      errorMessage = "Não é permitido alterar os parâmetros informados."
       throw new Error()
     }
 
-    const result: country | undefined = countries.find(
+    let result: country | undefined = countries.find(
       country => country.id === Number(req.params.id)
     )
 
     if(!result){
       errorCode = 404
+      errorMessage = "Not Found"
       throw new Error()
     }
 
-    result.capital = req.body.capital
-    result.name = req.body.name
+    result.name = req.body.name || result.name
+    result.capital = req.body.capital || result.capital
 
     res.status(200).end()
 
   } catch(error) {
-    res.status(errorCode).end()
+    res.status(errorCode).send(errorMessage)
   }
 })
 
