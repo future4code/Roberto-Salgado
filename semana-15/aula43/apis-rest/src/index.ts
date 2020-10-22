@@ -163,11 +163,11 @@ app.post("/users", (req: Request, res: Response): void=>{
 		}
 
 		const user: User = {
-				id,
-				name,
-				email,
-				age,
-				type
+			id,
+			name,
+			email,
+			age,
+			type
 		}
 
 		users.push(user);
@@ -182,32 +182,92 @@ app.put("/users", (req: Request, res: Response): void=>{
 	const errorMessage: ErrorMessage = {message:"Error updating users"}
 
 	try{
-			const {id, name} = req.body;
+		const {id, name} = req.body;
 
-			if(!id || !name) {
-				errorMessage.message = "Missing data for updating users"
-				throw new Error()
-			}
+		if(!id || !name) {
+			errorMessage.message = "Missing data for updating users"
+			throw new Error()
+		}
 
-			const userIndex = users.findIndex(u=>u.id === id);
-			if(userIndex === -1){
-				errorMessage.message = "User not found"
-				errorCode = 404
-				throw new Error();
-			}
+		const userIndex: number = users.findIndex(u=>u.id === id);
+		if(userIndex === -1){
+			errorMessage.message = "User not found"
+			errorCode = 404
+			throw new Error();
+		}
 
-			const existingName: User | undefined = users.find(user=>user.name === name)
-			if(existingName){
-				errorMessage.message = "Name value already registered. Try another one."
-				throw new Error()
-			}
+		const existingName: User | undefined = users.find(user=>user.name === name)
+		if(existingName){
+			errorMessage.message = "Name value already registered. Try another one."
+			throw new Error()
+		}
 
-			users[userIndex].name = `${name} - ALTERADO`;
+		users[userIndex].name = `${name} - ALTERADO`;
 
-			res.status(200).send({message: "User updated successfully"});
+		res.status(200).send({message: "User updated successfully"});
 	}catch(error){
-			res.status(errorCode).send(errorMessage);
+		res.status(errorCode).send(errorMessage);
 	}
+})
+
+app.patch("/users", (req: Request, res: Response): void=>{
+	let errorCode = 400
+	const errorMessage: ErrorMessage = {message:"Error updating users"}
+
+	try{
+		const {id, name} = req.body;
+
+		if(!id || !name) {
+			errorMessage.message = "Missing data for updating users"
+			throw new Error()
+		}
+
+		const userIndex: number = users.findIndex(u=>u.id === id);
+		if(userIndex === -1){
+			errorMessage.message = "User not found"
+			errorCode = 404
+			throw new Error();
+		}
+
+		const existingName: User | undefined = users.find(user=>user.name === name)
+		if(existingName){
+			errorMessage.message = "Name value already registered. Try another one."
+			throw new Error()
+		}
+
+		if(!users[userIndex].name.includes("ALTERADO")){
+			errorMessage.message = "User was not altered"
+			throw new Error()
+		}
+		
+		users[userIndex].name = `${name} - REALTERADO`;
+
+		res.status(200).send({message: "User updated successfully"});
+	}catch(error){
+		res.status(errorCode).send(errorMessage);
+	}
+})
+
+app.delete("/users/:id", (req: Request, res: Response)=>{
+	let errorCode: number = 400
+	const errorMessage: ErrorMessage = {message:"Error updating users"}
+  
+  try {
+		const searchedId: number = Number(req.params.id)
+		const userIndex: number = users.findIndex(user => user.id === searchedId)
+
+    if(userIndex === -1) {
+			errorCode = 404
+			errorMessage.message = "User not found"
+      throw new Error()
+    }
+
+    users.splice(userIndex, 1)
+
+    res.status(200).send({message: "User deleted successfully"})
+  } catch (error) {
+    res.status(errorCode).send(errorMessage)
+  }
 })
 
 const server = app.listen(process.env.PORT || 3003, () => {
