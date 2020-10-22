@@ -27,19 +27,19 @@ app.get("/countries/search", (req: Request, res: Response)=>{
 
   if (req.query.name) {
     result = result.filter(
-        country => country.name.toLocaleLowerCase().includes(String(req.query.name).toLowerCase())
+        country => country.name.toLowerCase().includes(String(req.query.name).toLowerCase())
     )
   }
 
   if (req.query.capital) {
     result = result.filter(
-        country => country.capital.toLocaleLowerCase().includes(String(req.query.capital).toLowerCase())
+        country => country.capital.toLowerCase().includes(String(req.query.capital).toLowerCase())
     )
   }
 
   if (req.query.continent) {
     result = result.filter(
-        country => country.continent.toLocaleLowerCase().includes(String(req.query.continent).toLowerCase())
+        country => country.continent.toLowerCase().includes(String(req.query.continent).toLowerCase())
     )
   }
 
@@ -76,12 +76,12 @@ app.put("/countries/edit/:id", (req: Request, res: Response)=>{
       throw new Error()
     }
     if(req.body.id || req.body.continent){
-      errorCode = 400
+      errorCode = 403
       errorMessage = "Não é permitido alterar os parâmetros informados."
       throw new Error()
     }
 
-    let result: country | undefined = countries.find(
+    const result: country | undefined = countries.find(
       country => country.id === Number(req.params.id)
     )
 
@@ -96,6 +96,81 @@ app.put("/countries/edit/:id", (req: Request, res: Response)=>{
 
     res.status(200).end()
 
+  } catch(error) {
+    res.status(errorCode).send(errorMessage)
+  }
+})
+
+app.delete("/countries/:id", (req: Request, res: Response)=>{
+  let errorCode: number = 401
+  
+  try {
+    if(!req.headers.authorization || req.headers.authorization.length < 10){
+      throw new Error()
+    }
+
+    const countryIndex: number = countries.findIndex(
+      country => country.id === Number(req.params.id)
+    )
+
+    if(countryIndex === -1) {
+      errorCode = 404
+      throw new Error()
+    }
+
+    countries.splice(countryIndex, 1)
+
+    res.status(200).end()
+  } catch (error) {
+    res.status(errorCode).end()
+  }
+})
+
+app.post("/countries/create", (req: Request, res: Response)=>{
+  let errorCode: number = 401
+  let errorMessage: string = "Unauthorized"
+  type successMessage = {
+    message: string,
+    country: country
+  }
+
+  try {
+    if(!req.headers.authorization || req.headers.authorization.length < 10){
+      throw new Error()
+    }
+    if(!req.body.name || !req.body.capital || !req.body.continent){
+      errorCode = 400
+      errorMessage = "Favor informar nome, capital e continente."
+      throw new Error()
+    }
+
+    const countryIndex: number = countries.findIndex(
+      country => (country.name).toLowerCase() === (req.body.name).toLowerCase()
+    )
+
+    if(countryIndex > -1) {
+      errorCode = 403
+      errorMessage = "Já existe um país cadastrado com este nome."
+      throw new Error()
+    }
+
+    const newCountryId: number = Date.now()
+
+    const newCountry: country = {
+      "id": newCountryId,
+      "name": req.body.name,
+      "capital": req.body.capital,
+      "continent": req.body.continent
+    }
+
+    countries.push(newCountry)
+
+    const successMessage: successMessage = {
+      "message": "Success!",
+      "country": newCountry
+    }
+
+    res.status(200).send(successMessage)
   } catch(error) {
     res.status(errorCode).send(errorMessage)
   }
