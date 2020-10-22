@@ -1,0 +1,23 @@
+{
+  "name": "typescript-intro",
+  "version": "1.0.0",
+  "description": "Semana 15 - aula 41: Introdução a Typescript",
+  "main": "index.js",
+  "scripts": {
+    "ex1": "clear && echo \"Starting Exercício 1...\n\" && tsc && node ./build/ex1.js",
+    "ex2": "clear && echo \"Starting Exercício 2...\n\" && tsc && node ./build/ex2.js",
+    "ex3": "clear && echo \"Starting Exercício 3...\n\" && tsc && node ./build/ex3.js",
+    "ex5": "clear && echo \"Starting Exercício 5...\n\" && tsc && node ./build/ex5.js",
+    "ex6": "clear && echo \"Starting Exercício 6...\n\" && tsc && node ./build/ex6.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "rpontosalgado",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^14.14.0",
+    "ts-node-dev": "^1.0.0",
+    "typescript": "^4.0.3"
+  }
+}
