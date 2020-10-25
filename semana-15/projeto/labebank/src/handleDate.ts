@@ -1,9 +1,13 @@
-const currentDate: Date = new Date()
+export const currentDate: Date = new Date()
 
-export const getAge = (dateStr: string): number => {
+export const getTimeStamp = (dateStr: string): number => {
   const [day, month, year] = dateStr.split("/")
   const date: Date = new Date(`${year}-${month}-${day}`)
-  const ageInMs: number = currentDate.getTime() - date.getTime()
+  return date.getTime()
+}
+
+export const getAge = (dateStr: string): number => {
+  const ageInMs: number = currentDate.getTime() - getTimeStamp(dateStr)
   const ageInYears: number = ageInMs/1000/60/60/24/365
   return ageInYears
 }

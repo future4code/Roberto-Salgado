@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import { accounts, account, transaction, user } from "./accounts";
-import { getAge, getToday } from "./handleDate";
+import { currentDate, getTimeStamp, getAge, getToday } from "./handleDate";
 import { AddressInfo } from "net";
 
 const app: Express = express();
@@ -135,7 +135,7 @@ app.post("/accounts/bill", (req: Request, res: Response): void =>{
     ]
 
 		res.status(200).send({
-      message: `${description} no valor de R$ ${value.toFixed(2)} paga com sucesso`,
+      message: `${description} no valor de R$ ${value.toFixed(2)} pago com sucesso`,
     });
   }catch(error){
     res.status(errorCode).send(errorMessage)
@@ -145,7 +145,7 @@ app.post("/accounts/bill", (req: Request, res: Response): void =>{
 
 app.put("/accounts/balance", (req: Request, res: Response): void =>{
   let errorCode = 400;
-  const errorMessage: ErrorMessage = {message:"Error updating users"}
+  const errorMessage: ErrorMessage = {message:"Error making deposit"}
   
   try{
     const {id, name, value} = req.body;
@@ -185,6 +185,33 @@ app.put("/accounts/balance", (req: Request, res: Response): void =>{
       user: {name, id}
     });
   }catch(erro){
+    res.status(errorCode).send(errorMessage)
+  }
+})
+
+app.put("/accounts/balance/:id", (req: Request, res: Response): void =>{
+  let errorCode = 400;
+  const errorMessage: ErrorMessage = {message:"Error updating balance"}
+  
+  try{
+    const searchedId: number = Number(req.params.id)
+    const accountIndex: number = accounts.findIndex(account => account.user.id === searchedId);
+    if(accountIndex === -1){
+      errorCode = 404;
+      errorMessage.message = "Account not found";
+      throw new Error();
+    }
+
+    accounts[accountIndex].statement.forEach(transaction=>{
+      if(getTimeStamp(transaction.date) < currentDate.getTime()){
+        accounts[accountIndex].balance -= transaction.value;
+      }
+    })
+
+    res.status(200).send({
+      message: `Saldo atual: ${accounts[accountIndex].balance}`
+    })
+  }catch(error){
     res.status(errorCode).send(errorMessage)
   }
 })
