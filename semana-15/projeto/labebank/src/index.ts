@@ -102,6 +102,47 @@ app.post("/accounts", (req: Request, res: Response)=>{
   }
 })
 
+app.post("/accounts/bill", (req: Request, res: Response): void =>{
+  let errorCode: number = 400;
+  let errorMessage: ErrorMessage = {message: "Error paying bill"};
+
+  try{
+    const {date, description, value, id} = req.body;
+
+    if(!description || !value || !id){
+      errorMessage.message = "Missing data for requested operation";
+			throw new Error();
+    }
+    
+    const accountIndex: number = accounts.findIndex(account => account.user.id === id);
+    if(accountIndex === -1){
+      errorCode = 404;
+      errorMessage.message = "Account not found";
+      throw new Error();
+    }
+
+    const dueDate: string = date || getToday()
+
+    const newTransaction: transaction = {
+      value,
+      date: dueDate,
+      description
+    }
+    
+    accounts[accountIndex].statement = [
+      newTransaction,
+      ...accounts[accountIndex].statement
+    ]
+
+		res.status(200).send({
+      message: `${description} no valor de R$ ${value.toFixed(2)} paga com sucesso`,
+    });
+  }catch(error){
+    res.status(errorCode).send(errorMessage)
+  }
+
+})
+
 app.put("/accounts/balance", (req: Request, res: Response): void =>{
   let errorCode = 400;
   const errorMessage: ErrorMessage = {message:"Error updating users"}
@@ -109,13 +150,13 @@ app.put("/accounts/balance", (req: Request, res: Response): void =>{
   try{
     const {id, name, value} = req.body;
     
-    if(!id || !name || value){
+    if(!id || !name || !value){
       errorMessage.message = "Missing data for requested operation";
 			throw new Error();
     }
 
     const accountIndex: number = accounts.findIndex(account => account.user.id === id);
-    if(accountIndex === -1) {
+    if(accountIndex === -1){
       errorCode = 404;
       errorMessage.message = "Account not found";
       throw new Error();
@@ -123,7 +164,7 @@ app.put("/accounts/balance", (req: Request, res: Response): void =>{
 
     if(accounts[accountIndex].user.name !== name){
       errorCode = 403;
-      errorMessage.message = "Name doesn't match the one registered for this account id";
+      errorMessage.message = "Nome não corresponde ao cadastrado para a conta deste CPF";
       throw new Error();
     }
     
@@ -140,7 +181,7 @@ app.put("/accounts/balance", (req: Request, res: Response): void =>{
     ]
 
 		res.status(200).send({
-      message: `R$ ${value.toFixed(2)} added to the account`,
+      message: `R$ ${value.toFixed(2)} depositado na conta`,
       user: {name, id}
     });
   }catch(erro){
