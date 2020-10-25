@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import { accounts, account, transaction, user } from "./accounts";
-import { getAge } from "./handleData";
+import { getAge } from "./handleDate";
 import { AddressInfo } from "net";
 
 const app: Express = express();
@@ -24,6 +24,35 @@ app.get("/users", (req: Request, res: Response): void =>{
 		});
 	}
 });
+
+app.get("/users/balance/:id", (req: Request, res: Response): void =>{
+  let errorCode: number = 400;
+  const errorMessage = {message:"Error getting user balance"}
+
+  type userBalance = {name: string, id: number}
+  type balance = {user: userBalance, balance: number}
+  
+  try{
+    const searchedAccount: account | undefined = accounts.find(
+      account => account.user.id === Number(req.params.id)
+    )
+
+    if(!searchedAccount){
+      errorCode = 404;
+      errorMessage.message = "Account not found";
+      throw new Error();
+    }
+
+    const balance: balance = {
+      user: {name: searchedAccount.user.name, id: searchedAccount.user.id},
+      balance: searchedAccount.balance
+    }
+
+    res.status(200).send(balance);
+  }catch(error){
+    res.status(errorCode).send(errorMessage)
+  }
+})
 
 app.post("/users", (req: Request, res: Response)=>{
   let errorCode: number = 400;
