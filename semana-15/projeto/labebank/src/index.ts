@@ -172,6 +172,12 @@ app.post("/accounts/transfer", (req: Request, res: Response): void =>{
       throw new Error();
     }
 
+    if(accounts[senderAccountIndex].balance < value){
+      errorCode = 403;
+      errorMessage.message = "Não foi pssível fazer a transferência. Saldo insuficiente."
+      throw new Error()
+    }
+
     const recipientAccountIndex: number = accounts.findIndex(account => account.user.id === recipientId);
     if(recipientAccountIndex === -1){
       errorCode = 404;
