@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import { accounts, account, transaction, user } from "./accounts";
-import { currentDate, getTimeStamp, getAge, getToday } from "./handleDate";
+import { currentDate, getTimeStamp, getAge, getCurrentDateStr } from "./handleDate";
 import { AddressInfo } from "net";
 
 const app: Express = express();
@@ -121,7 +121,12 @@ app.post("/accounts/bill", (req: Request, res: Response): void =>{
       throw new Error();
     }
 
-    const dueDate: string = date || getToday()
+    const dueDate: string = date || getCurrentDateStr();
+    if(getTimeStamp(dueDate) < currentDate.getTime()){
+      errorCode = 403;
+      errorMessage.message = "Não é possível fazer o pagamento em datas anteriores a de hoje";
+      throw new Error();
+    }
 
     const newTransaction: transaction = {
       value,
@@ -170,7 +175,7 @@ app.put("/accounts/balance", (req: Request, res: Response): void =>{
     
     const newTransaction: transaction = {
       value,
-      date: getToday(),
+      date: getCurrentDateStr(),
       description: "Depósito de dinheiro"
     }
     

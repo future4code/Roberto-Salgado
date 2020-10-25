@@ -12,4 +12,4 @@ export const getAge = (dateStr: string): number => {
   return ageInYears
 }
 
-export const getToday = (): string => currentDate.toLocaleDateString('pt-BR')
+export const getCurrentDateStr = (): string => currentDate.toLocaleDateString('pt-BR')
