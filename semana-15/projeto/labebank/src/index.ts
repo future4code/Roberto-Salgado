@@ -128,6 +128,12 @@ app.post("/accounts/bill", (req: Request, res: Response): void =>{
       throw new Error();
     }
 
+    if(accounts[accountIndex].balance < value){
+      errorCode = 403;
+      errorMessage.message = "Não foi possível efetuar o pagamento. Saldo insuficiente";
+      throw new Error();
+    }
+
     const newTransaction: transaction = {
       value,
       date: dueDate,
