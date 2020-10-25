@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import { accounts, account, transaction, user } from "./accounts";
-import { currentDate, getTimeStamp, getAge, getCurrentDateStr } from "./handleDate";
+import { currentDate, getTimeStamp, getAge, currentDateStr } from "./handleDate";
 import { AddressInfo } from "net";
 
 const app: Express = express();
@@ -121,7 +121,7 @@ app.post("/accounts/bill", (req: Request, res: Response): void =>{
       throw new Error();
     }
 
-    const dueDate: string = date || getCurrentDateStr();
+    const dueDate: string = date || currentDateStr;
     if(getTimeStamp(dueDate) < currentDate.getTime()){
       errorCode = 403;
       errorMessage.message = "Não é possível fazer o pagamento em datas anteriores a de hoje";
@@ -135,7 +135,7 @@ app.post("/accounts/bill", (req: Request, res: Response): void =>{
     }
 
     const newTransaction: transaction = {
-      value,
+      value: -value,
       date: dueDate,
       description
     }
@@ -152,6 +152,61 @@ app.post("/accounts/bill", (req: Request, res: Response): void =>{
     res.status(errorCode).send(errorMessage)
   }
 
+})
+
+app.post("/accounts/transfer", (req: Request, res: Response): void =>{
+  let errorCode = 400;
+  const errorMessage: ErrorMessage = {message:"Error making deposit"}
+
+  try{
+    const {senderName, senderId, recipientName, recipientId, value} = req.body;
+    if(!senderName || !senderId || !recipientName || !recipientId || !value){
+      errorMessage.message = "Missing data for requested operation";
+			throw new Error();
+    }
+
+    const senderAccountIndex: number = accounts.findIndex(account => account.user.id === senderId);
+    if(senderAccountIndex === -1){
+      errorCode = 404;
+      errorMessage.message = "Sender account not found";
+      throw new Error();
+    }
+
+    const recipientAccountIndex: number = accounts.findIndex(account => account.user.id === recipientId);
+    if(recipientAccountIndex === -1){
+      errorCode = 404;
+      errorMessage.message = "Recipient account not found";
+      throw new Error();
+    }
+
+    const senderTransaction: transaction = {
+      value: -value,
+      date: currentDateStr,
+      description: `Transferência para ${recipientName}`
+    }
+
+    const recipientTransaction: transaction = {
+      value: value,
+      date: currentDateStr,
+      description: `Transferência de ${senderName}`
+    }
+    
+    accounts[senderAccountIndex].statement = [
+      senderTransaction,
+      ...accounts[senderAccountIndex].statement
+    ]
+    
+    accounts[recipientAccountIndex].statement = [
+      recipientTransaction,
+      ...accounts[recipientAccountIndex].statement
+    ]
+
+		res.status(200).send({
+      message: `${recipientTransaction.description} para ${recipientName} no valor de R$ ${value.toFixed(2)} feita com sucesso`,
+    });
+  }catch(error){
+    res.status(errorCode).send(errorMessage)
+  }
 })
 
 app.put("/accounts/balance", (req: Request, res: Response): void =>{
@@ -181,7 +236,7 @@ app.put("/accounts/balance", (req: Request, res: Response): void =>{
     
     const newTransaction: transaction = {
       value,
-      date: getCurrentDateStr(),
+      date: currentDateStr,
       description: "Depósito de dinheiro"
     }
     
@@ -215,7 +270,7 @@ app.put("/accounts/balance/:id", (req: Request, res: Response): void =>{
 
     accounts[accountIndex].statement.forEach(transaction=>{
       if(getTimeStamp(transaction.date) < currentDate.getTime()){
-        accounts[accountIndex].balance -= transaction.value;
+        accounts[accountIndex].balance += transaction.value;
       }
     })
 
