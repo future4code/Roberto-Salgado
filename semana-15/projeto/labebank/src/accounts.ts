@@ -6,7 +6,7 @@ export type user = {
 
 export type transaction = {
   value: number,
-  date: "string",
+  date: string,
   description: string
 }
 
