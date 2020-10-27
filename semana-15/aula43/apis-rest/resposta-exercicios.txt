@@ -1,0 +1,42 @@
+// Exercício 1
+// a. Método GET
+// b. Entidade "/users"
+
+// Exercício 2
+// a. 
+// Para buscar pelo type a melhor opção é passar por path parameters.
+// Por que esta entidade é restrita a opções limitadas.
+// b.
+// Criar um type para restringir os valores aceitos 
+// e uma condição que aceite apenas este tipo
+// e atire um erro caso o dado esteja fora do esperado.
+
+// Exercício 3
+// a. Query parameters, já que o valor para a entidade nome não tem restrições.
+// b. 
+app.get("/users/search", (req: Request, res: Response): void => {
+	const errorMessage:{message: string} = {message:"Error searching for users"}
+	let errorCode: number = 400
+
+	try{
+		const usersByName: Users = users.filter(
+			user=>user.name.toLowerCase().includes(String(req.query.name).toLowerCase())
+		)
+
+		if(!usersByName.length) {
+			errorCode = 404
+			errorMessage.message = "User Not Found"
+		}
+
+		res.status(200).send(usersByName)
+	}catch(error){
+		res.status(errorCode).send(errorMessage)
+	}
+})
+
+// Exercício 4
+// a.
+// Não notei nenhuma mudança. O novo usuário foi adicionado da mesma forma.
+// b.
+// Não. O mais apropriado seria o POST.
+// Porque o o PUT é uma inserção direta, sem muita verificação.
