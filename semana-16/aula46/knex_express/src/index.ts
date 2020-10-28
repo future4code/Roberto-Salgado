@@ -8,6 +8,8 @@ import { putNewActor } from "./endpoints/putNewActor";
 import { postUpdateSalary } from "./endpoints/postUpdateSalary";
 import { deleteActorById } from "./endpoints/deleteActorById";
 import { postNewMovie } from "./endpoints/postNewMovie";
+import { getMovies } from "./endpoints/getAllMovies";
+import { getMovieByQuery } from "./endpoints/getMovieByQuery";
 
 /**************************************************************/
 
@@ -68,3 +70,7 @@ app.post("/actor", postUpdateSalary)
 app.delete("/actor/:id", deleteActorById);
 
 app.post("/movie", postNewMovie);
+
+app.get("/movie/all", getMovies);
+
+app.get("/movie/search", getMovieByQuery);
