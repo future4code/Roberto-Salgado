@@ -7,6 +7,7 @@ import { getActorCountByGender } from "./endpoints/getActorCountByGender";
 import { putNewActor } from "./endpoints/putNewActor";
 import { postUpdateSalary } from "./endpoints/postUpdateSalary";
 import { deleteActorById } from "./endpoints/deleteActorById";
+import { postNewMovie } from "./endpoints/postNewMovie";
 
 /**************************************************************/
 
@@ -65,3 +66,5 @@ app.put("/actor", putNewActor)
 app.post("/actor", postUpdateSalary)
 
 app.delete("/actor/:id", deleteActorById);
+
+app.post("/movie", postNewMovie);
