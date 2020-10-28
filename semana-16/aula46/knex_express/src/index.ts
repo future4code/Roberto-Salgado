@@ -1,5 +1,5 @@
-import knex from "knex";
 import express, { Request, Response } from "express";
+import knex from "knex";
 import dotenv from "dotenv";
 import { AddressInfo } from "net";
 
@@ -45,7 +45,7 @@ async function testEndpoint(req:Request, res:Response): Promise<void>{
       SELECT * FROM Actor
     `)
 
-    res.status(200).send(result)
+    res.status(200).send(result[0])
   } catch (error) {
     res.status(400).send(error.message)
   }
