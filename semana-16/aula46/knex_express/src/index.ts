@@ -2,6 +2,11 @@ import express, { Request, Response } from "express";
 import knex from "knex";
 import dotenv from "dotenv";
 import { AddressInfo } from "net";
+import { getActorById } from "./endpoints/getActorById";
+import { getActorCountByGender } from "./endpoints/getActorCountByGender";
+import { putNewActor } from "./endpoints/putNewActor";
+import { postUpdateSalary } from "./endpoints/postUpdateSalary";
+import { deleteActorById } from "./endpoints/deleteActorById";
 
 /**************************************************************/
 
@@ -9,7 +14,7 @@ dotenv.config();
 
 /**************************************************************/
 
-const connection = knex({   
+export const connection = knex({   
   client: "mysql",
   connection: {
     host: process.env.DB_HOST,
@@ -50,3 +55,13 @@ async function testEndpoint(req:Request, res:Response): Promise<void>{
     res.status(400).send(error.message)
   }
 }
+
+app.get("/actor", getActorCountByGender);
+
+app.get("/actor/:id", getActorById);
+
+app.put("/actor", putNewActor)
+
+app.post("/actor", postUpdateSalary)
+
+app.delete("/actor/:id", deleteActorById);
