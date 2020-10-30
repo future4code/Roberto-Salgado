@@ -6,6 +6,7 @@ import { AddressInfo } from "net";
 
 import { putNewUser } from "./endpoint/putNewUser";
 import { getUserById } from "./endpoint/getUserById";
+import { postEditUser } from "./endpoint/postEditUser";
 
 dotenv.config();
 
@@ -29,6 +30,8 @@ app.use(cors())
 app.put("/user", putNewUser)
 
 app.get("/user/:id", getUserById)
+
+app.post("/user/edit/:id", postEditUser)
 
 const server = app.listen(process.env.PORT || 3003, () => {
    if (server) {
