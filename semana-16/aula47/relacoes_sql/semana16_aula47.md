@@ -87,7 +87,7 @@ GROUP BY (m.id);
 #
 ### Exercício 5
 a) Porque a tabela de junção contêm apenas as chaves estrangeiras que relacionam as duas tabelas que contêm, de fato, os dados. Assim, para mostrar os dados que estão relacionados entre as duas tabelas, fazemos a união de uma tabela com a tabela de junção e da tabela gerada unimos novamente com o a outra tabela.
-
+#
 b) A query é:
 ```sql
 SELECT 
@@ -100,9 +100,9 @@ LEFT JOIN MovieCast mc ON m.id = mc.movie_id
 JOIN Actor a ON a.id = mc.actor_id
 ORDER BY movie_id;
 ```
-
+#
 c) Esta query retorna as colunas id e o título do filme e o id e nome do ator da tabela gerada a partir da junção da tabela de filmes com os ids correspondentes na tabela de intersecção do enredo e da junção desta tabela com a de atores.
-
+#
 d) A query é:
 ```sql
 SELECT 
@@ -118,4 +118,51 @@ LEFT JOIN MovieCast mc ON m.id = mc.movie_id
 JOIN Actor a ON a.id = mc.actor_id
 ORDER BY movie_id;
 ```
-
+#
+### Exercício 6
+a) A relação entre as entidades *Movie* e *Oscar* é **N:M**. Então, será necessário criar uma tabela intermediária de junção entre as duas entidades.
+#
+b) Criei a tabela da entidade *Oscar* com **id único** como **chave primária** para cada linha e a coluna **category** que é a categoria do prêmio. Criei também a tabela de junção *MovieAwards* para relacionar os filmes aos prêmios que ganhou, com as colunas de **chave estrangeira** do id do filme e id do oscar, e a coluna **year** do ano da premiação.
+Criação da tabela *Oscar*:
+```sql
+CREATE TABLE Oscar (
+  id VARCHAR(255) PRIMARY KEY,
+  category VARCHAR(255)
+);
+```
+Criação da tabela de junção *MovieAwards*:
+```sql
+CREATE TABLE MovieAward (
+  movie_id VARCHAR(255),
+  year YEAR,
+  oscar_id VARCHAR(255),
+  FOREIGN KEY (movie_id) REFERENCES Movie(id),
+  FOREIGN KEY (oscar_id) REFERENCES Oscar(id)
+);
+```
+#
+c) Exemplo de criação de prêmiação para um filme:
+```sql
+INSERT INTO MovieAward(movie_id, year, oscar_id)
+  VALUES(
+    "004",
+    "2004",
+    "01"
+);
+```
+#
+d) A query é:
+```sql
+SELECT 
+  CONCAT(
+    '"', m.title, '"', 
+    " ganhou o oscar de ", 
+    o.category, 
+    " no ano ", 
+    ma.year
+  ) as "Movie Awards"
+FROM Movie m
+JOIN MovieAward ma ON ma.movie_id = m.id
+JOIN Oscar o ON o.id = ma.oscar_id
+ORDER BY ma.year;
+```
