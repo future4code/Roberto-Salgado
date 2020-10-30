@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { AddressInfo } from "net";
 
 import { putNewUser } from "./endpoint/putNewUser";
+import { getUserById } from "./endpoint/getUserById";
 
 dotenv.config();
 
@@ -26,6 +27,8 @@ app.use(cors())
 // endpoints aqui
 
 app.put("/user", putNewUser)
+
+app.get("/user/:id", getUserById)
 
 const server = app.listen(process.env.PORT || 3003, () => {
    if (server) {
