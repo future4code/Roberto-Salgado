@@ -1,10 +1,10 @@
 import { connection } from ".."
 
 export const selectLast = async(): Promise<any> => {
-  const lastId = await connection("ToDoListUser")
-    .select("id")
+  const lastUser = await connection("ToDoListUser")
+    .select("*")
     .orderBy("id", "desc")
     .limit(1)
   
-    return lastId
+    return lastUser[0]
 }

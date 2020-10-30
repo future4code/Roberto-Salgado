@@ -16,9 +16,11 @@ export const putNewUser = async (req: Request, res: Response) => {
       email
     );
 
+    const lastUser = await selectLast()
+
     res.status(200).send({
-      message: "Success",
-      user_id: selectLast
+      message: "Success creating User",
+      user: lastUser
     });
   } catch (err) {
     res.status(400).send({
