@@ -3,9 +3,9 @@ import { selectAllTasks } from "../data/selectAllTasks";
 
 export const getAllTasks = async (req: Request, res: Response): Promise<void> => {
   try {
-    const task = await selectAllTasks();
+    const tasks = await selectAllTasks();
 
-    res.status(200).send(task)
+    res.status(200).send(tasks)
   } catch (err) {
     res.status(400).send({
       message: err.message,

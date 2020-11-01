@@ -10,6 +10,7 @@ import { getUserById } from "./endpoint/getUserById";
 import { postEditUser } from "./endpoint/postEditUser";
 import { putNewTask } from "./endpoint/putNewTask";
 import { getAllTasks } from "./endpoint/getAllTasks";
+import { getTaskById } from "./endpoint/getTaskById";
 
 dotenv.config();
 
@@ -41,6 +42,8 @@ app.post("/user/edit/:id", postEditUser)
 app.get("/task", getAllTasks)
 
 app.put("/task", putNewTask)
+
+app.get("/task/:id", getTaskById)
 
 const server = app.listen(process.env.PORT || 3003, () => {
    if (server) {
