@@ -31,7 +31,7 @@ app.use(cors())
 
 // endpoints aqui
 
-app.get("/user", getAllUsers)
+app.get("/user/all", getAllUsers)
 
 app.put("/user", putNewUser)
 
@@ -39,7 +39,7 @@ app.get("/user/:id", getUserById)
 
 app.post("/user/edit/:id", postEditUser)
 
-app.get("/task", getAllTasks)
+app.get("/task/all", getAllTasks)
 
 app.put("/task", putNewTask)
 
