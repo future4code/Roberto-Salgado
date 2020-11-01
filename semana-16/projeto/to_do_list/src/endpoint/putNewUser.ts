@@ -1,8 +1,7 @@
-import { error } from "console";
 import { Request, Response } from "express";
 import { createUser } from "../data/createUser";
 import { selectAllUsers } from "../data/selectAllUsers";
-import { selectLast } from "../data/selectLast";
+import { selectLastUser } from "../data/selectLastUser";
 
 export const putNewUser = async (req: Request, res: Response): Promise<void> => {
   let errorCode = 400;
@@ -26,13 +25,9 @@ export const putNewUser = async (req: Request, res: Response): Promise<void> => 
       }
     })
 
-    await createUser(
-      name,
-      nickname,
-      email
-    );
+    await createUser(name, nickname, email);
 
-    const lastUser = await selectLast();
+    const lastUser = await selectLastUser();
 
     res.status(201).send({
       message: "Success creating User",

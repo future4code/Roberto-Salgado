@@ -4,11 +4,12 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { AddressInfo } from "net";
 
+import { getAllUsers } from "./endpoint/getAllUsers";
 import { putNewUser } from "./endpoint/putNewUser";
 import { getUserById } from "./endpoint/getUserById";
 import { postEditUser } from "./endpoint/postEditUser";
-import { getAllUsers } from "./endpoint/getAllUsers";
 import { putNewTask } from "./endpoint/putNewTask";
+import { getAllTasks } from "./endpoint/getAllTasks";
 
 dotenv.config();
 
@@ -37,7 +38,9 @@ app.get("/user/:id", getUserById)
 
 app.post("/user/edit/:id", postEditUser)
 
-// app.put("/task", putNewTask)
+app.get("/task", getAllTasks)
+
+app.put("/task", putNewTask)
 
 const server = app.listen(process.env.PORT || 3003, () => {
    if (server) {

@@ -1,6 +1,6 @@
 import { connection } from ".."
 
-export const selectLast = async(): Promise<any> => {
+export const selectLastUser = async(): Promise<any> => {
   const lastUser = await connection("ToDoListUser")
     .select("*")
     .orderBy("id", "desc")
