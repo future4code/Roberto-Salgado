@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
 import { editUser } from "../data/editUser";
+import { selectAllUsers } from "../data/selectAllUsers";
 import { selectUserById } from "../data/selectUserById";
 
 export const postEditUser = async (req: Request, res: Response) => {
   let errorCode: number = 400;
 
   try {
-    let user = await selectUserById(Number(req.params.id));
+    const id = Number(req.params.id);
+
+    let user = await selectUserById(id);
 
     if(!user){
       errorCode = 404;
@@ -20,12 +23,26 @@ export const postEditUser = async (req: Request, res: Response) => {
       throw new Error("Cannot enter empty values")
     }
 
-    await editUser(Number(req.params.id), req.body);
+    const users =  await selectAllUsers();
+    users.forEach(user => {
+      if(user.id !== id){
+        if(user.nickname === nickname){
+          errorCode = 406;
+          throw new Error("Nickname already registered");
+        }
+        if(user.email === email){
+          errorCode = 406;
+          throw new Error("Email alerady registered")
+        }
+      }
+    })
 
-    user = await selectUserById(Number(req.params.id));
+    await editUser(id, req.body);
+
+    user = await selectUserById(id);
 
     res.status(200).send({
-      message: "Success",
+      message: "Success updating user",
       user
     });
   } catch (err) {

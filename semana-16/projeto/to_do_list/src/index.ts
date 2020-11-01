@@ -7,6 +7,8 @@ import { AddressInfo } from "net";
 import { putNewUser } from "./endpoint/putNewUser";
 import { getUserById } from "./endpoint/getUserById";
 import { postEditUser } from "./endpoint/postEditUser";
+import { getAllUsers } from "./endpoint/getAllUsers";
+import { putNewTask } from "./endpoint/putNewTask";
 
 dotenv.config();
 
@@ -27,11 +29,15 @@ app.use(cors())
 
 // endpoints aqui
 
+app.get("/user", getAllUsers)
+
 app.put("/user", putNewUser)
 
 app.get("/user/:id", getUserById)
 
 app.post("/user/edit/:id", postEditUser)
+
+// app.put("/task", putNewTask)
 
 const server = app.listen(process.env.PORT || 3003, () => {
    if (server) {

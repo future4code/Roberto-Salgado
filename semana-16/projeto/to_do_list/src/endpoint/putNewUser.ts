@@ -1,8 +1,12 @@
+import { error } from "console";
 import { Request, Response } from "express";
 import { createUser } from "../data/createUser";
+import { selectAllUsers } from "../data/selectAllUsers";
 import { selectLast } from "../data/selectLast";
 
-export const putNewUser = async (req: Request, res: Response) => {
+export const putNewUser = async (req: Request, res: Response): Promise<void> => {
+  let errorCode = 400;
+
   try {
     const {name, nickname, email} = req.body;
     
@@ -10,20 +14,32 @@ export const putNewUser = async (req: Request, res: Response) => {
 			throw new Error("Missing data for requested operation");
     }
 
+    const users =  await selectAllUsers();
+    users.forEach(user => {
+      if(user.nickname === nickname){
+        errorCode = 406;
+        throw new Error("Nickname already registered");
+      }
+      if(user.email === email){
+        errorCode = 406;
+        throw new Error("Email alerady registered")
+      }
+    })
+
     await createUser(
       name,
       nickname,
       email
     );
 
-    const lastUser = await selectLast()
+    const lastUser = await selectLast();
 
-    res.status(200).send({
+    res.status(201).send({
       message: "Success creating User",
       user: lastUser
     });
   } catch (err) {
-    res.status(400).send({
+    res.status(errorCode).send({
       message: err.message,
     });
   }
