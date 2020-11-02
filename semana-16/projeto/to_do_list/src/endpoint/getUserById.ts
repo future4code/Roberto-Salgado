@@ -5,7 +5,12 @@ export const getUserById = async (req: Request, res: Response): Promise<void> =>
   let errorCode: number = 400;
   
   try {
-    const user = await selectUserById(Number(req.params.id));
+    const {id} = req.params;
+    if(!id){
+      throw new Error("Please enter user id")
+    }
+
+    const user = await selectUserById(Number(id));
 
     if(!user){
       errorCode = 404;

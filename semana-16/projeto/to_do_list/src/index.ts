@@ -12,6 +12,7 @@ import { putNewTask } from "./endpoint/putNewTask";
 import { getAllTasks } from "./endpoint/getAllTasks";
 import { getTaskById } from "./endpoint/getTaskById";
 import { getTasksByUserId } from "./endpoint/getTasksByUserId";
+import { getUserByQuery } from "./endpoint/getUserByQuery";
 
 dotenv.config();
 
@@ -33,6 +34,8 @@ app.use(cors())
 // endpoints aqui
 
 app.get("/user/all", getAllUsers)
+
+app.get("/user", getUserByQuery)
 
 app.put("/user", putNewUser)
 
