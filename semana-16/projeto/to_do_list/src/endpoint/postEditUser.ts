@@ -20,7 +20,7 @@ export const postEditUser = async (req: Request, res: Response): Promise<void> =
 
     if(name === "" || nickname === "" || email === ""){
       errorCode = 406;
-      throw new Error("Cannot enter empty values")
+      throw new Error("Cannot enter empty values");
     }
 
     const users =  await selectAllUsers();
@@ -46,8 +46,6 @@ export const postEditUser = async (req: Request, res: Response): Promise<void> =
       user
     });
   } catch (err) {
-    res.status(errorCode).send({
-      message: err.message,
-    });
+    res.status(errorCode).send({message: err.message});
   }
 }

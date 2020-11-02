@@ -15,6 +15,7 @@ import { getTasksByUserId } from "./endpoint/getTasksByUserId";
 import { getUserByQuery } from "./endpoint/getUserByQuery";
 import { postUserToTask } from "./endpoint/postUserToTask";
 import { getResponsibleUsersByTask } from "./endpoint/getResponsibleUsersByTask";
+import { postUpdateTaskStatus } from "./endpoint/postUpdateTaskStatus";
 
 dotenv.config();
 
@@ -56,6 +57,8 @@ app.get("/task/:id", getTaskById);
 app.post("/task/responsible", postUserToTask);
 
 app.get("/task/:id/responsible", getResponsibleUsersByTask);
+
+app.post("/task/status/edit", postUpdateTaskStatus);
 
 const server = app.listen(process.env.PORT || 3003, () => {
    if (server) {
