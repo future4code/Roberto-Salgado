@@ -8,8 +8,6 @@ export const selectTaskById = async(id: number): Promise<any> => {
     .where("id", id)
   
   const task = result[0]
-  task.status = task.status.split('_').join(' ');
-  task.limit_date = formatDateStr(task.limit_date);
 
   const user = await selectUserById(task.creator_user_id);
 
@@ -17,8 +15,8 @@ export const selectTaskById = async(id: number): Promise<any> => {
     taskId: task.id,
     title: task.title,
     description: task.description,
-    status: task.status,
-    limitDate: task.limit_date,
+    status: task.status.split('_').join(' '),
+    limitDate: formatDateStr(task.limit_date),
     creatorUserId: task.creator_user_id,
     creatorUserNickname: user.nickname
   }

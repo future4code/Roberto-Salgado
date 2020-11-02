@@ -11,6 +11,7 @@ import { postEditUser } from "./endpoint/postEditUser";
 import { putNewTask } from "./endpoint/putNewTask";
 import { getAllTasks } from "./endpoint/getAllTasks";
 import { getTaskById } from "./endpoint/getTaskById";
+import { getTasksByUserId } from "./endpoint/getTasksByUserId";
 
 dotenv.config();
 
@@ -40,6 +41,8 @@ app.get("/user/:id", getUserById)
 app.post("/user/edit/:id", postEditUser)
 
 app.get("/task/all", getAllTasks)
+
+app.get("/task", getTasksByUserId)
 
 app.put("/task", putNewTask)
 
