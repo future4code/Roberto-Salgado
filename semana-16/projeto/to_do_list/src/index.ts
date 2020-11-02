@@ -14,6 +14,7 @@ import { getTaskById } from "./endpoint/getTaskById";
 import { getTasksByUserId } from "./endpoint/getTasksByUserId";
 import { getUserByQuery } from "./endpoint/getUserByQuery";
 import { postUserToTask } from "./endpoint/postUserToTask";
+import { getResponsibleUsersByTask } from "./endpoint/getResponsibleUsersByTask";
 
 dotenv.config();
 
@@ -26,33 +27,35 @@ export const connection = knex({
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME
    }
-})
+});
 
 const app: Express = express();
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 // endpoints aqui
 
-app.get("/user/all", getAllUsers)
+app.get("/user/all", getAllUsers);
 
-app.get("/user", getUserByQuery)
+app.get("/user", getUserByQuery);
 
-app.put("/user", putNewUser)
+app.put("/user", putNewUser);
 
-app.get("/user/:id", getUserById)
+app.get("/user/:id", getUserById);
 
-app.post("/user/edit/:id", postEditUser)
+app.post("/user/edit/:id", postEditUser);
 
-app.get("/task/all", getAllTasks)
+app.get("/task/all", getAllTasks);
 
-app.get("/task", getTasksByUserId)
+app.get("/task", getTasksByUserId);
 
-app.put("/task", putNewTask)
+app.put("/task", putNewTask);
 
-app.get("/task/:id", getTaskById)
+app.get("/task/:id", getTaskById);
 
-app.post("/task/responsible", postUserToTask)
+app.post("/task/responsible", postUserToTask);
+
+app.get("/task/:id/responsible", getResponsibleUsersByTask);
 
 const server = app.listen(process.env.PORT || 3003, () => {
    if (server) {

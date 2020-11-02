@@ -10,7 +10,7 @@ export const getTaskById = async (req: Request, res: Response): Promise<void> =>
     const id: number = Number(req.params.id);
 
     if(!id){
-      throw new Error("Please enter task id")
+      throw new Error("Please enter task id");
     }
 
     const task = await selectTaskById(id);
