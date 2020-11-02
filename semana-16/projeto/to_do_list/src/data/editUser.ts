@@ -1,6 +1,6 @@
 import { connection } from "..";
 
-export const editUser = async (id: number, body: any): Promise<any> => {
+export const editUser = async (id: number, body: any): Promise<void> => {
   await connection("ToDoListUser")
     .update({
       name: body.name,

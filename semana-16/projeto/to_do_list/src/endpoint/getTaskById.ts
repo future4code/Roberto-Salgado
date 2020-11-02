@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { selectTaskById } from "../data/selectTaskById";
+import { selectUserById } from "../data/selectUserById";
+import { formatDateStr } from "../handleDate";
 
 export const getTaskById = async (req: Request, res: Response): Promise<void> => {
   let errorCode: number = 400;
@@ -18,10 +20,18 @@ export const getTaskById = async (req: Request, res: Response): Promise<void> =>
       throw new Error("Task not found");
     }
 
-    res.status(200).send(task)
+    const user = await selectUserById(task.creator_user_id);
+
+    res.status(200).send({
+      taskId: task.id,
+      title: task.title,
+      description: task.description,
+      status: task.status.split('_').join(' '),
+      limitDate: formatDateStr(task.limit_date),
+      creatorUserId: task.creator_user_id,
+      creatorUserNickname: user.nickname
+    });
   } catch (err) {
-    res.status(errorCode).send({
-      message: err.message
-    })
+    res.status(errorCode).send({message: err.message});
   }
 }

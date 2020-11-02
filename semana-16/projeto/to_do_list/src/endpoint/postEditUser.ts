@@ -3,7 +3,7 @@ import { editUser } from "../data/editUser";
 import { selectAllUsers } from "../data/selectAllUsers";
 import { selectUserById } from "../data/selectUserById";
 
-export const postEditUser = async (req: Request, res: Response) => {
+export const postEditUser = async (req: Request, res: Response): Promise<void> => {
   let errorCode: number = 400;
 
   try {
