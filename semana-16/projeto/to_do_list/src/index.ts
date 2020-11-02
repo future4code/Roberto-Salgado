@@ -11,7 +11,7 @@ import { postEditUser } from "./endpoint/postEditUser";
 import { putNewTask } from "./endpoint/putNewTask";
 import { getAllTasks } from "./endpoint/getAllTasks";
 import { getTaskById } from "./endpoint/getTaskById";
-import { getTasksByUserId } from "./endpoint/getTasksByUserId";
+import { getTasksByQuery } from "./endpoint/getTasksByQuery";
 import { getUserByQuery } from "./endpoint/getUserByQuery";
 import { postUserToTask } from "./endpoint/postUserToTask";
 import { getResponsibleUsersByTask } from "./endpoint/getResponsibleUsersByTask";
@@ -48,7 +48,7 @@ app.post("/user/edit/:id", postEditUser);
 
 app.get("/task/all", getAllTasks);
 
-app.get("/task", getTasksByUserId);
+app.get("/task", getTasksByQuery);
 
 app.put("/task", putNewTask);
 
