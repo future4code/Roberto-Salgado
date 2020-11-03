@@ -9,3 +9,5 @@ export const formatDateStr = (date: Date): string => {
   const year: number = date.getFullYear();
   return `${day}/${month}/${year}`
 }
+
+export const currDate: Date = new Date();

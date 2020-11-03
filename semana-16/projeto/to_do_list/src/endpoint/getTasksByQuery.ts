@@ -42,7 +42,7 @@ export const getTasksByQuery = async (req: Request, res: Response): Promise<void
       ))
     }
 
-    res.status(200).send({tasks: tasks});
+    res.status(200).send({tasks});
   } catch (err) {
     res.status(errorCode).send({message: err.message});
   }

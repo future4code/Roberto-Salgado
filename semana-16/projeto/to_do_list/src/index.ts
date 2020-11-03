@@ -16,6 +16,7 @@ import { getUserByQuery } from "./endpoint/getUserByQuery";
 import { postUserToTask } from "./endpoint/postUserToTask";
 import { getResponsibleUsersByTask } from "./endpoint/getResponsibleUsersByTask";
 import { postUpdateTaskStatus } from "./endpoint/postUpdateTaskStatus";
+import { getDelayedTasks } from "./endpoint/getDelayedTasks";
 
 dotenv.config();
 
@@ -47,6 +48,8 @@ app.get("/user/:id", getUserById);
 app.post("/user/edit/:id", postEditUser);
 
 app.get("/task/all", getAllTasks);
+
+app.get("/task/delayed", getDelayedTasks);
 
 app.get("/task", getTasksByQuery);
 
