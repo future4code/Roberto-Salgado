@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import selectUsersOrder from "../data/selectUsersOrder";
+import { selectUsersOrder } from "../data/selectUsersOrder";
 import { User } from "../types/User";
 
 export const getUsersOrder = async(req: Request,res: Response): Promise<void> =>{

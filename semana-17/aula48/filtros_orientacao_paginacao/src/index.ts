@@ -7,6 +7,7 @@ import { getAllUsers } from "./endpoints/getAllUsers";
 import { getUsersByNameQuery } from "./endpoints/getUsersByNameQuery";
 import { getUsersByTypeParams } from "./endpoints/getUsersByTypeParams";
 import { getUsersOrder } from "./endpoints/getUserOrder";
+import { getUsersPage } from "./endpoints/getUsersPage";
 
 dotenv.config();
 
@@ -27,11 +28,13 @@ app.use(cors());
 
 app.get("/users/all", getAllUsers);
 
-app.get("/users/search", getUsersByNameQuery);
+app.get("/users/filter", getUsersByNameQuery);
 
-app.get("/users/search/:type", getUsersByTypeParams);
+app.get("/users/filter/:type", getUsersByTypeParams);
 
 app.get("/users/order", getUsersOrder);
+
+app.get("/users/page", getUsersPage);
 
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {
