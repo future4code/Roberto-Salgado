@@ -4,3 +4,11 @@ export type User = {
   email: string,
   type: string
 }
+
+export type inputData = {
+  name: string,
+  type: string,
+  orderBy: string,
+  orderType: string,
+  page: number
+}

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import selectAllUsers from "../data/selectAllUsers";
 import { User } from "../types/User";
 
-export const getAllUsers = async(req: Request,res: Response): Promise<void> =>{
+export const getAllUsers = async (req: Request,res: Response): Promise<void> =>{
   try {
     const users: User[] = await selectAllUsers();
 

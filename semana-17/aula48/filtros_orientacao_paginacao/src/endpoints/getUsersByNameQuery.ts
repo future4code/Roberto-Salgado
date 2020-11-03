@@ -19,7 +19,6 @@ export const getUsersByNameQuery = async(req: Request,res: Response): Promise<vo
 
     res.status(200).send({users});
   } catch (err) {
-    console.log(err);
     res.send({message: err.message || err.sqlMessage});
   }
 }

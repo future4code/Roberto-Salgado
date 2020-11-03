@@ -8,6 +8,7 @@ import { getUsersByNameQuery } from "./endpoints/getUsersByNameQuery";
 import { getUsersByTypeParams } from "./endpoints/getUsersByTypeParams";
 import { getUsersOrder } from "./endpoints/getUserOrder";
 import { getUsersPage } from "./endpoints/getUsersPage";
+import { searchUsers } from "./endpoints/searchUsers";
 
 dotenv.config();
 
@@ -35,6 +36,8 @@ app.get("/users/filter/:type", getUsersByTypeParams);
 app.get("/users/order", getUsersOrder);
 
 app.get("/users/page", getUsersPage);
+
+app.get("/users/search", searchUsers);
 
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {
