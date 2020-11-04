@@ -26,7 +26,6 @@ export const getUsersOrder = async(req: Request,res: Response): Promise<void> =>
 
     res.status(200).send({users});
   } catch (err) {
-    console.log(err);
     res.send({message: err.message || err.sqlMessage});
   }
 }
