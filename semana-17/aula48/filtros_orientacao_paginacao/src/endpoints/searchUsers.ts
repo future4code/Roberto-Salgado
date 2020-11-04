@@ -6,7 +6,7 @@ export const searchUsers = async (req: Request, res: Response): Promise<any> => 
   try {
     const data: inputData = {
       name: req.query.name as string || "",
-      type: req.query.type as string || "%",
+      type: req.params.type || "%",
       orderBy: req.query.orderBy as string || "name",
       orderType: req.query.orderType as string || "DESC",
       page: Number(req.query.page) <= 0 ? 1 : Number(req.query.page) || 1

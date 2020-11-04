@@ -37,7 +37,7 @@ app.get("/users/order", getUsersOrder);
 
 app.get("/users/page", getUsersPage);
 
-app.get("/users/search", searchUsers);
+app.get("/users/search/:type?", searchUsers);
 
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {
