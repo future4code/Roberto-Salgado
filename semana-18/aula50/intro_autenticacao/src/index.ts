@@ -26,7 +26,7 @@ app.post('/signup', signup);
 
 app.post('/login', login);
 
-app.post("/user/profile", getUserById);
+app.get("/user/profile", getUserById);
 
 const server = app.listen(process.env.PORT || 3000, () => {
   if (server) {
