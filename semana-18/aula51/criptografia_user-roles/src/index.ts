@@ -1,10 +1,13 @@
+import cors from "cors";
+import dotenv from "dotenv";
 import knex from "knex";
 import express from "express";
-import dotenv from "dotenv";
 import { AddressInfo } from "net";
 import signup from "./endpoints/signup";
 import login from "./endpoints/login";
+import getUserByToken from "./endpoints/getUserByToken";
 import getUserById from "./endpoints/getUserById";
+import removeUser from "./endpoints/removeUser";
 
 dotenv.config();
 
@@ -21,12 +24,17 @@ export const connection = knex({
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.post('/signup', signup);
 
 app.post('/login', login);
 
-app.get("/user/profile", getUserById);
+app.get("/user/profile", getUserByToken);
+
+app.get("/user/:id", getUserById);
+
+app.delete("/user/:id", removeUser);
 
 const server = app.listen(process.env.PORT || 3000, () => {
   if (server) {
