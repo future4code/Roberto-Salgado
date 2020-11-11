@@ -5,5 +5,6 @@ CREATE TABLE aula52_user_address (
   complemento VARCHAR(8),
   bairro VARCHAR(40) NOT NULL,
   cidade VARCHAR(40) NOT NULL,
-  estado CHAR(2) NOT NULL
+  estado CHAR(2) NOT NULL,
+  FOREIGN KEY (id) REFERENCES aula50_User(id)
 );
