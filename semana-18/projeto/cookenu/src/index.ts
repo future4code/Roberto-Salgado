@@ -23,8 +23,6 @@ app.use(cors());
 
 app.post('/signup', signup);
 
-
-
 const server = app.listen(process.env.PORT || 3000, () => {
   if (server) {
     const address = server.address() as AddressInfo;
