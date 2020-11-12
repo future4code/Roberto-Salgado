@@ -10,3 +10,11 @@ export type InputSignUp = {
   role: USER_ROLES,
   password: string
 }
+
+export type User = {
+  id: string,
+  name: string,
+  email: string,
+  role: USER_ROLES,
+  password: string,
+}

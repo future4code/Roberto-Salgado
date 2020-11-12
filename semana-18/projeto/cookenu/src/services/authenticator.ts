@@ -1,5 +1,5 @@
 import * as jwt from "jsonwebtoken";
-import { USER_ROLES } from "../types";
+import { USER_ROLES } from "../types/types";
 
 export type AuthenticationData = {
   id: string,

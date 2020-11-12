@@ -3,7 +3,7 @@ import insertUser from "../data/insertUser";
 import { generateToken } from "../services/authenticator";
 import generateId from "../services/idGenerator";
 import { hash } from "../services/hashManager";
-import { InputSignUp } from "../types";
+import { InputSignUp } from "../types/types";
 
 export default async function signup(
   req: Request, res: Response

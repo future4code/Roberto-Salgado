@@ -1,5 +1,5 @@
 import { connection } from "..";
-import { InputSignUp } from "../types";
+import { InputSignUp } from "../types/types";
 
 export default async function insertUser (
   signupData: InputSignUp

@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import knex from "knex";
 import express from "express";
 import { AddressInfo } from "net";
+import signup from "./endpoints/signup";
+import login from "./endpoints/login";
 
 dotenv.config()
 
@@ -22,6 +24,8 @@ app.use(express.json());
 app.use(cors());
 
 app.post('/signup', signup);
+
+app.post('/login', login);
 
 const server = app.listen(process.env.PORT || 3000, () => {
   if (server) {
