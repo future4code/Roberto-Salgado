@@ -8,7 +8,7 @@ export default async function createRecipe(
   req: Request, res: Response
 ): Promise<void> {
   try {
-    const token = req.headers.authorization as string;
+    const token: string = req.headers.authorization as string;
    
     const authenticationData: AuthenticationData = getTokenData(token);
 
@@ -38,6 +38,17 @@ export default async function createRecipe(
       description
     });
   } catch (error) {
-    res.status(400).send({message: error.message});
+    let { message } = error;
+
+    if(
+      message === "jwt must be provided" ||
+      message === "invalid signature" ||
+      message === "jwt expired"
+    ){
+      res.statusCode = 401;
+      message = "Unauthorized";
+    }
+
+    res.send({message});
   }
 }
