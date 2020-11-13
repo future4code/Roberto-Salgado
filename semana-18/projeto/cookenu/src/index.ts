@@ -6,6 +6,7 @@ import { AddressInfo } from "net";
 import signup from "./endpoints/signup";
 import login from "./endpoints/login";
 import getUserByToken from "./endpoints/getUserByToken";
+import getUserById from "./endpoints/getUserById";
 
 dotenv.config()
 
@@ -29,6 +30,10 @@ app.post('/signup', signup);
 app.post('/login', login);
 
 app.get("/user/profile", getUserByToken);
+
+app.get("/user/:id", getUserById);
+
+app.post("/recipe", createRecipe)
 
 const server = app.listen(process.env.PORT || 3000, () => {
   if (server) {

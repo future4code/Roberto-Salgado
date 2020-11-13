@@ -1,16 +1,18 @@
 import { Request, Response } from "express";
 import selectUserById from "../data/selectUserById";
-import { AuthenticationData, getTokenData } from "../services/authenticator";
+import { getTokenData } from "../services/authenticator";
 
-export default async function getUserByToken(
+export default async function getUserById(
   req: Request, res: Response
 ): Promise<void> {
   try {
     const token = req.headers.authorization as string;
    
-    const authenticationData: AuthenticationData = getTokenData(token);
+    getTokenData(token);
+	
+    const id = req.params.id;
 
-    const user = await selectUserById(authenticationData.id);
+    const user = await selectUserById(id);
 
     res.status(200).send({
       id: user.id,

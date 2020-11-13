@@ -9,8 +9,6 @@ export default async function login(
   try {
     const {email, password} = req.body;
 
-    let message = "Successfully logged"
-
     if (!email || !password) {
       res.statusCode = 406;
       throw new Error("'email' and 'password' required");

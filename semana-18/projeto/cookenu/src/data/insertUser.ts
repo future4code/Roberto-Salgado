@@ -1,8 +1,8 @@
 import { connection } from "..";
-import { InputSignUp } from "../types/types";
+import { User } from "../types/types";
 
 export default async function insertUser (
-  signupData: InputSignUp
+  signupData: User
 ): Promise<void> {
   await connection("cookenu_users")
     .insert({
