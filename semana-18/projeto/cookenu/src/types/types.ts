@@ -18,3 +18,8 @@ export type Recipe = {
   createdAt: Date,
   userId: string
 }
+
+export type InputToFollowUser = {
+  userId: string,
+  userToFollowId: string
+}

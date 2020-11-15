@@ -6,7 +6,7 @@ export type AuthenticationData = {
   role: USER_ROLES
 }
 
-const expiresIn = "1min";
+const expiresIn = "20min";
 
 export function generateToken(input: AuthenticationData): string {
   return jwt.sign(

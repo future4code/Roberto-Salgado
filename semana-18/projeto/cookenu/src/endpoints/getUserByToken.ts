@@ -19,12 +19,14 @@ export default async function getUserByToken(
     });
 
   } catch (error) {
+    res.statusCode = 400;
     let { message } = error;
 
     if(
       message === "jwt must be provided" ||
       message === "invalid signature" ||
-      message === "jwt expired"
+      message === "jwt expired" ||
+      message === "invalid token"
     ){
       res.statusCode = 401;
       message = "Unauthorized";

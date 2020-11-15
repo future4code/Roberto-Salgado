@@ -9,8 +9,9 @@ import getUserByToken from "./endpoints/getUserByToken";
 import getUserById from "./endpoints/getUserById";
 import createRecipe from "./endpoints/createRecipe";
 import getRecipeById from "./endpoints/getRecipeById";
+import followUser from "./endpoints/followUser";
 
-dotenv.config()
+dotenv.config();
 
 export const connection = knex({
   client: 'mysql',
@@ -33,13 +34,15 @@ app.post('/login', login);
 
 app.get("/user/profile", getUserByToken);
 
-app.get("/user/:id", getUserById);
+app.get("/user/:id?", getUserById);
 
-app.post("/recipe", createRecipe)
+app.post("/user/follow", followUser);
 
-app.post("/recipe/:id", getRecipeById)
+app.post("/recipe", createRecipe);
 
-const server = app.listen(process.env.PORT || 3000, () => {
+app.get("/recipe/:id?", getRecipeById);
+
+const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {
     const address = server.address() as AddressInfo;
     console.log(`Server is running in http://localhost:${address.port}`);

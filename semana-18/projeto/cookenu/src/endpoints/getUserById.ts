@@ -26,10 +26,16 @@ export default async function getUserById(
     if(
       message === "jwt must be provided" ||
       message === "invalid signature" ||
-      message === "jwt expired"
+      message === "jwt expired" ||
+      message === "invalid token"
     ){
       res.statusCode = 401;
       message = "Unauthorized";
+    }
+
+    if(message === "Cannot read property 'id' of undefined"){
+      res.statusCode = 404;
+      message = "User not found";
     }
 
     res.send({message});

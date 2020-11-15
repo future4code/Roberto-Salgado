@@ -24,8 +24,8 @@ export default async function login(
     const passwordIsCorrect: boolean = await compare(password, user.password);
 
     if (!passwordIsCorrect) {
-      res.statusCode = 404
-      throw new Error("User not found or incorrect password")
+      res.statusCode = 404;
+      throw new Error("User not found or incorrect password");
     }
 
     const token: string = generateToken({ id: user.id, role: user.role });
@@ -33,13 +33,13 @@ export default async function login(
     res.status(200).send({access_token: token});
 
   } catch (error) {
-    let { message } = error
+    let { message } = error;
 
     if(message === "Cannot read property 'id' of undefined"){
-        message = "User not found or incorrect password"
-        res.statusCode = 404
+        message = "User not found or incorrect password";
+        res.statusCode = 404;
     }
 
-    res.send({message})
+    res.send({message});
   }
 }

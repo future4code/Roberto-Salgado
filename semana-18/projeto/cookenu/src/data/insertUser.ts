@@ -4,7 +4,8 @@ import { User } from "../types/types";
 export default async function insertUser (
   signupData: User
 ): Promise<void> {
-  await connection("cookenu_users")
+  try {
+    await connection("cookenu_users")
     .insert({
       id: signupData.id,
       name: signupData.name,
@@ -12,4 +13,7 @@ export default async function insertUser (
       role: signupData.role,
       password: signupData.password,
     });
+  } catch (error) {
+    throw new Error(error.sqlMessage || error.message);
+  }
 }

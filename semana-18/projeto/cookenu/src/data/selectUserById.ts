@@ -2,7 +2,7 @@ import { connection } from "..";
 import { User } from "../types/types";
 
 export default async function selectUserById (
-  id: string 
+  id: string = ""
 ): Promise<User> {
   try {
     const result = await connection("cookenu_users")

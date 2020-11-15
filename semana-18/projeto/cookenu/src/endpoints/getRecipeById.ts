@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import selectRecipeById from "../data/selectRecipeById";
+import { formatDateTime } from "../functions/handleDate";
 import { getTokenData } from "../services/authenticator";
 import { Recipe } from "../types/types";
 
@@ -19,7 +20,7 @@ export default async function getRecipeById(
       id: recipe.id,
       title: recipe.title,
       description: recipe.description,
-      createdAt: recipe.createdAt
+      createdAt: formatDateTime(recipe.createdAt)
     });
 
   } catch (error) {
@@ -32,6 +33,11 @@ export default async function getRecipeById(
     ){
       res.statusCode = 401;
       message = "Unauthorized";
+    }
+
+    if(message === "Cannot read property 'id' of undefined"){
+      res.statusCode = 404;
+      message = "Recipe not found";
     }
 
     res.send({message});
