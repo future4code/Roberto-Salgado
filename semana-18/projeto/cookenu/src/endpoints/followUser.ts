@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import insertFollowedUser from "../data/insertFollowedUser";
 import { AuthenticationData, getTokenData } from "../services/authenticator";
-import { UserRelations } from "../types/types";
+import { UsersRelation } from "../types/types";
 
 export default async function followUser (
   req: Request, res: Response
@@ -23,7 +23,7 @@ export default async function followUser (
       throw new Error("Cannot follow own profile");
     }
 
-    const inputToFollowUser: UserRelations = {
+    const inputToFollowUser: UsersRelation = {
       userId: authenticationData.id,
       followedUserId: userToFollowId
     };

@@ -11,6 +11,7 @@ import createRecipe from "./endpoints/createRecipe";
 import getRecipeById from "./endpoints/getRecipeById";
 import followUser from "./endpoints/followUser";
 import unfollowUser from "./endpoints/unfollowUser";
+import getRecipeFeed from "./endpoints/getRecipeFeed";
 
 dotenv.config();
 
@@ -34,7 +35,7 @@ app.post('/signup', signup);
 app.post('/login', login);
 
 app.get("/user/profile", getUserByToken);
-
+app.get("/user/feed", getRecipeFeed);
 app.get("/user/:id?", getUserById);
 
 app.post("/user/follow", followUser);

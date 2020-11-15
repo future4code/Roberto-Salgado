@@ -1,8 +1,8 @@
 import { connection } from "..";
-import { UserRelations } from "../types/types";
+import { UsersRelation } from "../types/types";
 
 export default async function insertFollowedUser (
-  inputToFollowUser: UserRelations
+  inputToFollowUser: UsersRelation
 ): Promise<void> {
   try {
     await connection("cookenu_users_relations")
