@@ -40,11 +40,11 @@ export default async function createRecipe(
   } catch (error) {
     let { message } = error;
 
-    if(
+    if (
       message === "jwt must be provided" ||
       message === "invalid signature" ||
       message === "jwt expired"
-    ){
+    ) {
       res.statusCode = 401;
       message = "Unauthorized";
     }

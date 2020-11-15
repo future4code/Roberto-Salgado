@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import selectUserById from "../data/selectUserById";
 import { getTokenData } from "../services/authenticator";
+import { User } from "../types/types";
 
 export default async function getUserById(
   req: Request, res: Response
@@ -23,12 +24,12 @@ export default async function getUserById(
   } catch (error) {
     let { message } = error;
 
-    if(
+    if (
       message === "jwt must be provided" ||
       message === "invalid signature" ||
       message === "jwt expired" ||
       message === "invalid token"
-    ){
+    ) {
       res.statusCode = 401;
       message = "Unauthorized";
     }

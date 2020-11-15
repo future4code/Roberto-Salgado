@@ -22,12 +22,12 @@ export default async function getUserByToken(
     res.statusCode = 400;
     let { message } = error;
 
-    if(
+    if (
       message === "jwt must be provided" ||
       message === "invalid signature" ||
       message === "jwt expired" ||
-      message === "invalid token"
-    ){
+      message === "Cannot read property 'id' of undefined"
+    ) {
       res.statusCode = 401;
       message = "Unauthorized";
     }

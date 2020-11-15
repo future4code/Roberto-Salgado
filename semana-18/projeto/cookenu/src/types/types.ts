@@ -19,7 +19,7 @@ export type Recipe = {
   userId: string
 }
 
-export type InputToFollowUser = {
+export type UsersRelation = {
   userId: string,
-  userToFollowId: string
+  followedUserId: string
 }

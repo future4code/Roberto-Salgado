@@ -8,10 +8,9 @@ import { User } from "../types/types";
 export default async function signup(
   req: Request, res: Response
 ): Promise<void> {
-  
-  const {name, email, role, password} = req.body;
-  
   try {
+    const {name, email, role, password} = req.body;
+    
     if(!name){
       throw new Error("Invalid name");
     }
@@ -45,7 +44,7 @@ export default async function signup(
     res.statusCode = 400;
     let { message } = error;
     
-    if (message === `Duplicate entry '${email}' for key 'email'`) {
+    if (message.includes("Duplicate entry")) {
       message = "Cannot register duplicate e-mail";
       res.statusCode = 406;
     }

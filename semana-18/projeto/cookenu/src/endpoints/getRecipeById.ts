@@ -26,16 +26,17 @@ export default async function getRecipeById(
   } catch (error) {
     let { message } = error;
 
-    if(
+    if (
       message === "jwt must be provided" ||
       message === "invalid signature" ||
-      message === "jwt expired"
-    ){
+      message === "jwt expired" ||
+      message === "invalid token"
+    ) {
       res.statusCode = 401;
       message = "Unauthorized";
     }
 
-    if(message === "Cannot read property 'id' of undefined"){
+    if (message === "Cannot read property 'id' of undefined") {
       res.statusCode = 404;
       message = "Recipe not found";
     }

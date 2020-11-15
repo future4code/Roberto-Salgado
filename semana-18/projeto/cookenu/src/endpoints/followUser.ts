@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import insertFollowedUser from "../data/insertFollowedUser";
-import selectUserById from "../data/selectUserById";
 import { AuthenticationData, getTokenData } from "../services/authenticator";
-import { InputToFollowUser } from "../types/types";
+import { UserRelations } from "../types/types";
 
 export default async function followUser (
   req: Request, res: Response
@@ -24,32 +23,27 @@ export default async function followUser (
       throw new Error("Cannot follow own profile");
     }
 
-    const userToFollow = await selectUserById(userToFollowId);
-
-    if (!userToFollow) {
-      res.statusCode = 404;
-      throw new Error("User not found");
-    }
-
-    const inputToFollowUser: InputToFollowUser = {
+    const inputToFollowUser: UserRelations = {
       userId: authenticationData.id,
-      userToFollowId
+      followedUserId: userToFollowId
     };
 
     await insertFollowedUser(inputToFollowUser);
 
-    res.status(201).send({
+    res.status(200).send({
       message: "Followed successfully"
     });
 
   } catch (error) {
     let { message } = error;
 
-    if(
+    if (
       message === "jwt must be provided" ||
       message === "invalid signature" ||
-      message === "jwt expired"
-    ){
+      message === "jwt expired" ||
+      message === "invalid token" ||
+      message === "Cannot read property 'id' of undefined"
+    ) {
       res.statusCode = 401;
       message = "Unauthorized";
     }
@@ -57,6 +51,11 @@ export default async function followUser (
     if (message.includes("Duplicate entry")) {
       res.statusCode = 406;
       message = "Already following user";
+    }
+
+    if (message.includes("a foreign key constraint fails")) {
+      res.statusCode = 404;
+      message = "User not found";
     }
 
     res.send({message});
