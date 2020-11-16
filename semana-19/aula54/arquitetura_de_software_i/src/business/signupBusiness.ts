@@ -2,9 +2,9 @@ import insertUser from "../data/user/insertUser";
 import { generateToken } from "../services/authenticator";
 import { hash } from "../services/hashManager";
 import { generateId } from "../services/idGenerator";
-import { User, UserInput } from "../types/types";
+import { User, SignupInput } from "../types/types";
 
-export default async function signupBusiness(user: UserInput) {
+export default async function signupBusiness(user: SignupInput) {
 
   try{
 
