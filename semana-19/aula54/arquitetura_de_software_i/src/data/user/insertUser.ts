@@ -5,7 +5,7 @@ export default async function insertUser (
   user: User
 ): Promise<void> {
   try {
-    await connection()
+    await connection
       .insert({
         id: user.id,
         email: user.email,

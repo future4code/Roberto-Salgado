@@ -5,7 +5,7 @@ export default async function getUserByEmail(email: string): Promise<User> {
 
   try {
 
-    const result = await connection()
+    const result = await connection
       .select("*")
       .from(TABLE_NAME.USER)
       .where({ email });

@@ -5,7 +5,7 @@ export default async function deleteUserData(
   id: string
 ): Promise<void> {
   try {
-    await connection()
+    await connection
       .where({ id })
       .from(TABLE_NAME.USER)
       .del()
