@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
+import deleteRecipe from "../data/deleteRecipe";
 import selectRecipeById from "../data/selectRecipeById";
 import updateRecipe from "../data/updateRecipe";
 import { AuthenticationData, getTokenData } from "../services/authenticator";
 import { Recipe, RecipeUpdate, USER_ROLES } from "../types/types";
 
-export default async function editRecipe(
+export default async function removeRecipe(
   req: Request, res: Response
 ): Promise<void> {
   try {
@@ -13,13 +14,6 @@ export default async function editRecipe(
     const authenticationData: AuthenticationData = getTokenData(token);
 
     const recipeId: string = req.params.id;
-
-    const {title, description} = req.body;
-
-    if (!title && !description) {
-      res.statusCode = 406;
-      throw new Error("'title' or 'description' required");
-    }
 
     const recipe: Recipe = await selectRecipeById(recipeId);
 
@@ -31,15 +25,11 @@ export default async function editRecipe(
       throw new Error("Unauthorized");
     }
 
-    const updateRecipeInput: RecipeUpdate = {
-      id: recipeId,
-      title,
-      description
-    };
+    await deleteRecipe(recipeId);
 
-    await updateRecipe(updateRecipeInput);
-
-    res.status(200).end();
+    res.status(200).send({
+      message: "Recipe removed successfully"
+    });
 
   } catch (error) {
     let { message } = error;
