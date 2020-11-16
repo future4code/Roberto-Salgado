@@ -1,8 +1,8 @@
-import insertUser from "../data/user/insertUser";
-import { generateToken } from "../services/authenticator";
-import { hash } from "../services/hashManager";
-import { generateId } from "../services/idGenerator";
-import { User, SignupInput } from "../types/types";
+import insertUser from "../../data/user/insertUser";
+import { generateToken } from "../../services/authenticator";
+import { hash } from "../../services/hashManager";
+import { generateId } from "../../services/idGenerator";
+import { SignupInput, User } from "../../types/types";
 
 export default async function signupBusiness(user: SignupInput) {
 

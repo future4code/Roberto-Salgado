@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import signupBusiness from "../../business/signupBusiness";
+import signupBusiness from "../../business/user/signupBusiness";
 import { SignupInput } from "../../types/types";
 
 export default async function signup (req: Request, res: Response) {

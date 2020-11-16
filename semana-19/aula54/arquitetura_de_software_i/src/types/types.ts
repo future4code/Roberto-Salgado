@@ -32,4 +32,9 @@ export type LoginInput = {
   password: string,
 }
 
+export type DeleteInput = {
+  id: string,
+  token: string
+}
+
 

@@ -1,7 +1,7 @@
 import { compare } from "bcryptjs";
-import getUserByEmail from "../data/user/getUserByEmail";
-import { generateToken } from "../services/authenticator";
-import { LoginInput } from "../types/types";
+import getUserByEmail from "../../data/user/getUserByEmail";
+import { generateToken } from "../../services/authenticator";
+import { LoginInput } from "../../types/types";
 
 export default async function loginBusiness (loginData: LoginInput) {
 

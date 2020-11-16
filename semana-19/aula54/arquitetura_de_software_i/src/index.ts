@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import { connection } from './data/connection'
 import signup from './controller/user/signup'
 import login from './controller/user/login'
+import getAllUsers from './controller/user/getAllUsers'
 
 dotenv.config()
 
@@ -18,7 +19,7 @@ app.get("/", async function(req,res){
 app.put("/signup", signup);
 app.post("/login", login);
 
-
+app.get("/all", getAllUsers);
 
 app.listen(3003, () => {
    console.log('Servidor rodando na porta 3003')
