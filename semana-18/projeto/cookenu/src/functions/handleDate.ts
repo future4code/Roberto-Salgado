@@ -5,6 +5,6 @@ export function formatDateTime (date: Date): string {
   const hour = date.getHours();
   const minutes = date.getMinutes();
   const seconds = date.getSeconds();
-  const dateTimeString = `${day}/${month}/${year}, ${hour}:${minutes}:${seconds}`
+  const dateTimeString = `${day}/${month+1}/${year}, ${hour}:${minutes}:${seconds}`
   return dateTimeString
 }
