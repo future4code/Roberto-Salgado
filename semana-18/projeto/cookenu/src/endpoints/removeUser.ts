@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
-import selectRecipeById from "../data/selectRecipeById";
-import updateRecipe from "../data/updateRecipe";
+import deleteAllUserRecipes from "../data/deleteAllUserRecipes";
+import deleteAllUserRelations from "../data/deleteAllUserRelations";
+import deleteUser from "../data/deleteUser";
+import selectUserById from "../data/selectUserById";
 import { AuthenticationData, getTokenData } from "../services/authenticator";
-import { Recipe, RecipeUpdate, USER_ROLES } from "../types/types";
+import { User, USER_ROLES } from "../types/types";
 
-export default async function editRecipe(
+export default async function removeUser(
   req: Request, res: Response
 ): Promise<void> {
   try {
@@ -12,34 +14,27 @@ export default async function editRecipe(
    
     const authenticationData: AuthenticationData = getTokenData(token);
 
-    const recipeId: string = req.params.id;
+    const userId: string = req.params.id;
 
-    const {title, description} = req.body;
-
-    if (!title && !description) {
-      res.statusCode = 406;
-      throw new Error("'title' or 'description' required");
-    }
-
-    const recipe: Recipe = await selectRecipeById(recipeId);
+    const user: User = await selectUserById(userId);
 
     if (
       authenticationData.role === USER_ROLES.NORMAL &&
-      authenticationData.id !== recipe.userId
+      authenticationData.id !== user.id
     ) {
       res.statusCode = 401;
       throw new Error("Unauthorized");
     }
 
-    const updateRecipeInput: RecipeUpdate = {
-      id: recipeId,
-      title,
-      description
-    };
+    await deleteAllUserRelations(userId);
 
-    await updateRecipe(updateRecipeInput);
+    await deleteAllUserRecipes(userId);
 
-    res.status(200).end();
+    await deleteUser(userId);
+
+    res.status(200).send({
+      message: "User removed successfully"
+    });
 
   } catch (error) {
     let { message } = error;
@@ -56,7 +51,7 @@ export default async function editRecipe(
 
     if (message === "Cannot read property 'id' of undefined") {
       res.statusCode = 404;
-      message = "Recipe not found";
+      message = "User not found";
     }
 
     res.send({message});

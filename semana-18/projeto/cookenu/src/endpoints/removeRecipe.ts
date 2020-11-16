@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 import deleteRecipe from "../data/deleteRecipe";
 import selectRecipeById from "../data/selectRecipeById";
-import updateRecipe from "../data/updateRecipe";
 import { AuthenticationData, getTokenData } from "../services/authenticator";
-import { Recipe, RecipeUpdate, USER_ROLES } from "../types/types";
+import { Recipe, USER_ROLES } from "../types/types";
 
 export default async function removeRecipe(
   req: Request, res: Response
@@ -37,7 +36,8 @@ export default async function removeRecipe(
     if (
       message === "jwt must be provided" ||
       message === "invalid signature" ||
-      message === "jwt expired"
+      message === "jwt expired" ||
+      message === "invalid token"
     ) {
       res.statusCode = 401;
       message = "Unauthorized";

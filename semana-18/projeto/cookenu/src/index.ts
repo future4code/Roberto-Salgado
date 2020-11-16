@@ -13,6 +13,8 @@ import followUser from "./endpoints/followUser";
 import unfollowUser from "./endpoints/unfollowUser";
 import getRecipeFeed from "./endpoints/getRecipeFeed";
 import editRecipe from "./endpoints/editRecipe";
+import removeRecipe from "./endpoints/removeRecipe";
+import removeUser from "./endpoints/removeUser";
 
 dotenv.config();
 
@@ -32,19 +34,19 @@ app.use(express.json());
 app.use(cors());
 
 app.post('/signup', signup);
-
 app.post('/login', login);
 
 app.get("/user/profile", getUserByToken);
 app.get("/user/feed", getRecipeFeed);
 app.get("/user/:id?", getUserById);
-
 app.post("/user/follow", followUser);
 app.post("/user/unfollow", unfollowUser);
+app.delete("/user/remove/:id?", removeUser);
 
 app.post("/recipe", createRecipe);
-app.put("/recipe/edit/:id?", editRecipe);
 app.get("/recipe/:id?", getRecipeById);
+app.put("/recipe/edit/:id?", editRecipe);
+app.delete("/recipe/remove/:id?", removeRecipe);
 
 const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {
