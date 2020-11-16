@@ -12,6 +12,7 @@ import getRecipeById from "./endpoints/getRecipeById";
 import followUser from "./endpoints/followUser";
 import unfollowUser from "./endpoints/unfollowUser";
 import getRecipeFeed from "./endpoints/getRecipeFeed";
+import editRecipe from "./endpoints/editRecipe";
 
 dotenv.config();
 
@@ -42,7 +43,7 @@ app.post("/user/follow", followUser);
 app.post("/user/unfollow", unfollowUser);
 
 app.post("/recipe", createRecipe);
-
+app.put("/recipe/edit/:id?", editRecipe);
 app.get("/recipe/:id?", getRecipeById);
 
 const server = app.listen(process.env.PORT || 3003, () => {

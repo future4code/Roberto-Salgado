@@ -28,6 +28,12 @@ export type Recipes = {
   userName: string
 }[]
 
+export type RecipeUpdate = {
+  id: string,
+  title: string,
+  description: string
+}
+
 export type UsersRelation = {
   userId: string,
   followedUserId: string
