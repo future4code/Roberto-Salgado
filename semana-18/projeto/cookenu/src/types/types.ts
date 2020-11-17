@@ -38,3 +38,8 @@ export type UsersRelation = {
   userId: string,
   followedUserId: string
 }
+
+export type PasswordUpdate = {
+  id: string,
+  newPassword: string
+}

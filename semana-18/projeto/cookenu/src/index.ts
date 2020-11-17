@@ -15,6 +15,7 @@ import getRecipeFeed from "./endpoints/getRecipeFeed";
 import editRecipe from "./endpoints/editRecipe";
 import removeRecipe from "./endpoints/removeRecipe";
 import removeUser from "./endpoints/removeUser";
+import resetPassword from "./endpoints/resetPassword";
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ app.get("/user/feed", getRecipeFeed);
 app.get("/user/:id?", getUserById);
 app.post("/user/follow", followUser);
 app.post("/user/unfollow", unfollowUser);
+app.post("/user/password/reset", resetPassword)
 app.delete("/user/remove/:id?", removeUser);
 
 app.post("/recipe", createRecipe);

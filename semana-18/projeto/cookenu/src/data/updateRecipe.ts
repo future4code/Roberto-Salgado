@@ -14,6 +14,6 @@ export default async function updateRecipe(
         description
       });
   } catch (error) {
-    throw new Error(error.sqlMessage || error.message)
+    throw new Error(error.sqlMessage || error.message);
   }
 }

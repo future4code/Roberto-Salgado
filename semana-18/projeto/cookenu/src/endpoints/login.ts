@@ -36,8 +36,8 @@ export default async function login(
     let { message } = error;
 
     if(message === "Cannot read property 'id' of undefined"){
-        message = "User not found or incorrect password";
-        res.statusCode = 404;
+      message = "User not found or incorrect password";
+      res.statusCode = 404;
     }
 
     res.send({message});
