@@ -12,7 +12,7 @@ export default async function resetPassword (req: Request, res: Response) {
       throw new Error("Invalid email");
     }
 
-    const user =  await selectUserByEmail(email);
+    const user = await selectUserByEmail(email);
 
     if (!user) {
       res.statusCode = 404;

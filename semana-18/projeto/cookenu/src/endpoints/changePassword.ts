@@ -10,9 +10,11 @@ export default async function resetPassword (req: Request, res: Response) {
    
     const authenticationData: AuthenticationData = getTokenData(token);
 
+    const user = await selectUserById(authenticationData.id);
+
     const {password} = req.body;
 
-    if(!password || password < 6){
+    if(!password || password < 6 || password === user.password){
       throw new Error("Invalid password");
     }
 
@@ -30,6 +32,16 @@ export default async function resetPassword (req: Request, res: Response) {
   } catch (error) {
     res.statusCode = 400;
     let { message } = error;
+
+    if (
+      message === "jwt must be provided" ||
+      message === "invalid signature" ||
+      message === "jwt expired"||
+      message === "invalid token"
+    ) {
+      res.statusCode = 401;
+      message = "Unauthorized";
+    }
 
     res.send({message});
   }
