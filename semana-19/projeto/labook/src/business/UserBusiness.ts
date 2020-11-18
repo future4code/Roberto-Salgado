@@ -32,7 +32,7 @@ class UserBusiness {
   
       const token: string = authenticator.generateToken({ id });
   
-      return token
+      return token;
   
     } catch (error) {
       throw new Error(error.message);
@@ -61,12 +61,12 @@ class UserBusiness {
         queryResult[0].name,
         queryResult[0].email,
         queryResult[0].password
-      )
+      );
   
       const passwordIsCorrect: boolean = await hashManager.compare(
         password,
         user.getPassword()
-      )
+      );
   
       if (!passwordIsCorrect) {
         throw new Error("Invalid credentials");
@@ -76,13 +76,13 @@ class UserBusiness {
         id: user.getId()
       });
   
-      return token
+      return token;
   
     } catch (error) {
-      throw new Error(error.message)
+      throw new Error(error.message);
     }
   }
 
 }
 
-export default new UserBusiness()
+export default new UserBusiness();

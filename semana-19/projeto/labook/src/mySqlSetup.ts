@@ -1,4 +1,4 @@
-import { connection } from "./data/connection"
+import { connection } from "./data/connection";
 
 async function createTables(){
    try {
@@ -9,7 +9,7 @@ async function createTables(){
             email VARCHAR(255) UNIQUE NOT NULL,
             password VARCHAR(255) NOT NULL
          )
-      `)
+      `);
 
       await connection.raw(`
          CREATE TABLE labook_posts(
@@ -21,12 +21,12 @@ async function createTables(){
             author_id VARCHAR(255),
             FOREIGN KEY (author_id) REFERENCES labook_users (id)
          )
-      `)
+      `);
 
-      console.log("MySql setup completed!")
+      console.log("MySql setup completed!");
    } catch (error) {
-      console.log(error)
+      console.log(error);
    }
 }
 
-createTables()
+createTables();

@@ -1,4 +1,4 @@
-import * as bcrypt from "bcryptjs"
+import * as bcrypt from "bcryptjs";
 
 class HashManager {
    public hash = async (
@@ -6,14 +6,14 @@ class HashManager {
    ): Promise<string> => {
       const rounds = Number(process.env.BCRYPT_COST);
       const salt = await bcrypt.genSalt(rounds);
-      return bcrypt.hash(plainText, salt)
+      return bcrypt.hash(plainText, salt);
    }
 
    public compare = async (
       plainText: string, cypherText: string
    ): Promise<boolean> => {
-      return bcrypt.compare(plainText, cypherText)
+      return bcrypt.compare(plainText, cypherText);
    }
 }
 
-export default new HashManager()
+export default new HashManager();

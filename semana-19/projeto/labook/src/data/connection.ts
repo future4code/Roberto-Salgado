@@ -12,4 +12,4 @@ export const connection: knex = knex({
       port: 3306,
       database: process.env.DB_NAME,
    }
-})
+});

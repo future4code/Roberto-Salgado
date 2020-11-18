@@ -41,24 +41,24 @@ class UserController {
       const input: LoginInput = {
         email: req.body.email,
         password: req.body.password
-      }
+      };
   
-      const token: string = await UserBusiness.login(input)
+      const token: string = await UserBusiness.login(input);
   
       res.send({
         message: "Success!",
         token
-      })
+      });
       
     } catch (error) {
       res
         .status(400)
         .send({
           message: error.message
-        })
+        });
     }
   }
 
 }
 
-export default new UserController()
+export default new UserController();

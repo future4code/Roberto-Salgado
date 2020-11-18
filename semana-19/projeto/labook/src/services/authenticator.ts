@@ -11,7 +11,7 @@ class Authenticator {
        {
           expiresIn: process.env.JWT_EXPIRES_IN
        }
-    )
+    );
   }
 
   public getTokenData(
@@ -20,9 +20,9 @@ class Authenticator {
     const result: any = jwt.verify(
       token,
       process.env.JWT_KEY as string
-    )
+    );
   
-    return { id: result.id, }
+    return { id: result.id, };
   }
 }
 
