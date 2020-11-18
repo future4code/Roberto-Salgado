@@ -25,7 +25,7 @@ async function createTables(){
 
       console.log("MySql setup completed!");
    } catch (error) {
-      console.log(error.message);
+      console.log(error);
    }
 }
 
