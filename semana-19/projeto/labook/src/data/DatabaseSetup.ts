@@ -25,13 +25,78 @@ class DatabaseSetup extends BaseDatabase {
 				);
 			`);
 
+			await BaseDatabase.connection.raw(`
+				CREATE TABLE labook_users_friends(
+					user_one_id VARCHAR(255),
+					user_two_id VARCHAR(255),
+					FOREIGN KEY (user_one_id) REFERENCES labook_users (id),
+					FOREIGN KEY (user_two_id) REFERENCES labook_users (id),
+					PRIMARY KEY (user_one_id, user_two_id)
+				);
+			`);
+
+			await BaseDatabase.connection.raw(`
+				CREATE TABLE labook_posts_likes(
+					post_id VARCHAR(255),
+					user_id VARCHAR(255),
+					FOREIGN KEY (post_id) REFERENCES labook_posts(id),
+					FOREIGN KEY (user_id) REFERENCES labook_users(id),
+					PRIMARY KEY (post_id, user_id)
+				);
+			`);
+
+			await BaseDatabase.connection.raw(`
+				CREATE TABLE labook_posts_comments(
+					id VARCHAR(255) PRIMARY KEY,
+					post_id VARCHAR(255),
+					user_id VARCHAR(255),
+					comment TEXT NOT NULL,
+					created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+					FOREIGN KEY (post_id) REFERENCES labook_posts(id),
+					FOREIGN KEY (user_id) REFERENCES labook_users(id)
+				);
+			`);
+
 			console.log("MySql setup completed!");
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
-	public async displayTables():Promise<void> {
+	public async resetTables():Promise<void> {
+		try {
+			await BaseDatabase.connection.raw(`
+				DROP TABLE labook_posts_comments;
+			`);
+
+			await BaseDatabase.connection.raw(`
+				DROP TABLE labook_posts_likes;
+			`);
+
+			await BaseDatabase.connection.raw(`
+				DROP TABLE labook_users_friends;
+			`);
+
+			await BaseDatabase.connection.raw(`
+				DROP TABLE labook_posts;
+			`);
+
+			await BaseDatabase.connection.raw(`
+				DROP TABLE labook_users;
+			`);
+
+			console.log("MySql tables dropped...");
+			console.log("Recreating MySql tables ...");
+
+			await this.createTables();
+
+			console.log("MySql reset completed!");
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	public async displayTables() {
 		try {
 			await BaseDatabase.connection.raw('SHOW TABLES');
 		} catch (error) {
