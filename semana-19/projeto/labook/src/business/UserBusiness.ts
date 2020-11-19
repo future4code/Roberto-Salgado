@@ -1,6 +1,7 @@
 import UserDatabase from "../data/UserDatabase";
 import { CreateUserInput, LoginInput, User, UserData } from "../model/User";
 import authenticator from "../services/authenticator";
+import { CustomError } from "../services/CustomError";
 import hashManager from "../services/hashManager";
 import idGenerator from "../services/idGenerator";
 
@@ -14,7 +15,7 @@ class UserBusiness {
       const { name, email, password } = input;
   
       if (!name || !email || !password) {
-        throw new Error("'name', 'email' and 'password' must be provided");
+        throw new CustomError(406, "'name', 'email' and 'password' must be provided");
       }
   
       const id: string = idGenerator.generateId();

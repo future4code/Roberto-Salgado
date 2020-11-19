@@ -26,7 +26,7 @@ class UserController {
   
     } catch (error) {
       res
-        .status(400)
+        .status(error.statusCode)
         .send({
           message: error.message
         });

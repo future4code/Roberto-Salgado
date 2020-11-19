@@ -1,18 +1,18 @@
 import { Post, PostData } from "../model/Post";
-import { connection } from "./connection";
+import BaseDatabase from "./BaseDatabase";
 
-class PostDatabase {
+class PostDatabase extends BaseDatabase {
 
-  private tableName: string = "labook_posts";
+  private static tableName: string = "labook_posts";
 
-  public getTableName = ():string => this.tableName;
+  public getTableName = ():string => PostDatabase.tableName;
 
   public async createPost(
     post:Post
   ):Promise<void> {
     try {
       
-      await connection(this.tableName)
+      await BaseDatabase.connection(PostDatabase.tableName)
         .insert({
           id: post.getId(),
           photo: post.getPhoto(),
@@ -31,7 +31,7 @@ class PostDatabase {
   ):Promise<PostData | []> {
     try {
       
-      const result = await connection("labook_posts")
+      const result = await BaseDatabase.connection(PostDatabase.tableName)
         .select("*")
         .where({ id });
   

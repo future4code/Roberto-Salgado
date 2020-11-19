@@ -1,17 +1,17 @@
 import { User, UserData } from "../model/User";
-import { connection } from "./connection";
+import BaseDatabase from "./BaseDatabase";
 
-class UserDatabase {
+class UserDatabase extends BaseDatabase {
 
-  private tableName: string = "labook_users";
+  private static tableName: string = "labook_users";
 
-  public getTableName = ():string => this.tableName;
+  public getTableName = ():string => UserDatabase.tableName;
 
   public async signup(
     user:User
   ):Promise<void> {
     try {
-      await connection(this.tableName)
+      await BaseDatabase.connection(UserDatabase.tableName)
         .insert({
           id: user.getId(),
           name: user.getName(),
@@ -27,7 +27,7 @@ class UserDatabase {
     email: string
   ):Promise<UserData> {
     try {
-      const result = await connection(this.tableName)
+      const result = await BaseDatabase.connection(UserDatabase.tableName)
         .select("*")
         .where({ email });
       
