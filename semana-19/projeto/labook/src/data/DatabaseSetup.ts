@@ -96,14 +96,6 @@ class DatabaseSetup extends BaseDatabase {
 		}
 	}
 
-	public async displayTables() {
-		try {
-			await BaseDatabase.connection.raw('SHOW TABLES');
-		} catch (error) {
-			throw new Error(error.message);
-		}
-	}
-
 }
 
 export default new DatabaseSetup();
