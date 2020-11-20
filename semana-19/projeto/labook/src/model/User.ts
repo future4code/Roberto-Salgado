@@ -33,3 +33,10 @@ export type UserData = Array<{
   email: string,
   password: string
 }>
+
+export type UsersRelationInput = Array<string>
+
+export type UsersRelationData = Array<{
+  user_one_id: string,
+  user_two_id: string
+}>

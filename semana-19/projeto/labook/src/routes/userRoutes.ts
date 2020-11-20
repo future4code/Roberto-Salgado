@@ -5,3 +5,4 @@ export const userRouter = express.Router();
 
 userRouter.post("/signup", UserController.signup);
 userRouter.post("/login", UserController.login);
+userRouter.post("/friend", UserController.toggleFriendUser);

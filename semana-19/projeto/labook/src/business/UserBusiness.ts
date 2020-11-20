@@ -1,5 +1,5 @@
 import UserDatabase from "../data/UserDatabase";
-import { CreateUserInput, LoginInput, User, UserData } from "../model/User";
+import { CreateUserInput, LoginInput, User, UserData, UsersRelationData, UsersRelationInput } from "../model/User";
 import authenticator from "../services/authenticator";
 import { CustomError } from "../services/CustomError";
 import hashManager from "../services/hashManager";
@@ -15,7 +15,10 @@ class UserBusiness {
       const { name, email, password } = input;
   
       if (!name || !email || !password) {
-        throw new CustomError(406, "'name', 'email' and 'password' must be provided");
+        throw new CustomError(
+          406,
+          "'name', 'email' and 'password' must be provided"
+        );
       }
   
       const id: string = idGenerator.generateId();
@@ -79,6 +82,31 @@ class UserBusiness {
   
       return token;
   
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  public async toggleFriendUser(
+    input:UsersRelationInput
+  ):Promise<void> {
+    try {
+
+      if (input[0] === input[1]) {
+        throw new Error("Different 'id' must be provided")
+      }
+      
+      input.sort();
+
+      const usersRelation: UsersRelationData 
+        = await UserDatabase.getUsersRelation(input);
+
+      if (!usersRelation.length) {
+        await UserDatabase.friendUser(input);
+      } else {
+        await UserDatabase.unfriendUser(input);
+      }
+
     } catch (error) {
       throw new Error(error.message);
     }

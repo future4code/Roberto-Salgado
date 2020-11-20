@@ -12,7 +12,8 @@ class PostDatabase extends BaseDatabase {
   ):Promise<void> {
     try {
       
-      await BaseDatabase.connection(PostDatabase.tableName)
+      await BaseDatabase
+        .connection(PostDatabase.tableName)
         .insert({
           id: post.getId(),
           photo: post.getPhoto(),
@@ -31,7 +32,8 @@ class PostDatabase extends BaseDatabase {
   ):Promise<PostData | []> {
     try {
       
-      const result = await BaseDatabase.connection(PostDatabase.tableName)
+      const result = await BaseDatabase
+        .connection(PostDatabase.tableName)
         .select("*")
         .where({ id });
   
