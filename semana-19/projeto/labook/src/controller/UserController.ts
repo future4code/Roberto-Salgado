@@ -71,7 +71,7 @@ class UserController {
 
       const input: UsersRelationInput = [
         tokenData.id,
-        req.body.id
+        req.params.id
       ];
 
       await UserBusiness.toggleFriendUser(input);

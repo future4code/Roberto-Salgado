@@ -62,6 +62,33 @@ class PostController {
     }
   }
 
+  public async getFeed(
+    req:Request, res:Response
+  ):Promise<void> {
+    try {
+      
+      const token: string = req.headers.authorization as string;
+  
+      const tokenData: AuthenticationData = authenticator.getTokenData(token);
+
+      const posts = PostBusiness.getFeed(tokenData.id);
+
+      res
+        .status(200)
+        .send({
+          message: "Success!",
+          posts
+        })
+
+    } catch (error) {
+      res
+        .status(400)
+        .send({
+          message: error.message
+        });
+    }
+  }
+
 }
 
 export default new PostController();

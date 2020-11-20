@@ -1,5 +1,6 @@
 import { Post, PostData } from "../model/Post";
 import BaseDatabase from "./BaseDatabase";
+import UserDatabase from "./UserDatabase";
 
 class PostDatabase extends BaseDatabase {
 
@@ -29,16 +30,50 @@ class PostDatabase extends BaseDatabase {
 
   public async getPostById(
     id:string
-  ):Promise<PostData | []> {
+  ):Promise<PostData[]> {
     try {
       
-      const result = await BaseDatabase
+      const result: PostData[] = await BaseDatabase
         .connection(PostDatabase.tableName)
         .select("*")
         .where({ id });
   
       return result;
   
+    } catch (error) {
+      throw new Error(error.sqlMessage || error.message);
+    }
+  }
+
+  public async getFeed(
+    id:string
+  ):Promise<PostData[]> {
+    try {
+      
+      const query1: PostData[] = await BaseDatabase
+        .connection(`${PostDatabase.tableName} as p`)
+        .leftJoin(
+          `${UserDatabase.getFriendsTableName()} as uf`,
+          'p.author_id',
+          'uf.user_two_id'
+        )
+        .select('p*')
+        .where('uf.user_one_id', id);
+      
+      const query2: PostData[] = await BaseDatabase
+        .connection(`${PostDatabase.tableName} as p`)
+        .leftJoin(
+          `${UserDatabase.getFriendsTableName()} as uf`,
+          'p.author_id',
+          'uf.user_one_id'
+        )
+        .select('p*')
+        .where('uf.user_two_id', id);
+
+      const result: PostData[] = [...query1, ...query2];
+      
+      return result;
+
     } catch (error) {
       throw new Error(error.sqlMessage || error.message);
     }

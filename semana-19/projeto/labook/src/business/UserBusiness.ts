@@ -95,7 +95,7 @@ class UserBusiness {
       if (input[0] === input[1]) {
         throw new Error("Different 'id' must be provided")
       }
-      
+
       input.sort();
 
       const usersRelation: UsersRelationData 

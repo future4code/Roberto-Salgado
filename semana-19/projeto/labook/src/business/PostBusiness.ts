@@ -37,7 +37,7 @@ class PostBusiness {
   ):Promise<Post> {
     try {
       
-      const queryResult: PostData | [] = await PostDatabase.getPostById(id);
+      const queryResult: PostData[] | [] = await PostDatabase.getPostById(id);
   
       if (!queryResult[0]) {
         throw new Error("Post not found");
@@ -54,6 +54,31 @@ class PostBusiness {
   
      return post;
   
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  public async getFeed(
+    id:string
+  ):Promise<Array<Post>> {
+    try {
+      
+      const queryResult: PostData[] = await PostDatabase.getFeed(id);
+  
+      const posts = queryResult.map(post => (
+        new Post(
+          post.id,
+          post.photo,
+          post.description,
+          post.type,
+          post.author_id,
+          post.created_at
+        )
+      ))
+
+      return posts
+      
     } catch (error) {
       throw new Error(error.message);
     }

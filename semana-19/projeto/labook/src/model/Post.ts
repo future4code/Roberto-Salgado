@@ -12,6 +12,7 @@ export class Post {
     private description: string,
     type: string,
     private authorId: string,
+    // private authorName?: string,
     private createdAt?: Date
   ) {
     if (type.toLowerCase() === POST_TYPES.EVENT) {
@@ -28,6 +29,7 @@ export class Post {
   public getDescription = () => this.description;
   public getType = () => this.type;
   public getAuthorId = () => this.authorId;
+  // public getauthorName = () => this.authorName;
   public getCreatedAt = () => this.createdAt;
 }
 
@@ -46,11 +48,11 @@ export type CreatePostData = {
   authorId: string
 }
 
-export type PostData = Array<{
+export type PostData = {
   id: string,
   photo: string,
   description: string,
   type: string,
   created_at: Date,
   author_id: string
-}>
+}
