@@ -1,4 +1,4 @@
-import { Post, PostData } from "../model/Post";
+import { Post, PostData, POST_TYPES } from "../model/Post";
 import BaseDatabase from "./BaseDatabase";
 import UserDatabase from "./UserDatabase";
 
@@ -30,7 +30,7 @@ class PostDatabase extends BaseDatabase {
 
   public async getPostById(
     id:string
-  ):Promise<PostData[]> {
+  ):Promise<Array<PostData>> {
     try {
       
       const result: PostData[] = await BaseDatabase
@@ -47,7 +47,7 @@ class PostDatabase extends BaseDatabase {
 
   public async getFeed(
     id:string
-  ):Promise<PostData[]> {
+  ):Promise<Array<PostData>> {
     try {
       
       const query1: PostData[] = await BaseDatabase
@@ -73,6 +73,23 @@ class PostDatabase extends BaseDatabase {
       const result: PostData[] = [...query1, ...query2];
       
       return result;
+
+    } catch (error) {
+      throw new Error(error.sqlMessage || error.message);
+    }
+  }
+
+  public async getPostByType(
+    type: POST_TYPES
+  ):Promise<Array<PostData>> {
+    try {
+      
+      const result: PostData[] = await BaseDatabase
+        .connection(PostDatabase.tableName)
+        .select('*')
+        .where({ type });
+
+      return result
 
     } catch (error) {
       throw new Error(error.sqlMessage || error.message);

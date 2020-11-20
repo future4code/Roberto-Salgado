@@ -89,6 +89,33 @@ class PostController {
     }
   }
 
+  public async getPostsByType(
+    req:Request, res:Response
+  ):Promise<void> {
+    try {
+      
+      const token: string = req.headers.authorization as string;
+  
+      authenticator.getTokenData(token);
+
+      const posts = PostBusiness.getPostsByType(req.params.type);
+
+      res
+        .status(200)
+        .send({
+          message: "Success!",
+          posts
+        })
+
+    } catch (error) {
+      res
+        .status(400)
+        .send({
+          message: error.message
+        });
+    }
+  }
+
 }
 
 export default new PostController();

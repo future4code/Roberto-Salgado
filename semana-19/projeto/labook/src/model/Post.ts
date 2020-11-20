@@ -1,6 +1,6 @@
 export enum POST_TYPES {
-  NORMAL = "normal",
-  EVENT = "event"
+  NORMAL = "NORMAL",
+  EVENT = "EVENT"
 }
 
 export class Post {
@@ -15,9 +15,9 @@ export class Post {
     // private authorName?: string,
     private createdAt?: Date
   ) {
-    if (type.toLowerCase() === POST_TYPES.EVENT) {
+    if (type.toUpperCase() === POST_TYPES.EVENT) {
       this.type = POST_TYPES.EVENT;
-    } else if (type.toLowerCase() === POST_TYPES.NORMAL || !type) {
+    } else if (type.toUpperCase() === POST_TYPES.NORMAL || !type) {
       this.type = POST_TYPES.NORMAL;
     } else {
       throw new Error("Invalid post type");

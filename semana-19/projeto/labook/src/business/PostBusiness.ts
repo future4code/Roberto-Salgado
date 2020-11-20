@@ -1,5 +1,5 @@
 import PostDatabase from "../data/PostDatabase";
-import { CreatePostInput, Post, PostData } from "../model/Post";
+import { CreatePostInput, Post, PostData, POST_TYPES } from "../model/Post";
 import idGenerator from "../services/idGenerator";
 
 class PostBusiness {
@@ -37,7 +37,7 @@ class PostBusiness {
   ):Promise<Post> {
     try {
       
-      const queryResult: PostData[] | [] = await PostDatabase.getPostById(id);
+      const queryResult: PostData[] = await PostDatabase.getPostById(id);
   
       if (!queryResult[0]) {
         throw new Error("Post not found");
@@ -75,10 +75,46 @@ class PostBusiness {
           post.author_id,
           post.created_at
         )
-      ))
+      ));
 
-      return posts
+      return posts;
       
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  public async getPostsByType(
+    type: string
+  ):Promise<Array<Post>> {
+    try {
+
+      let searchedType: POST_TYPES = POST_TYPES.NORMAL;
+
+      if (type.toUpperCase() === POST_TYPES.EVENT) {
+        searchedType = POST_TYPES.EVENT;
+      } else if (type.toUpperCase() === POST_TYPES.NORMAL || !type) {
+        searchedType = POST_TYPES.NORMAL;
+      } else {
+        throw new Error("Invalid post type");
+      }
+      
+      const queryResult: PostData[] 
+        = await PostDatabase.getPostByType(searchedType);
+
+      const posts = queryResult.map(post => (
+        new Post(
+          post.id,
+          post.photo,
+          post.description,
+          post.type,
+          post.author_id,
+          post.created_at
+        )
+      ));
+
+      return posts;
+
     } catch (error) {
       throw new Error(error.message);
     }
