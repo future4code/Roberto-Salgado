@@ -1,5 +1,6 @@
 import PostDatabase from "../data/PostDatabase";
-import { CreatePostInput, Post, PostData, POST_TYPES } from "../model/Post";
+import { CreatePostInput, Post, PostData, PostLikeData, PostLikeInput, POST_TYPES } from "../model/Post";
+import { CustomError } from "../services/CustomError";
 import idGenerator from "../services/idGenerator";
 
 class PostBusiness {
@@ -40,7 +41,7 @@ class PostBusiness {
       const queryResult: PostData[] = await PostDatabase.getPostById(id);
   
       if (!queryResult[0]) {
-        throw new Error("Post not found");
+        throw new CustomError(404, "Post not found");
       }
   
       const post: Post = new Post(
@@ -93,9 +94,7 @@ class PostBusiness {
 
       if (type.toUpperCase() === POST_TYPES.EVENT) {
         searchedType = POST_TYPES.EVENT;
-      } else if (type.toUpperCase() === POST_TYPES.NORMAL || !type) {
-        searchedType = POST_TYPES.NORMAL;
-      } else {
+      } else if (type && type.toUpperCase() !== POST_TYPES.NORMAL) {
         throw new Error("Invalid post type");
       }
       
@@ -118,6 +117,30 @@ class PostBusiness {
     } catch (error) {
       throw new Error(error.message);
     }
+  }
+
+  public async toggleLike(
+    input: PostLikeInput
+  ):Promise<void> {
+    try {
+
+      const post: PostData[] = await PostDatabase.getPostById(input.postId);
+    
+      if (!post[0]) {
+        throw new CustomError(404, "Post not found");
+      }
+
+      const postLike: PostLikeData = await PostDatabase.getPostLike(input);
+
+      if (!postLike.length) {
+        await PostDatabase.likePost(input);
+      } else {
+        await PostDatabase.dislikePost(input);
+      }
+      
+    } catch (error) {
+      throw new Error(error.message);
+    }    
   }
 
 }

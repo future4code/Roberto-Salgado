@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import PostBusiness from "../business/PostBusiness";
-import { CreatePostInput, Post } from "../model/Post";
+import { CreatePostInput, Post, PostLikeInput } from "../model/Post";
 import { AuthenticationData } from "../model/User";
 import authenticator from "../services/authenticator";
 
@@ -71,7 +71,7 @@ class PostController {
   
       const tokenData: AuthenticationData = authenticator.getTokenData(token);
 
-      const posts = PostBusiness.getFeed(tokenData.id);
+      const posts = await PostBusiness.getFeed(tokenData.id);
 
       res
         .status(200)
@@ -98,7 +98,7 @@ class PostController {
   
       authenticator.getTokenData(token);
 
-      const posts = PostBusiness.getPostsByType(req.params.type);
+      const posts = await PostBusiness.getPostsByType(req.params.type);
 
       res
         .status(200)
@@ -107,6 +107,37 @@ class PostController {
           posts
         })
 
+    } catch (error) {
+      res
+        .status(400)
+        .send({
+          message: error.message
+        });
+    }
+  }
+
+  public async toggleLike(
+    req:Request, res:Response
+  ):Promise<void> {
+    try {
+
+      const token: string = req.headers.authorization as string;
+  
+      const tokenData: AuthenticationData = authenticator.getTokenData(token);
+
+      const input: PostLikeInput = {
+        userId: tokenData.id,
+        postId: req.params.id
+      }
+
+      await PostBusiness.toggleLike(input)
+
+      res
+        .status(200)
+        .send({
+          message: "Success!",
+        })
+      
     } catch (error) {
       res
         .status(400)

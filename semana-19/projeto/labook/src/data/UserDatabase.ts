@@ -78,7 +78,7 @@ class UserDatabase extends BaseDatabase {
         });
 
     } catch (error) {
-      throw new Error(error.sqlMessage || error.message)
+      throw new Error(error.sqlMessage || error.message);
     }
   }
 
@@ -96,7 +96,7 @@ class UserDatabase extends BaseDatabase {
         .del();
 
     } catch (error) {
-      throw new Error(error.sqlMessage || error.message)
+      throw new Error(error.sqlMessage || error.message);
     }
   }
 

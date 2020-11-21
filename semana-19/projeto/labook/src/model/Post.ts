@@ -56,3 +56,13 @@ export type PostData = {
   created_at: Date,
   author_id: string
 }
+
+export type PostLikeInput = {
+  userId: string,
+  postId: string
+}
+
+export type PostLikeData = Array<{
+  user_id: string,
+  post_id: string
+}>
