@@ -50,7 +50,7 @@ class DatabaseSetup extends BaseDatabase {
 					id VARCHAR(255) PRIMARY KEY,
 					post_id VARCHAR(255),
 					user_id VARCHAR(255),
-					comment TEXT NOT NULL,
+					message TEXT NOT NULL,
 					created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 					FOREIGN KEY (post_id) REFERENCES labook_posts(id),
 					FOREIGN KEY (user_id) REFERENCES labook_users(id)

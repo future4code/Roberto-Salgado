@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import PostBusiness from "../business/PostBusiness";
-import { CreatePostInput, Post, PostLikeInput } from "../model/Post";
+import { CreatePostInput, Post, PostCommentInput, PostLikeInput } from "../model/Post";
 import { AuthenticationData } from "../model/User";
 import authenticator from "../services/authenticator";
 
@@ -137,6 +137,38 @@ class PostController {
         .send({
           message: "Success!",
         })
+      
+    } catch (error) {
+      res
+        .status(400)
+        .send({
+          message: error.message
+        });
+    }
+  }
+
+  public async commentPost(
+    req:Request, res:Response
+  ):Promise<void> {
+    try {
+
+      const token: string = req.headers.authorization as string;
+  
+      const tokenData: AuthenticationData = authenticator.getTokenData(token);
+
+      const input: PostCommentInput = {
+        userId: tokenData.id,
+        postId: req.params.id,
+        message: req.body.message
+      }
+
+      await PostBusiness.commentPost(input)
+
+      res
+        .status(201)
+        .send({
+          message: "Success!"
+        });
       
     } catch (error) {
       res

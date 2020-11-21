@@ -66,3 +66,16 @@ export type PostLikeData = Array<{
   user_id: string,
   post_id: string
 }>
+
+export type PostCommentInput = {
+  userId: string,
+  postId: string,
+  message: string
+}
+
+export type PostComment = {
+  id: string,
+  userId: string,
+  postId: string,
+  message: string
+}

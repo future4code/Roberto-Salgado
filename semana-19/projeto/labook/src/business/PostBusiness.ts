@@ -1,5 +1,5 @@
 import PostDatabase from "../data/PostDatabase";
-import { CreatePostInput, Post, PostData, PostLikeData, PostLikeInput, POST_TYPES } from "../model/Post";
+import { CreatePostInput, Post, PostComment, PostCommentInput, PostData, PostLikeData, PostLikeInput, POST_TYPES } from "../model/Post";
 import { CustomError } from "../services/CustomError";
 import idGenerator from "../services/idGenerator";
 
@@ -141,6 +141,39 @@ class PostBusiness {
     } catch (error) {
       throw new Error(error.message);
     }    
+  }
+
+  public async commentPost(
+    input: PostCommentInput
+  ):Promise<void> {
+    try {
+
+      const { userId, postId, message } = input;
+
+      if (!message) {
+        throw new Error("'message' must be provided");
+      }
+
+      const post: PostData[] = await PostDatabase.getPostById(postId);
+    
+      if (!post[0]) {
+        throw new CustomError(404, "Post not found");
+      }
+
+      const id: string = idGenerator.generateId();
+
+      const newComment: PostComment = {
+        id,
+        userId,
+        postId,
+        message
+      }
+
+      await PostDatabase.commentPost(newComment);
+      
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
 }

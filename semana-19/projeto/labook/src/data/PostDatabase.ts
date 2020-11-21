@@ -1,4 +1,4 @@
-import { Post, PostData, PostLikeData, PostLikeInput, POST_TYPES } from "../model/Post";
+import { Post, PostComment, PostData, PostLikeData, PostLikeInput, POST_TYPES } from "../model/Post";
 import BaseDatabase from "./BaseDatabase";
 import UserDatabase from "./UserDatabase";
 
@@ -149,6 +149,25 @@ class PostDatabase extends BaseDatabase {
           user_id: input.userId
         })
         .del();
+      
+    } catch (error) {
+      throw new Error(error.sqlMessage || error.message);
+    }
+  }
+
+  public async commentPost(
+    comment:PostComment
+  ):Promise<void> {
+    try {
+
+      await BaseDatabase
+        .connection(PostDatabase.commentsTableName)
+        .insert({
+          id: comment.id,
+          post_id: comment.postId,
+          user_id: comment.userId,
+          message: comment.message
+        })
       
     } catch (error) {
       throw new Error(error.sqlMessage || error.message);
