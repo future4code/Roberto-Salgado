@@ -1,6 +1,18 @@
 import PostDatabase from "../data/PostDatabase";
-import { CreatePostInput, FeedByTypeInput, FeedByTypeInputDTO, FeedInput, Post, PostComment, PostCommentInput, PostData, PostLikeData, PostLikeInput, POST_TYPES } from "../model/Post";
-import { CustomError } from "../services/CustomError";
+import {
+  CreatePostInput,
+  FeedByTypeInput,
+  FeedByTypeInputDTO,
+  FeedInput,
+  Post,
+  PostComment,
+  PostCommentInput,
+  PostData,
+  PostLikeData,
+  PostLikeInput,
+  POST_TYPES
+} from "../model/Post";
+import { CustomError } from "../errors/CustomError";
 import idGenerator from "../services/idGenerator";
 
 class PostBusiness {

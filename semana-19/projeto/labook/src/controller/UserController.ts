@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import UserBusiness from "../business/UserBusiness";
-import { AuthenticationData, CreateUserInput, LoginInput, UsersRelationInput } from "../model/User";
+import {
+  AuthenticationData,
+  CreateUserInput,
+  LoginInput,
+  UsersRelationInput
+} from "../model/User";
 import authenticator from "../services/authenticator";
 
 class UserController {
@@ -16,7 +21,7 @@ class UserController {
         password: req.body.password
       };
   
-      const token = UserBusiness.signup(input);
+      const token = await UserBusiness.signup(input);
   
       res
         .status(201)
@@ -53,7 +58,7 @@ class UserController {
       
     } catch (error) {
       res
-        .status(400)
+        .status(error.statusCode)
         .send({
           message: error.message
         });
@@ -83,8 +88,22 @@ class UserController {
         });
       
     } catch (error) {
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      if (
+        error.message === "jwt must be provided" ||
+        error.message === "jwt malformed" ||
+        error.message === "jwt expired" ||
+        error.message === "invalid token"
+      ) {
+        error.statusCode = 401;
+        error.message = "Invalid credentials"
+      }
+
       res
-        .status(400)
+        .status(error.statusCode)
         .send({
           message: error.message
         });

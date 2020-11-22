@@ -1,7 +1,7 @@
 {
    "name": "labook",
    "version": "1.0.0",
-   "description": "",
+   "description": "Semana19-projeto:LaBook",
    "main": "index.js",
    "scripts": {
       "my-sql-setup": "clear && tsc && node ./build/mySqlSetup.js",
@@ -12,7 +12,7 @@
       "test": "jest"
    },
    "keywords": [],
-   "author": "",
+   "author": "rpontosalgado",
    "license": "ISC",
    "dependencies": {
       "bcryptjs": "^2.4.3",

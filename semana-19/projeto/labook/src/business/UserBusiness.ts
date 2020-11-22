@@ -1,7 +1,14 @@
 import UserDatabase from "../data/UserDatabase";
-import { CreateUserInput, LoginInput, User, UserData, UsersRelationData, UsersRelationInput } from "../model/User";
+import {
+  CreateUserInput,
+  LoginInput,
+  User,
+  UserData,
+  UsersRelationData,
+  UsersRelationInput
+} from "../model/User";
+import { CustomError } from "../errors/CustomError";
 import authenticator from "../services/authenticator";
-import { CustomError } from "../services/CustomError";
 import hashManager from "../services/hashManager";
 import idGenerator from "../services/idGenerator";
 
@@ -39,7 +46,19 @@ class UserBusiness {
       return token;
   
     } catch (error) {
-      throw new Error(error.message);
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      if (error.message.includes("Duplicate entry")) {
+        error.statusCode = 409;
+        error.message = "'email' already registered"
+      }
+
+      throw new CustomError(
+          error.statusCode,
+          error.message
+        );
     }
   }
 
@@ -51,13 +70,16 @@ class UserBusiness {
       const { email, password } = input;
   
       if (!email || !password) {
-        throw new Error("'email' and 'password' must be provided");
+        throw new CustomError(
+          406,
+          "'email' and 'password' must be provided"
+        );
       }
   
       const queryResult: UserData = await UserDatabase.getUserByEmail(email);
   
       if (!queryResult[0]) {
-        throw new Error("Invalid credentials");
+        throw new CustomError(401, "Invalid credentials");
       }
   
       const user: User = new User(
@@ -73,7 +95,7 @@ class UserBusiness {
       );
   
       if (!passwordIsCorrect) {
-        throw new Error("Invalid credentials");
+        throw new CustomError(401, "Invalid credentials");
       }
   
       const token: string = authenticator.generateToken({
@@ -83,7 +105,14 @@ class UserBusiness {
       return token;
   
     } catch (error) {
-      throw new Error(error.message);
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      throw new CustomError(
+        error.statusCode,
+        error.message
+      );
     }
   }
 
@@ -93,7 +122,7 @@ class UserBusiness {
     try {
 
       if (input[0] === input[1]) {
-        throw new Error("Different 'id' must be provided")
+        throw new CustomError(406, "Different 'id' must be provided")
       }
 
       input.sort();
@@ -108,7 +137,14 @@ class UserBusiness {
       }
 
     } catch (error) {
-      throw new Error(error.message);
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      throw new CustomError(
+        error.statusCode,
+        error.message
+      );
     }
   }
 

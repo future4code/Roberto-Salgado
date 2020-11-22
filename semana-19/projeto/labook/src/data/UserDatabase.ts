@@ -1,4 +1,9 @@
-import { User, UserData, UsersRelationData, UsersRelationInput } from "../model/User";
+import {
+  User,
+  UserData,
+  UsersRelationData,
+  UsersRelationInput
+} from "../model/User";
 import BaseDatabase from "./BaseDatabase";
 
 class UserDatabase extends BaseDatabase {

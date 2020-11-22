@@ -1,6 +1,13 @@
 import { Request, Response } from "express";
 import PostBusiness from "../business/PostBusiness";
-import { CreatePostInput, FeedByTypeInput, FeedInput, Post, PostCommentInput, PostLikeInput } from "../model/Post";
+import {
+  CreatePostInput,
+  FeedByTypeInput,
+  FeedInput,
+  Post,
+  PostCommentInput,
+  PostLikeInput
+} from "../model/Post";
 import { AuthenticationData } from "../model/User";
 import authenticator from "../services/authenticator";
 

@@ -1,4 +1,12 @@
-import { FeedByTypeInput, FeedByTypeInputDTO, FeedInput, Post, PostComment, PostData, PostLikeData, PostLikeInput, POST_TYPES } from "../model/Post";
+import {
+  FeedByTypeInputDTO,
+  FeedInput,
+  Post,
+  PostComment,
+  PostData,
+  PostLikeData,
+  PostLikeInput
+} from "../model/Post";
 import BaseDatabase from "./BaseDatabase";
 import UserDatabase from "./UserDatabase";
 
