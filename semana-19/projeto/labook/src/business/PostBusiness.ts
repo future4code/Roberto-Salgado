@@ -1,5 +1,5 @@
 import PostDatabase from "../data/PostDatabase";
-import { CreatePostInput, Post, PostComment, PostCommentInput, PostData, PostLikeData, PostLikeInput, POST_TYPES } from "../model/Post";
+import { CreatePostInput, FeedByTypeInput, FeedByTypeInputDTO, FeedInput, Post, PostComment, PostCommentInput, PostData, PostLikeData, PostLikeInput, POST_TYPES } from "../model/Post";
 import { CustomError } from "../services/CustomError";
 import idGenerator from "../services/idGenerator";
 
@@ -61,11 +61,11 @@ class PostBusiness {
   }
 
   public async getFeed(
-    id:string
+    input:FeedInput
   ):Promise<Array<Post>> {
     try {
       
-      const queryResult: PostData[] = await PostDatabase.getFeed(id);
+      const queryResult: PostData[] = await PostDatabase.getFeed(input);
   
       const posts = queryResult.map(post => (
         new Post(
@@ -86,20 +86,25 @@ class PostBusiness {
   }
 
   public async getPostsByType(
-    type: string
+    input: FeedByTypeInput
   ):Promise<Array<Post>> {
     try {
 
-      let searchedType: POST_TYPES = POST_TYPES.NORMAL;
+      let validType: POST_TYPES = POST_TYPES.NORMAL;
 
-      if (type.toUpperCase() === POST_TYPES.EVENT) {
-        searchedType = POST_TYPES.EVENT;
-      } else if (type && type.toUpperCase() !== POST_TYPES.NORMAL) {
+      if (input.type.toUpperCase() === POST_TYPES.EVENT) {
+        validType = POST_TYPES.EVENT;
+      } else if (input.type && input.type.toUpperCase() !== POST_TYPES.NORMAL) {
         throw new Error("Invalid post type");
       }
+
+      const inputDTO: FeedByTypeInputDTO = {
+        type: validType,
+        page: input.page
+      };
       
       const queryResult: PostData[] 
-        = await PostDatabase.getPostByType(searchedType);
+        = await PostDatabase.getPostByType(inputDTO);
 
       const posts = queryResult.map(post => (
         new Post(

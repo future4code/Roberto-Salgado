@@ -1,4 +1,4 @@
-import { Post, PostComment, PostData, PostLikeData, PostLikeInput, POST_TYPES } from "../model/Post";
+import { FeedByTypeInput, FeedByTypeInputDTO, FeedInput, Post, PostComment, PostData, PostLikeData, PostLikeInput, POST_TYPES } from "../model/Post";
 import BaseDatabase from "./BaseDatabase";
 import UserDatabase from "./UserDatabase";
 
@@ -50,31 +50,35 @@ class PostDatabase extends BaseDatabase {
   }
 
   public async getFeed(
-    id:string
+    input:FeedInput
   ):Promise<Array<PostData>> {
     try {
+
+      const resultPerPage: number = 5;
+      const offset: number = resultPerPage * (input.page - 1);
       
-      const query1: PostData[] = await BaseDatabase
-        .connection(`${PostDatabase.postsTableName} as p`)
+      const result: PostData[] = await BaseDatabase
+        .connection(`${PostDatabase.postsTableName} AS p`)
         .leftJoin(
-          `${UserDatabase.getFriendsTableName()} as uf`,
+          `${UserDatabase.getFriendsTableName()} AS uf`,
           'p.author_id',
           'uf.user_two_id'
         )
-        .select('p*')
-        .where('uf.user_one_id', id);
-      
-      const query2: PostData[] = await BaseDatabase
-        .connection(`${PostDatabase.postsTableName} as p`)
-        .leftJoin(
-          `${UserDatabase.getFriendsTableName()} as uf`,
-          'p.author_id',
-          'uf.user_one_id'
-        )
-        .select('p*')
-        .where('uf.user_two_id', id);
-
-      const result: PostData[] = [...query1, ...query2];
+        .select('p.*')
+        .where('uf.user_one_id', input.id)
+        .union([
+          BaseDatabase.connection(`${PostDatabase.postsTableName} AS p`)
+          .leftJoin(
+            `${UserDatabase.getFriendsTableName()} AS uf`,
+            'p.author_id',
+            'uf.user_one_id'
+          )
+          .select('p.*')
+          .where('uf.user_two_id', input.id)
+        ])
+        .orderBy('p.created_at', 'DESC')
+        .limit(resultPerPage)
+        .offset(offset);
       
       return result;
 
@@ -84,14 +88,20 @@ class PostDatabase extends BaseDatabase {
   }
 
   public async getPostByType(
-    type: POST_TYPES
+    input: FeedByTypeInputDTO
   ):Promise<Array<PostData>> {
     try {
+
+      const resultPerPage: number = 5;
+      const offset: number = resultPerPage * (input.page - 1);
       
       const result: PostData[] = await BaseDatabase
         .connection(PostDatabase.postsTableName)
         .select('*')
-        .where({ type });
+        .where({ type: input.type })
+        .orderBy('created_at', 'DESC')
+        .limit(resultPerPage)
+        .offset(offset);
 
       return result
 

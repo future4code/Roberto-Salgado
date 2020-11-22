@@ -57,6 +57,20 @@ export type PostData = {
   author_id: string
 }
 
+export type FeedInput = {
+  id: string,
+  page: number
+}
+
+export type FeedByTypeInput = {
+  type: string,
+  page: number
+}
+export type FeedByTypeInputDTO = {
+  type: POST_TYPES,
+  page: number
+}
+
 export type PostLikeInput = {
   userId: string,
   postId: string
