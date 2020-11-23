@@ -46,9 +46,14 @@ class PostDatabase extends BaseDatabase {
     try {
       
       const result: PostData[] = await BaseDatabase
-        .connection(PostDatabase.postsTableName)
-        .select("*")
-        .where({ id });
+        .connection(`${PostDatabase.postsTableName} AS p`)
+        .join(
+          `${UserDatabase.getUsersTableName()} AS u`,
+          'p.author_id',
+          'u.id'
+        )
+        .select('p.*', 'u.name')
+        .where({ 'p.id': id });
   
       return result;
   
@@ -72,7 +77,12 @@ class PostDatabase extends BaseDatabase {
           'p.author_id',
           'uf.user_two_id'
         )
-        .select('p.*')
+        .join(
+          `${UserDatabase.getUsersTableName()} AS u`,
+          'p.author_id',
+          'u.id'
+        )
+        .select('p.*', 'u.name')
         .where('uf.user_one_id', input.id)
         .union([
           BaseDatabase.connection(`${PostDatabase.postsTableName} AS p`)
@@ -81,7 +91,12 @@ class PostDatabase extends BaseDatabase {
             'p.author_id',
             'uf.user_one_id'
           )
-          .select('p.*')
+          .join(
+            `${UserDatabase.getUsersTableName()} AS u`,
+            'p.author_id',
+            'u.id'
+          )
+          .select('p.*', 'u.name')
           .where('uf.user_two_id', input.id)
         ])
         .orderBy('created_at', 'DESC')
@@ -105,7 +120,12 @@ class PostDatabase extends BaseDatabase {
       
       const result: PostData[] = await BaseDatabase
         .connection(PostDatabase.postsTableName)
-        .select('*')
+        .join(
+          `${UserDatabase.getUsersTableName()} AS u`,
+          'p.author_id',
+          'u.id'
+        )
+        .select('p.*', 'u.name')
         .where({ type: input.type })
         .orderBy('created_at', 'DESC')
         .limit(resultPerPage)

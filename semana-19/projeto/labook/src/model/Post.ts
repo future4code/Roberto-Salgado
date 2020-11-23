@@ -16,7 +16,7 @@ export class Post {
     private description: string,
     type: string,
     private authorId: string,
-    // private authorName?: string,
+    private authorName?: string,
     createdAt?: Date
   ) {
     if (!type || type.toUpperCase() === POST_TYPES.NORMAL) {
@@ -37,7 +37,7 @@ export class Post {
   public getDescription = () => this.description;
   public getType = () => this.type;
   public getAuthorId = () => this.authorId;
-  // public getauthorName = () => this.authorName;
+  public getauthorName = () => this.authorName;
   public getCreatedAt = () => this.createdAt;
 }
 
@@ -62,7 +62,8 @@ export type PostData = {
   description: string,
   type: string,
   created_at: Date,
-  author_id: string
+  author_id: string,
+  name: string
 }
 
 export type FeedInput = {

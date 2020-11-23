@@ -69,6 +69,7 @@ class PostBusiness {
         queryResult[0].description,
         queryResult[0].type,
         queryResult[0].author_id,
+        queryResult[0].name,
         queryResult[0].created_at
       );
   
@@ -100,6 +101,7 @@ class PostBusiness {
           post.description,
           post.type,
           post.author_id,
+          post.name,
           post.created_at
         )
       ));
@@ -139,6 +141,7 @@ class PostBusiness {
           post.description,
           post.type,
           post.author_id,
+          post.name,
           post.created_at
         )
       ));
