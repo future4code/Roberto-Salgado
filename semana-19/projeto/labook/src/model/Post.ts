@@ -1,3 +1,6 @@
+import { CustomError } from "../errors/CustomError";
+import { formatDateTime } from "../utils/handleDate";
+
 export enum POST_TYPES {
   NORMAL = "NORMAL",
   EVENT = "EVENT"
@@ -5,6 +8,7 @@ export enum POST_TYPES {
 
 export class Post {
   private type: POST_TYPES;
+  private createdAt?: string;
 
   constructor(
     private id: string,
@@ -13,14 +17,18 @@ export class Post {
     type: string,
     private authorId: string,
     // private authorName?: string,
-    private createdAt?: Date
+    createdAt?: Date
   ) {
-    if (type.toUpperCase() === POST_TYPES.EVENT) {
-      this.type = POST_TYPES.EVENT;
-    } else if (type.toUpperCase() === POST_TYPES.NORMAL || !type) {
+    if (!type || type.toUpperCase() === POST_TYPES.NORMAL) {
       this.type = POST_TYPES.NORMAL;
+    } else if (type.toUpperCase() === POST_TYPES.EVENT) {
+      this.type = POST_TYPES.EVENT;
     } else {
-      throw new Error("Invalid post type");
+      throw new CustomError(406, "Invalid post type");
+    }
+
+    if (createdAt) {
+      this.createdAt = formatDateTime(createdAt);
     }
   }
 

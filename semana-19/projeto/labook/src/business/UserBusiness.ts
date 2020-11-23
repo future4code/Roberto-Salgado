@@ -56,9 +56,9 @@ class UserBusiness {
       }
 
       throw new CustomError(
-          error.statusCode,
-          error.message
-        );
+        error.statusCode,
+        error.message
+      );
     }
   }
 

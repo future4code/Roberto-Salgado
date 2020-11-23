@@ -84,7 +84,7 @@ class PostDatabase extends BaseDatabase {
           .select('p.*')
           .where('uf.user_two_id', input.id)
         ])
-        .orderBy('p.created_at', 'DESC')
+        .orderBy('created_at', 'DESC')
         .limit(resultPerPage)
         .offset(offset);
       

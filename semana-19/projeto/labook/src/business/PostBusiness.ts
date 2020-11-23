@@ -25,7 +25,7 @@ class PostBusiness {
       const { photo, description, type, authorId } = input;
 
       if (!photo || !description) {
-        throw new Error("'photo' and 'description' must be provided");
+        throw new CustomError(406, "'photo' and 'description' must be provided");
       }
       
       const id: string = idGenerator.generateId();
@@ -41,7 +41,14 @@ class PostBusiness {
       await PostDatabase.createPost(newPost);
   
     } catch (error) {
-      throw new Error(error.message);
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      throw new CustomError(
+        error.statusCode,
+        error.message
+      );
     }
   }
 
@@ -68,7 +75,14 @@ class PostBusiness {
      return post;
   
     } catch (error) {
-      throw new Error(error.message);
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      throw new CustomError(
+        error.statusCode,
+        error.message
+      );
     }
   }
 
@@ -106,8 +120,8 @@ class PostBusiness {
 
       if (input.type.toUpperCase() === POST_TYPES.EVENT) {
         validType = POST_TYPES.EVENT;
-      } else if (input.type && input.type.toUpperCase() !== POST_TYPES.NORMAL) {
-        throw new Error("Invalid post type");
+      } else if (input.type.toUpperCase() !== POST_TYPES.NORMAL) {
+        throw new CustomError(406, "Invalid post type");
       }
 
       const inputDTO: FeedByTypeInputDTO = {
@@ -132,7 +146,14 @@ class PostBusiness {
       return posts;
 
     } catch (error) {
-      throw new Error(error.message);
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      throw new CustomError(
+        error.statusCode,
+        error.message
+      );
     }
   }
 
@@ -156,7 +177,14 @@ class PostBusiness {
       }
       
     } catch (error) {
-      throw new Error(error.message);
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      throw new CustomError(
+        error.statusCode,
+        error.message
+      );
     }    
   }
 
@@ -168,7 +196,7 @@ class PostBusiness {
       const { userId, postId, message } = input;
 
       if (!message) {
-        throw new Error("'message' must be provided");
+        throw new CustomError(406, "'message' must be provided");
       }
 
       const post: PostData[] = await PostDatabase.getPostById(postId);
@@ -189,7 +217,14 @@ class PostBusiness {
       await PostDatabase.commentPost(newComment);
       
     } catch (error) {
-      throw new Error(error.message);
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      throw new CustomError(
+        error.statusCode,
+        error.message
+      );
     }
   }
 

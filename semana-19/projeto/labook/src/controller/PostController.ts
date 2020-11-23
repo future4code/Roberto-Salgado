@@ -10,6 +10,7 @@ import {
 } from "../model/Post";
 import { AuthenticationData } from "../model/User";
 import authenticator from "../services/authenticator";
+import { formatDateTime } from "../utils/handleDate";
 
 class PostController {
 
@@ -38,8 +39,22 @@ class PostController {
         });
   
     } catch (error) {
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      if (
+        error.message === "jwt must be provided" ||
+        error.message === "jwt malformed" ||
+        error.message === "jwt expired" ||
+        error.message === "invalid token"
+      ) {
+        error.statusCode = 401;
+        error.message = "Invalid credentials"
+      }
+
       res
-        .status(400)
+        .status(error.statusCode)
         .send({
           message: error.message
         });
@@ -62,7 +77,7 @@ class PostController {
   
     } catch (error) {
       res
-        .status(400)
+        .status(error.statusCode)
         .send({
           message: error.message
         });
@@ -93,8 +108,22 @@ class PostController {
         })
 
     } catch (error) {
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      if (
+        error.message === "jwt must be provided" ||
+        error.message === "jwt malformed" ||
+        error.message === "jwt expired" ||
+        error.message === "invalid token"
+      ) {
+        error.statusCode = 401;
+        error.message = "Invalid credentials"
+      }
+
       res
-        .status(400)
+        .status(error.statusCode)
         .send({
           message: error.message
         });
@@ -125,8 +154,22 @@ class PostController {
         })
 
     } catch (error) {
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      if (
+        error.message === "jwt must be provided" ||
+        error.message === "jwt malformed" ||
+        error.message === "jwt expired" ||
+        error.message === "invalid token"
+      ) {
+        error.statusCode = 401;
+        error.message = "Invalid credentials"
+      }
+
       res
-        .status(400)
+        .status(error.statusCode)
         .send({
           message: error.message
         });
@@ -156,8 +199,22 @@ class PostController {
         })
       
     } catch (error) {
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      if (
+        error.message === "jwt must be provided" ||
+        error.message === "jwt malformed" ||
+        error.message === "jwt expired" ||
+        error.message === "invalid token"
+      ) {
+        error.statusCode = 401;
+        error.message = "Invalid credentials"
+      }
+
       res
-        .status(400)
+        .status(error.statusCode)
         .send({
           message: error.message
         });
@@ -188,8 +245,22 @@ class PostController {
         });
       
     } catch (error) {
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      if (
+        error.message === "jwt must be provided" ||
+        error.message === "jwt malformed" ||
+        error.message === "jwt expired" ||
+        error.message === "invalid token"
+      ) {
+        error.statusCode = 401;
+        error.message = "Invalid credentials"
+      }
+
       res
-        .status(400)
+        .status(error.statusCode)
         .send({
           message: error.message
         });
