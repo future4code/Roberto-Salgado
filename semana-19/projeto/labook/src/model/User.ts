@@ -3,22 +3,12 @@ export type AuthenticationData = {
 }
 
 export class User {
-  private id: string;
-  private name: string;
-  private email: string;
-  private password: string;
-
   constructor(
-    id: string,
-    name: string,
-    email: string,
-    password: string
-  ) {
-    this.id = id;
-    this.name = name;
-    this.email = email;
-    this.password = password;
-  }
+    private id: string,
+    private name: string,
+    private email: string,
+    private password: string
+  ) {}
 
   public getId = ():string => this.id;
   public getName = ():string => this.name;
@@ -42,4 +32,11 @@ export type UserData = Array<{
   name: string,
   email: string,
   password: string
+}>
+
+export type UsersRelationInput = Array<string>
+
+export type UsersRelationData = Array<{
+  user_one_id: string,
+  user_two_id: string
 }>

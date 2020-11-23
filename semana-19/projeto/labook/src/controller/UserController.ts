@@ -1,6 +1,12 @@
 import { Request, Response } from "express";
 import UserBusiness from "../business/UserBusiness";
-import { CreateUserInput, LoginInput } from "../model/User";
+import {
+  AuthenticationData,
+  CreateUserInput,
+  LoginInput,
+  UsersRelationInput
+} from "../model/User";
+import authenticator from "../services/authenticator";
 
 class UserController {
   
@@ -15,7 +21,7 @@ class UserController {
         password: req.body.password
       };
   
-      const token = UserBusiness.signup(input);
+      const token = await UserBusiness.signup(input);
   
       res
         .status(201)
@@ -26,7 +32,7 @@ class UserController {
   
     } catch (error) {
       res
-        .status(400)
+        .status(error.statusCode)
         .send({
           message: error.message
         });
@@ -52,7 +58,52 @@ class UserController {
       
     } catch (error) {
       res
-        .status(400)
+        .status(error.statusCode)
+        .send({
+          message: error.message
+        });
+    }
+  }
+
+  public async toggleFriendUser(
+    req:Request, res:Response
+  ):Promise<void> {
+    try {
+      
+      const token: string = req.headers.authorization as string;
+  
+      const tokenData: AuthenticationData = authenticator.getTokenData(token);
+
+      const input: UsersRelationInput = [
+        tokenData.id,
+        req.params.id
+      ];
+
+      await UserBusiness.toggleFriendUser(input);
+
+      res
+        .status(200)
+        .send({
+          message: "Success!"
+        });
+      
+    } catch (error) {
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      if (
+        error.message === "jwt must be provided" ||
+        error.message === "jwt malformed" ||
+        error.message === "jwt expired" ||
+        error.message === "invalid token"
+      ) {
+        error.statusCode = 401;
+        error.message = "Invalid credentials"
+      }
+
+      res
+        .status(error.statusCode)
         .send({
           message: error.message
         });

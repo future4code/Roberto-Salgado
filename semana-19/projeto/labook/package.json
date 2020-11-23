@@ -1,17 +1,18 @@
 {
    "name": "labook",
    "version": "1.0.0",
-   "description": "",
+   "description": "Semana19-projeto:LaBook",
    "main": "index.js",
    "scripts": {
-      "my-sql-setup": "tsc && node ./build/mySqlSetup.js",
+      "my-sql-setup": "clear && tsc && node ./build/mySqlSetup.js",
+      "my-sql-reset": "clear && tsc && node ./build/mySqlReset.js",
       "start": "npm run build && node --inspect ./build/src/index.js",
       "dev": "clear && ts-node-dev ./src/index.ts",
       "build": "clear && echo \"Transpiling files...\" && tsc && echo \"Done!\" ",
       "test": "jest"
    },
    "keywords": [],
-   "author": "",
+   "author": "rpontosalgado",
    "license": "ISC",
    "dependencies": {
       "bcryptjs": "^2.4.3",

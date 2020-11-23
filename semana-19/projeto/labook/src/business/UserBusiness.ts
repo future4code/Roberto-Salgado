@@ -1,5 +1,13 @@
 import UserDatabase from "../data/UserDatabase";
-import { CreateUserInput, LoginInput, User, UserData } from "../model/User";
+import {
+  CreateUserInput,
+  LoginInput,
+  User,
+  UserData,
+  UsersRelationData,
+  UsersRelationInput
+} from "../model/User";
+import { CustomError } from "../errors/CustomError";
 import authenticator from "../services/authenticator";
 import hashManager from "../services/hashManager";
 import idGenerator from "../services/idGenerator";
@@ -14,7 +22,10 @@ class UserBusiness {
       const { name, email, password } = input;
   
       if (!name || !email || !password) {
-        throw new Error("'name', 'email' and 'password' must be provided");
+        throw new CustomError(
+          406,
+          "'name', 'email' and 'password' must be provided"
+        );
       }
   
       const id: string = idGenerator.generateId();
@@ -35,7 +46,19 @@ class UserBusiness {
       return token;
   
     } catch (error) {
-      throw new Error(error.message);
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      if (error.message.includes("Duplicate entry")) {
+        error.statusCode = 409;
+        error.message = "'email' already registered"
+      }
+
+      throw new CustomError(
+        error.statusCode,
+        error.message
+      );
     }
   }
 
@@ -47,13 +70,16 @@ class UserBusiness {
       const { email, password } = input;
   
       if (!email || !password) {
-        throw new Error("'email' and 'password' must be provided");
+        throw new CustomError(
+          406,
+          "'email' and 'password' must be provided"
+        );
       }
   
       const queryResult: UserData = await UserDatabase.getUserByEmail(email);
   
       if (!queryResult[0]) {
-        throw new Error("Invalid credentials");
+        throw new CustomError(401, "Invalid credentials");
       }
   
       const user: User = new User(
@@ -69,7 +95,7 @@ class UserBusiness {
       );
   
       if (!passwordIsCorrect) {
-        throw new Error("Invalid credentials");
+        throw new CustomError(401, "Invalid credentials");
       }
   
       const token: string = authenticator.generateToken({
@@ -79,7 +105,46 @@ class UserBusiness {
       return token;
   
     } catch (error) {
-      throw new Error(error.message);
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      throw new CustomError(
+        error.statusCode,
+        error.message
+      );
+    }
+  }
+
+  public async toggleFriendUser(
+    input:UsersRelationInput
+  ):Promise<void> {
+    try {
+
+      if (input[0] === input[1]) {
+        throw new CustomError(406, "Different 'id' must be provided")
+      }
+
+      input.sort();
+
+      const usersRelation: UsersRelationData 
+        = await UserDatabase.getUsersRelation(input);
+
+      if (!usersRelation.length) {
+        await UserDatabase.friendUser(input);
+      } else {
+        await UserDatabase.unfriendUser(input);
+      }
+
+    } catch (error) {
+      if (!error.statusCode) {
+        error.statusCode = 400;
+      }
+
+      throw new CustomError(
+        error.statusCode,
+        error.message
+      );
     }
   }
 
