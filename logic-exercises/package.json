@@ -1,10 +1,11 @@
 {
-  "name": "numero-faltante",
+
+  "name": "logic-exercises",
   "version": "1.0.0",
-  "description": "Logic Exercises: Missing Number",
+  "description": "Logic Exercises",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node --inspect ./build/src/index.js",
+    "start": "npm run build && node ./build/src/index.js",
     "dev": "clear && ts-node-dev ./src/index.ts",
     "build": "clear && echo \"Transpiling files...\" && tsc && echo \"Done!\" ",
     "test": "clear && echo \"Running tests...\" && jest"
