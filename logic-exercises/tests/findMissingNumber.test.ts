@@ -1,6 +1,6 @@
 import { findMissingNumber } from "../src/findMissingNumber";
 
-describe("Find Missing Number from sequential number 1 to 100 array", () => {
+describe.skip("Find Missing Number from sequential number 1 to 100 array", () => {
 
   test("Missing number: 47", () => {
     const arrayMissing47 = [];
@@ -34,7 +34,7 @@ describe("Find Missing Number from sequential number 1 to 100 array", () => {
 
 });
 
-describe("Find Missing Number from any sequential number array", () => {
+describe.skip("Find Missing Number from any sequential number array", () => {
 
   test("22 to 29 array missing 26", () => {
     const arr: number[] = [];

@@ -1,6 +1,6 @@
 import { indexOf } from "../src/indexOf";
 
-describe("Index Of", () => {
+describe.skip("Index Of", () => {
 
   test("Find index of a character contained in a string", () => {
     const result = indexOf("Roberto de Abreu Salgado", "A");
