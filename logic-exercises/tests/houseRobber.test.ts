@@ -1,4 +1,4 @@
-import { houseRobber } from "../src/houseRobber"
+import { houseRobber } from "../src/houseRobber";
 
 describe.skip("House Robber", () => {
 
