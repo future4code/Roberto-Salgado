@@ -1,6 +1,6 @@
 import { lonelyNumber } from "../src/lonelyNumber"
 
-describe("Indentify the number that is not paired in an array", () => {
+describe.skip("Indentify the number that is not paired in an array", () => {
 
   test("Case 1: [2,2,1] - 1", () => {
     const result = lonelyNumber([2,2,1]);

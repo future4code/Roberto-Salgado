@@ -15,7 +15,7 @@ describe("Return negative count from descending order wise sorted matrix", () =>
       countNegativesInSortedMatrix(
         [[3,2],[1,0]]
       )
-    ).toBe(8);
+    ).toBe(0);
   });
 
   test("Case 3 - [[1,-1],[-1,-1]]: 3", () => {
