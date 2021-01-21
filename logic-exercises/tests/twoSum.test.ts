@@ -1,6 +1,6 @@
 import { twoSum } from "../src/twoSum";
 
-describe(
+describe.skip(
   "Return indices of the two numbers in a given array that add up to a given target",
   () => {
 
